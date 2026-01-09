@@ -495,6 +495,20 @@
                 <div x-data="mexicoClinicPage()"></div>
             </template>
         </div>
+
+        <!-- Dynamic City Directory Page -->
+        <div x-show="currentPage === 'city-directory'" x-cloak x-transition>
+            <template x-if="currentPage === 'city-directory'">
+                <div x-data="cityDirectoryPage()"></div>
+            </template>
+        </div>
+
+        <!-- Dynamic State Directory Page -->
+        <div x-show="currentPage === 'state-directory'" x-cloak x-transition>
+            <template x-if="currentPage === 'state-directory'">
+                <div x-data="stateDirectoryPage()"></div>
+            </template>
+        </div>
     </main>
 
     <!-- Global Footer -->
