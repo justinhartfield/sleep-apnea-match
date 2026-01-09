@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "version": "1.0",
+    "generated": "2026-01-09",
+    "site": "stemcellprices.com",
+    "purpose": "GoDotoro Dynamic Ad Campaign Templates"
+  },
+  "campaign_templates": {
+    "city_condition": {
+      "name_template": "Stem Cell {{condition}} - {{city}}, {{state_abbr}}",
+      "headline_templates": [
+        "{{condition}} Treatment in {{city}}",
+        "Stem Cell Therapy {{city}} | ${{price_low}}+",
+        "{{city}} {{condition}} Specialists",
+        "Compare {{condition}} Costs in {{city}}"
+      ],
+      "description_templates": [
+        "Find verified stem cell clinics in {{city}} for {{condition}}. Average cost ${{avg_price}}. Compare prices from {{clinic_count}} providers.",
+        "{{condition}} stem cell therapy in {{city}}, {{state_abbr}}. Prices from ${{price_low}}-${{price_high}}. Get free consultation today.",
+        "Looking for {{condition}} treatment in {{city}}? Compare {{clinic_count}} verified clinics. Transparent pricing, no hidden fees."
+      ],
+      "landing_url_template": "/locations/{{state_slug}}/{{city_slug}}/?utm_source={{source}}&utm_medium=cpc&utm_campaign={{campaign_id}}"
+    },
+    "clinic_specific": {
+      "name_template": "{{clinic_name}} - {{city}}",
+      "headline_templates": [
+        "{{clinic_name}} | Stem Cell Therapy",
+        "{{specialty}} in {{city}}",
+        "{{clinic_name}} - From ${{price_low}}"
+      ],
+      "description_templates": [
+        "{{clinic_name}} offers {{specialty}} in {{city}}. Prices ${{price_low}}-${{price_high}}. Verified provider. Book consultation.",
+        "Visit {{clinic_name}} for stem cell therapy in {{city}}, {{state_abbr}}. {{specialty}}. Call {{phone}} today."
+      ],
+      "landing_url_template": "{{clinic_url}}?utm_source={{source}}&utm_medium=cpc&utm_campaign={{campaign_id}}"
+    },
+    "state_awareness": {
+      "name_template": "Stem Cell Clinics - {{state}}",
+      "headline_templates": [
+        "Stem Cell Therapy in {{state}}",
+        "{{state}} Stem Cell Clinics | Compare Prices",
+        "Find {{state}} Regenerative Medicine"
+      ],
+      "description_templates": [
+        "Compare {{clinic_count}} stem cell clinics across {{city_count}} cities in {{state}}. Average cost ${{avg_price}}. Verified providers.",
+        "{{state}} stem cell therapy directory. {{clinic_count}} clinics, {{city_count}} cities. Transparent pricing from ${{price_low}}."
+      ],
+      "landing_url_template": "/locations/{{state_slug}}/?utm_source={{source}}&utm_medium=cpc&utm_campaign={{campaign_id}}"
+    }
+  },
+  "keyword_templates": {
+    "condition_city": [
+      "stem cell {{condition}} {{city}}",
+      "{{condition}} stem cell therapy {{city}}",
+      "{{condition}} treatment {{city}} cost",
+      "best {{condition}} clinic {{city}}",
+      "{{condition}} regenerative medicine {{city}}"
+    ],
+    "general_city": [
+      "stem cell therapy {{city}}",
+      "stem cell clinic {{city}}",
+      "regenerative medicine {{city}}",
+      "stem cell injection {{city}}",
+      "stem cell treatment cost {{city}}"
+    ],
+    "condition_state": [
+      "stem cell {{condition}} {{state}}",
+      "{{condition}} stem cell {{state_abbr}}",
+      "best {{condition}} clinic {{state}}"
+    ]
+  },
+  "audience_segments": {
+    "knee_pain_seekers": {
+      "conditions": ["knee-osteoarthritis"],
+      "age_range": "45-65",
+      "interests": ["orthopedics", "joint health", "sports medicine", "arthritis treatment"]
+    },
+    "back_pain_seekers": {
+      "conditions": ["spine-disc"],
+      "age_range": "35-60",
+      "interests": ["back pain relief", "spine health", "chronic pain", "disc problems"]
+    },
+    "sports_injury": {
+      "conditions": ["sports-injury", "shoulder", "elbow"],
+      "age_range": "25-50",
+      "interests": ["sports medicine", "athletic recovery", "fitness", "sports injuries"]
+    },
+    "general_regenerative": {
+      "conditions": ["all"],
+      "age_range": "40-70",
+      "interests": ["regenerative medicine", "alternative medicine", "stem cell therapy", "anti-aging"]
+    }
+  },
+  "budget_recommendations": {
+    "per_city_daily": {
+      "tier_1_cities": {"budget": 50, "cities": ["los-angeles", "new-york-city", "chicago", "houston", "miami"]},
+      "tier_2_cities": {"budget": 30, "cities": ["dallas", "phoenix", "seattle", "boston", "atlanta"]},
+      "tier_3_cities": {"budget": 15, "cities": ["all_other"]}
+    },
+    "per_condition_daily": {
+      "high_volume": {"budget": 100, "conditions": ["knee-osteoarthritis", "spine-disc"]},
+      "medium_volume": {"budget": 50, "conditions": ["shoulder", "hip-osteoarthritis", "sports-injury"]},
+      "low_volume": {"budget": 25, "conditions": ["elbow", "ankle-foot", "wrist-hand"]}
+    }
+  }
+}
