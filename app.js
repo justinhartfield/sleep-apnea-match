@@ -1068,16 +1068,16 @@ function costIndexPage() {
         sortBy: 'name',
         // Real pricing data from BioInformant, AZCPM, Mayo Clinic, and multiple clinic sources (January 2026)
         pricingData: [
-            { id: 1, name: 'Knee Osteoarthritis', low: 3500, median: 5800, high: 9000, clinics: 250, trend: 'up', trendPercent: 3.5, successRate: '68-77%', source: 'Cochrane Review 2025' },
-            { id: 2, name: 'Lumbar Spine / Disc', low: 5000, median: 8500, high: 15000, clinics: 150, trend: 'up', trendPercent: 4.1, successRate: '55-65%', source: 'Cellular Hope Institute' },
-            { id: 3, name: 'Shoulder (Rotator Cuff)', low: 3000, median: 5500, high: 8000, clinics: 210, trend: 'stable', trendPercent: 1.2, successRate: '65-75%', source: 'BioInformant' },
-            { id: 4, name: 'Hip Osteoarthritis', low: 4000, median: 6500, high: 10000, clinics: 180, trend: 'up', trendPercent: 2.9, successRate: '60-70%', source: 'AZCPM' },
-            { id: 5, name: 'Cervical Spine (Neck)', low: 4500, median: 7500, high: 12000, clinics: 90, trend: 'up', trendPercent: 3.8, successRate: '55-65%', source: 'Cellular Hope Institute' },
-            { id: 6, name: 'Ankle / Achilles', low: 2500, median: 4500, high: 6500, clinics: 110, trend: 'stable', trendPercent: 0.9, successRate: '65-75%', source: 'BioInformant' },
-            { id: 7, name: "Tennis/Golfer's Elbow", low: 2000, median: 3500, high: 5500, clinics: 130, trend: 'down', trendPercent: 1.5, successRate: '70-80%', source: 'BioInformant' },
-            { id: 8, name: 'Sacroiliac (SI) Joint', low: 4000, median: 6000, high: 9000, clinics: 70, trend: 'up', trendPercent: 2.1, successRate: '60-70%', source: 'BioInformant' },
-            { id: 9, name: 'Wrist / Hand Arthritis', low: 2800, median: 4800, high: 7000, clinics: 85, trend: 'stable', trendPercent: 1.0, successRate: '65-75%', source: 'BioInformant' },
-            { id: 10, name: 'Plantar Fasciitis', low: 1800, median: 3500, high: 5000, clinics: 140, trend: 'down', trendPercent: 2.5, successRate: '70-80%', source: 'BioInformant' }
+            { id: 1, name: 'Knee Osteoarthritis', low: 3500, median: 5800, high: 9000, clinics: 250, trend: 'up', trendPercent: 3.5, successRate: '68-77%', source: 'Cochrane Review 2025', link: 'knee-cost-guide' },
+            { id: 2, name: 'Lumbar Spine / Disc', low: 5000, median: 8500, high: 15000, clinics: 150, trend: 'up', trendPercent: 4.1, successRate: '55-65%', source: 'Cellular Hope Institute', link: '/lp/spine-disc/california/los-angeles/' },
+            { id: 3, name: 'Shoulder (Rotator Cuff)', low: 3000, median: 5500, high: 8000, clinics: 210, trend: 'stable', trendPercent: 1.2, successRate: '65-75%', source: 'BioInformant', link: '/lp/shoulder/california/los-angeles/' },
+            { id: 4, name: 'Hip Osteoarthritis', low: 4000, median: 6500, high: 10000, clinics: 180, trend: 'up', trendPercent: 2.9, successRate: '60-70%', source: 'AZCPM', link: '/lp/hip-osteoarthritis/california/los-angeles/' },
+            { id: 5, name: 'Cervical Spine (Neck)', low: 4500, median: 7500, high: 12000, clinics: 90, trend: 'up', trendPercent: 3.8, successRate: '55-65%', source: 'Cellular Hope Institute', link: '/lp/spine-disc/california/los-angeles/' },
+            { id: 6, name: 'Ankle / Achilles', low: 2500, median: 4500, high: 6500, clinics: 110, trend: 'stable', trendPercent: 0.9, successRate: '65-75%', source: 'BioInformant', link: '/locations/' },
+            { id: 7, name: "Tennis/Golfer's Elbow", low: 2000, median: 3500, high: 5500, clinics: 130, trend: 'down', trendPercent: 1.5, successRate: '70-80%', source: 'BioInformant', link: '/locations/' },
+            { id: 8, name: 'Sacroiliac (SI) Joint', low: 4000, median: 6000, high: 9000, clinics: 70, trend: 'up', trendPercent: 2.1, successRate: '60-70%', source: 'BioInformant', link: '/lp/spine-disc/california/los-angeles/' },
+            { id: 9, name: 'Wrist / Hand Arthritis', low: 2800, median: 4800, high: 7000, clinics: 85, trend: 'stable', trendPercent: 1.0, successRate: '65-75%', source: 'BioInformant', link: '/locations/' },
+            { id: 10, name: 'Plantar Fasciitis', low: 1800, median: 3500, high: 5000, clinics: 140, trend: 'down', trendPercent: 2.5, successRate: '70-80%', source: 'BioInformant', link: '/locations/' }
         ],
         // Real price drivers with verified cost impacts
         priceDrivers: [
@@ -1168,7 +1168,7 @@ function costIndexPage() {
 
                             <div class="divide-y divide-slate-50">
                                 <template x-for="item in filteredPricing" :key="item.id">
-                                    <div class="px-6 md:px-8 py-6 table-row-hover transition-colors group cursor-pointer" @click="$dispatch('navigate', 'knee-cost-guide')">
+                                    <div class="px-6 md:px-8 py-6 table-row-hover transition-colors group cursor-pointer" @click="item.link.startsWith('/') ? window.location.href = item.link : $dispatch('navigate', item.link)">
                                         <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
                                             <div class="md:col-span-4">
                                                 <h3 class="font-bold text-slate-900 group-hover:text-brand-600 transition-colors" x-text="item.name"></h3>
@@ -1337,9 +1337,9 @@ function kneeCostGuidePage() {
                         <div class="bg-slate-900 rounded-3xl p-8 text-center">
                             <h3 class="text-2xl font-extrabold text-white mb-4">Find Knee Stem Cell Clinics Near You</h3>
                             <p class="text-slate-400 mb-6">Compare prices and credentials from 250+ verified providers</p>
-                            <button @click="$dispatch('navigate', 'california-directory')" class="bg-brand-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-brand-700 transition-all">
+                            <a href="/locations/" class="inline-block bg-brand-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-brand-700 transition-all">
                                 Browse Clinics
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </section>
