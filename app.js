@@ -1805,7 +1805,7 @@ function mexicoComparisonPage() {
         ],
         // Real Mexico clinic data
         mexicoCities: [
-            { name: 'Tijuana', clinics: 5, avgPrice: '$3,500', description: 'Closest to US border, easy access from San Diego' },
+            { name: 'Tijuana', clinics: 8, avgPrice: '$3,500', description: 'Closest to US border, easy access from San Diego' },
             { name: 'Cancun', clinics: 4, avgPrice: '$4,500', description: 'Medical tourism hub with resort recovery options' },
             { name: 'Mexico City', clinics: 3, avgPrice: '$4,000', description: 'Major medical center with advanced facilities' }
         ],
