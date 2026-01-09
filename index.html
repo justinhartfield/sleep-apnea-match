@@ -183,7 +183,18 @@
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
                     <a href="#" @click.prevent="navigate('cost-index')" :class="currentPage === 'cost-index' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Cost Guide</a>
                     <a href="#" @click.prevent="navigate('knee-cost-guide')" :class="currentPage === 'knee-cost-guide' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Conditions</a>
-                    <a href="#" @click.prevent="navigate('california-directory')" :class="currentPage.includes('directory') ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Locations</a>
+                    <div class="relative" x-data="{ locationsOpen: false }" @mouseenter="locationsOpen = true" @mouseleave="locationsOpen = false">
+                        <a href="#" @click.prevent="navigate('all-states')" :class="currentPage.includes('directory') || currentPage === 'all-states' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Locations</a>
+                        <div x-show="locationsOpen" x-cloak class="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 max-h-96 overflow-y-auto">
+                            <a href="#" @click.prevent="navigate('all-states'); locationsOpen=false" class="block px-4 py-2 text-sm font-bold text-brand-600 hover:bg-brand-50">View All 30 States →</a>
+                            <div class="border-t border-slate-100 my-2"></div>
+                            <template x-for="state in ['California', 'Texas', 'Florida', 'New York', 'Arizona', 'Colorado', 'Illinois', 'Georgia', 'Washington', 'Massachusetts']" :key="state">
+                                <a href="#" @click.prevent="window.selectedState = state; navigate('state-directory'); locationsOpen=false" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600" x-text="state"></a>
+                            </template>
+                            <div class="border-t border-slate-100 my-2"></div>
+                            <a href="#" @click.prevent="navigate('all-states'); locationsOpen=false" class="block px-4 py-2 text-xs text-slate-400 hover:text-brand-600">+ 20 more states</a>
+                        </div>
+                    </div>
                     <a href="#" @click.prevent="navigate('home')" :class="currentPage === 'home' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Find Clinics</a>
                 </div>
                 <div class="flex items-center gap-4">
@@ -199,7 +210,7 @@
                 <div class="flex flex-col space-y-3">
                     <a href="#" @click.prevent="navigate('cost-index'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Cost Guide</a>
                     <a href="#" @click.prevent="navigate('knee-cost-guide'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Conditions</a>
-                    <a href="#" @click.prevent="navigate('california-directory'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Locations</a>
+                    <a href="#" @click.prevent="navigate('all-states'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Locations (30 States)</a>
                     <a href="#" @click.prevent="navigate('home'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Find Clinics</a>
                 </div>
             </div>
@@ -379,8 +390,8 @@
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div class="flex flex-col md:flex-row items-baseline justify-between gap-4 mb-10">
                                 <h2 class="text-3xl font-extrabold text-slate-900">Popular Hubs & Medical Tourism</h2>
-                                <a href="#" @click.prevent="$dispatch('navigate', 'california-directory')" class="text-brand-600 font-bold hover:underline inline-flex items-center gap-1">
-                                    View All 100+ Cities
+                                <a href="#" @click.prevent="$dispatch('navigate', 'all-states')" class="text-brand-600 font-bold hover:underline inline-flex items-center gap-1">
+                                    View All 30 States & 50+ Cities
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                                 </a>
                             </div>
@@ -509,6 +520,13 @@
                 <div x-data="stateDirectoryPage()"></div>
             </template>
         </div>
+
+        <!-- All States Directory Page -->
+        <div x-show="currentPage === 'all-states'" x-cloak x-transition>
+            <template x-if="currentPage === 'all-states'">
+                <div x-data="allStatesPage()"></div>
+            </template>
+        </div>
     </main>
 
     <!-- Global Footer -->
@@ -538,8 +556,11 @@
                 <div>
                     <h5 class="font-bold text-slate-900 mb-4">Top Locations</h5>
                     <ul class="space-y-2 text-sm text-slate-500">
+                        <li><a href="#" @click.prevent="navigate('all-states')" class="hover:text-brand-600 font-semibold">All 30 States →</a></li>
                         <li><a href="#" @click.prevent="navigate('la-directory')" class="hover:text-brand-600">Clinics in Los Angeles</a></li>
                         <li><a href="#" @click.prevent="navigate('california-directory')" class="hover:text-brand-600">Clinics in California</a></li>
+                        <li><a href="#" @click.prevent="window.selectedState='Texas'; navigate('state-directory')" class="hover:text-brand-600">Clinics in Texas</a></li>
+                        <li><a href="#" @click.prevent="window.selectedState='Florida'; navigate('state-directory')" class="hover:text-brand-600">Clinics in Florida</a></li>
                         <li><a href="#" @click.prevent="navigate('mexico-comparison')" class="hover:text-brand-600">Clinics in Mexico</a></li>
                     </ul>
                 </div>

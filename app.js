@@ -1583,25 +1583,57 @@ function clinicProfilePage() {
 // California Directory Page - REAL DATA
 function californiaDirectoryPage() {
     return {
-        // Real California city data with verified clinic counts and average prices
-        cities: [
-            { name: 'Los Angeles', clinics: 8, avgPrice: '$5,800', description: 'Premium market with research institutions' },
-            { name: 'San Francisco', clinics: 6, avgPrice: '$6,200', description: 'Bay Area regenerative medicine hub' },
-            { name: 'San Diego', clinics: 5, avgPrice: '$5,400', description: 'Growing market near Mexico border' },
-            { name: 'Irvine', clinics: 4, avgPrice: '$5,600', description: 'Orange County medical corridor' },
-            { name: 'Sacramento', clinics: 3, avgPrice: '$4,800', description: 'Northern California options' }
-        ],
-
+        cities: [],
+        
         init() {
+            // Get California cities from CLINIC_DATABASE
+            const caData = CLINIC_DATABASE.states['California'];
+            if (caData) {
+                this.cities = caData.cities.map(city => ({
+                    ...city,
+                    avgPriceFormatted: '$' + city.avgPrice.toLocaleString()
+                }));
+            }
             this.$nextTick(() => this.renderContent());
         },
 
+        navigateToCity(cityName) {
+            const cityKey = cityName.toLowerCase().replace(/ /g, '_').replace(/\./g, '');
+            if (CLINIC_DATABASE.cities[cityKey]) {
+                window.selectedCity = cityKey;
+                this.$dispatch('navigate', 'city-directory');
+            } else if (cityName === 'Los Angeles') {
+                this.$dispatch('navigate', 'la-directory');
+            }
+        },
+
         renderContent() {
+            const totalClinics = this.cities.reduce((sum, city) => sum + city.clinics, 0);
+            
+            const citiesHtml = this.cities.map(city => `
+                <div onclick="window.selectedCity='${city.name.toLowerCase().replace(/ /g, '_').replace(/\./g, '')}'; window.dispatchEvent(new CustomEvent('navigate', {detail: '${city.name === 'Los Angeles' ? 'la-directory' : 'city-directory'}'}))" 
+                     class="bg-white rounded-3xl p-6 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer group">
+                    <h3 class="text-xl font-extrabold text-slate-900 mb-2 group-hover:text-brand-600">${city.name}</h3>
+                    <p class="text-sm text-slate-500 mb-3">${city.description}</p>
+                    <div class="flex items-center gap-4 text-sm text-slate-500 mb-4">
+                        <span>${city.clinics} Clinics</span>
+                        <span>|</span>
+                        <span>Avg $${city.avgPrice.toLocaleString()}</span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs font-bold text-brand-600">View All</span>
+                        <svg class="w-4 h-4 text-brand-600 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div>
+                </div>
+            `).join('');
+
             this.$el.innerHTML = `
                 <section class="py-8 md:py-12">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <nav class="flex mb-8 text-xs font-bold uppercase tracking-widest text-slate-400 gap-2">
-                            <a href="#" @click.prevent="$dispatch('navigate', 'home')" class="hover:text-brand-600">Home</a>
+                            <a href="#" onclick="event.preventDefault(); window.dispatchEvent(new CustomEvent('navigate', {detail: 'home'}))" class="hover:text-brand-600">Home</a>
+                            <span>/</span>
+                            <a href="#" onclick="event.preventDefault(); window.dispatchEvent(new CustomEvent('navigate', {detail: 'all-states'}))" class="hover:text-brand-600">All States</a>
                             <span>/</span>
                             <span class="text-slate-600">California</span>
                         </nav>
@@ -1609,26 +1641,21 @@ function californiaDirectoryPage() {
                         <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
                             Stem Cell Clinics in <span class="text-brand-600">California</span>
                         </h1>
-                        <p class="text-lg text-slate-600 max-w-3xl mb-12">
-                            Browse 26+ verified regenerative medicine clinics across the Golden State, including major research institutions and specialized orthopedic centers.
+                        <p class="text-lg text-slate-600 max-w-3xl mb-8">
+                            Browse ${totalClinics}+ verified regenerative medicine clinics across the Golden State, including major research institutions and specialized orthopedic centers.
                         </p>
+                        
+                        <div class="flex flex-wrap gap-4 mb-12">
+                            <div class="bg-brand-50 text-brand-700 px-4 py-2 rounded-full text-sm font-bold">
+                                ${this.cities.length} Cities
+                            </div>
+                            <div class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full text-sm font-bold">
+                                ${totalClinics}+ Clinics
+                            </div>
+                        </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            <template x-for="city in cities" :key="city.name">
-                                <div @click="city.name === 'Los Angeles' ? $dispatch('navigate', 'la-directory') : null" class="bg-white rounded-3xl p-6 border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer group">
-                                    <h3 class="text-xl font-extrabold text-slate-900 mb-2 group-hover:text-brand-600" x-text="city.name"></h3>
-                                    <p class="text-sm text-slate-500 mb-3" x-text="city.description"></p>
-                                    <div class="flex items-center gap-4 text-sm text-slate-500 mb-4">
-                                        <span x-text="city.clinics + ' Clinics'"></span>
-                                        <span>|</span>
-                                        <span x-text="'Avg ' + city.avgPrice"></span>
-                                    </div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-xs font-bold text-brand-600">View All</span>
-                                        <svg class="w-4 h-4 text-brand-600 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                                    </div>
-                                </div>
-                            </template>
+                            ${citiesHtml}
                         </div>
                     </div>
                 </section>
@@ -2129,6 +2156,114 @@ function stateDirectoryPage() {
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             ${citiesHtml}
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+    };
+}
+
+
+// All States Directory Page - Shows all 30 states with clinic counts
+function allStatesPage() {
+    return {
+        states: [],
+        
+        init() {
+            // Build states array from CLINIC_DATABASE
+            this.states = Object.keys(CLINIC_DATABASE.states).map(stateName => {
+                const stateData = CLINIC_DATABASE.states[stateName];
+                const totalClinics = stateData.cities.reduce((sum, city) => sum + city.clinics, 0);
+                const avgPrice = Math.round(stateData.cities.reduce((sum, city) => sum + city.avgPrice, 0) / stateData.cities.length);
+                return {
+                    name: stateName,
+                    cities: stateData.cities.length,
+                    clinics: totalClinics,
+                    avgPrice: avgPrice
+                };
+            }).sort((a, b) => a.name.localeCompare(b.name));
+            
+            this.$nextTick(() => this.renderContent());
+        },
+
+        navigateToState(stateName) {
+            window.selectedState = stateName;
+            this.$dispatch('navigate', 'state-directory');
+        },
+
+        renderContent() {
+            const totalClinics = this.states.reduce((sum, s) => sum + s.clinics, 0);
+            const totalCities = this.states.reduce((sum, s) => sum + s.cities, 0);
+            
+            // Group states by region
+            const regions = {
+                'West Coast': ['California', 'Oregon', 'Washington', 'Alaska', 'Hawaii'],
+                'Southwest': ['Arizona', 'Nevada', 'New Mexico', 'Utah', 'Colorado'],
+                'Texas': ['Texas'],
+                'Midwest': ['Illinois', 'Michigan', 'Minnesota', 'Missouri', 'Ohio', 'Indiana', 'Wisconsin'],
+                'Southeast': ['Florida', 'Georgia', 'North Carolina', 'Tennessee', 'Kentucky'],
+                'Northeast': ['New York', 'Pennsylvania', 'Massachusetts', 'Maryland', 'Washington DC'],
+                'Mountain': ['Idaho', 'Oklahoma']
+            };
+
+            const statesHtml = this.states.map(state => `
+                <div onclick="window.selectedState='${state.name}'; window.dispatchEvent(new CustomEvent('navigate', {detail: 'state-directory'}))" 
+                     class="bg-white rounded-2xl p-5 border border-slate-200 hover:shadow-lg hover:-translate-y-1 transition-all cursor-pointer group">
+                    <h3 class="text-lg font-bold text-slate-900 mb-1 group-hover:text-brand-600">${state.name}</h3>
+                    <div class="flex items-center gap-3 text-sm text-slate-500">
+                        <span class="font-semibold text-brand-600">${state.clinics} Clinics</span>
+                        <span>•</span>
+                        <span>${state.cities} Cities</span>
+                        <span>•</span>
+                        <span>Avg $${state.avgPrice.toLocaleString()}</span>
+                    </div>
+                </div>
+            `).join('');
+
+            this.$el.innerHTML = `
+                <section class="py-8 md:py-12">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <nav class="flex mb-8 text-xs font-bold uppercase tracking-widest text-slate-400 gap-2">
+                            <a href="#" onclick="event.preventDefault(); window.dispatchEvent(new CustomEvent('navigate', {detail: 'home'}))" class="hover:text-brand-600">Home</a>
+                            <span>/</span>
+                            <span class="text-slate-600">All States</span>
+                        </nav>
+
+                        <div class="mb-12">
+                            <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
+                                Stem Cell Clinics in <span class="text-brand-600">All 30 States</span>
+                            </h1>
+                            <p class="text-lg text-slate-600 max-w-3xl mb-6">
+                                Browse ${totalClinics}+ verified regenerative medicine clinics across ${totalCities} cities in ${this.states.length} states.
+                            </p>
+                            <div class="flex flex-wrap gap-4">
+                                <div class="bg-brand-50 text-brand-700 px-4 py-2 rounded-full text-sm font-bold">
+                                    ${this.states.length} States
+                                </div>
+                                <div class="bg-emerald-50 text-emerald-700 px-4 py-2 rounded-full text-sm font-bold">
+                                    ${totalCities} Cities
+                                </div>
+                                <div class="bg-amber-50 text-amber-700 px-4 py-2 rounded-full text-sm font-bold">
+                                    ${totalClinics}+ Clinics
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                            ${statesHtml}
+                        </div>
+
+                        <div class="mt-12 p-6 bg-slate-50 rounded-2xl border border-slate-200">
+                            <h3 class="text-lg font-bold text-slate-900 mb-4">Popular States for Stem Cell Therapy</h3>
+                            <div class="flex flex-wrap gap-2">
+                                <button onclick="window.selectedState='California'; window.dispatchEvent(new CustomEvent('navigate', {detail: 'state-directory'}))" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-semibold hover:border-brand-600 hover:text-brand-600 transition">California</button>
+                                <button onclick="window.selectedState='Texas'; window.dispatchEvent(new CustomEvent('navigate', {detail: 'state-directory'}))" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-semibold hover:border-brand-600 hover:text-brand-600 transition">Texas</button>
+                                <button onclick="window.selectedState='Florida'; window.dispatchEvent(new CustomEvent('navigate', {detail: 'state-directory'}))" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-semibold hover:border-brand-600 hover:text-brand-600 transition">Florida</button>
+                                <button onclick="window.selectedState='Arizona'; window.dispatchEvent(new CustomEvent('navigate', {detail: 'state-directory'}))" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-semibold hover:border-brand-600 hover:text-brand-600 transition">Arizona</button>
+                                <button onclick="window.selectedState='New York'; window.dispatchEvent(new CustomEvent('navigate', {detail: 'state-directory'}))" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-semibold hover:border-brand-600 hover:text-brand-600 transition">New York</button>
+                                <button onclick="window.selectedState='Colorado'; window.dispatchEvent(new CustomEvent('navigate', {detail: 'state-directory'}))" class="px-4 py-2 bg-white border border-slate-200 rounded-full text-sm font-semibold hover:border-brand-600 hover:text-brand-600 transition">Colorado</button>
+                            </div>
                         </div>
                     </div>
                 </section>
