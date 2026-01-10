@@ -1,81 +1,350 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""
+Script to update all USA clinic detail pages to use the Mexico clinic template format.
+Features:
+- Hero section with city background and price range in header
+- Sticky CTA lead capture form on right
+- Treatment tags (colored pills instead of bullet lists)
+- "Why Choose [City] for Stem Cell Therapy?" section
+- "Other Clinics in [City]" section with navigation links
+"""
+
+import os
+import re
+import json
+from pathlib import Path
+from html.parser import HTMLParser
+
+# State display names
+STATE_NAMES = {
+    'alabama': 'Alabama', 'alaska': 'Alaska', 'arizona': 'Arizona', 'arkansas': 'Arkansas',
+    'california': 'California', 'colorado': 'Colorado', 'connecticut': 'Connecticut', 'delaware': 'Delaware',
+    'florida': 'Florida', 'georgia': 'Georgia', 'hawaii': 'Hawaii', 'idaho': 'Idaho',
+    'illinois': 'Illinois', 'indiana': 'Indiana', 'iowa': 'Iowa', 'kansas': 'Kansas',
+    'kentucky': 'Kentucky', 'louisiana': 'Louisiana', 'maine': 'Maine', 'maryland': 'Maryland',
+    'massachusetts': 'Massachusetts', 'michigan': 'Michigan', 'minnesota': 'Minnesota', 'mississippi': 'Mississippi',
+    'missouri': 'Missouri', 'montana': 'Montana', 'nebraska': 'Nebraska', 'nevada': 'Nevada',
+    'new-hampshire': 'New Hampshire', 'new-jersey': 'New Jersey', 'new-mexico': 'New Mexico', 'new-york': 'New York',
+    'north-carolina': 'North Carolina', 'north-dakota': 'North Dakota', 'ohio': 'Ohio', 'oklahoma': 'Oklahoma',
+    'oregon': 'Oregon', 'pennsylvania': 'Pennsylvania', 'rhode-island': 'Rhode Island', 'south-carolina': 'South Carolina',
+    'south-dakota': 'South Dakota', 'tennessee': 'Tennessee', 'texas': 'Texas', 'utah': 'Utah',
+    'vermont': 'Vermont', 'virginia': 'Virginia', 'washington': 'Washington', 'west-virginia': 'West Virginia',
+    'wisconsin': 'Wisconsin', 'wyoming': 'Wyoming'
+}
+
+def slug_to_display(slug):
+    """Convert slug to display name"""
+    return STATE_NAMES.get(slug, slug.replace('-', ' ').title())
+
+def extract_clinic_data(filepath):
+    """Extract clinic data from existing HTML file"""
+    with open(filepath, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    data = {}
+
+    # Extract clinic name from title
+    title_match = re.search(r'<title>([^<]+)', content)
+    if title_match:
+        title = title_match.group(1)
+        # Extract clinic name (before " - Stem Cell" or " | ")
+        name_match = re.match(r'([^-|]+)', title)
+        if name_match:
+            data['name'] = name_match.group(1).strip()
+
+    # Extract from JSON-LD if available
+    jsonld_match = re.search(r'<script type="application/ld\+json">\s*(\{.*?\})\s*</script>', content, re.DOTALL)
+    if jsonld_match:
+        try:
+            jsonld = json.loads(jsonld_match.group(1))
+            if '@graph' in jsonld:
+                for item in jsonld['@graph']:
+                    if item.get('@type') and ('MedicalBusiness' in str(item.get('@type')) or 'LocalBusiness' in str(item.get('@type'))):
+                        if 'name' in item:
+                            data['name'] = item['name']
+                        if 'telephone' in item:
+                            data['phone'] = item['telephone']
+                        if 'address' in item and isinstance(item['address'], dict):
+                            addr = item['address']
+                            data['street'] = addr.get('streetAddress', '')
+                            data['city_name'] = addr.get('addressLocality', '')
+                            data['state_name'] = addr.get('addressRegion', '')
+                        if 'priceRange' in item:
+                            data['price_range'] = item['priceRange'].replace('$', '').replace(',', '')
+        except:
+            pass
+
+    # Extract description from meta tag
+    desc_match = re.search(r'<meta name="description" content="([^"]+)"', content)
+    if desc_match:
+        data['meta_description'] = desc_match.group(1)
+
+    # Extract specialty from content
+    specialty_match = re.search(r'<h3[^>]*>Specialty</h3>\s*<p[^>]*>([^<]+)</p>', content, re.IGNORECASE)
+    if specialty_match:
+        data['specialty'] = specialty_match.group(1).strip()
+    else:
+        # Try to get from meta description
+        if 'meta_description' in data:
+            spec_match = re.search(r'offers? ([^.]+?) in', data['meta_description'])
+            if spec_match:
+                data['specialty'] = spec_match.group(1).strip()
+
+    # Extract about/description text
+    about_match = re.search(r'<h2[^>]*>About[^<]*</h2>\s*<p[^>]*>([^<]+)</p>', content, re.IGNORECASE)
+    if about_match:
+        data['about'] = about_match.group(1).strip()
+
+    # Extract treatments offered
+    treatments = []
+    treatments_section = re.search(r'<h3[^>]*>Treatments Offered</h3>\s*<ul[^>]*>(.*?)</ul>', content, re.DOTALL | re.IGNORECASE)
+    if treatments_section:
+        items = re.findall(r'<li>([^<]+)</li>', treatments_section.group(1))
+        treatments = [t.strip() for t in items]
+    data['treatments'] = treatments if treatments else ['Stem Cell Therapy', 'PRP Therapy', 'Regenerative Medicine']
+
+    # Extract conditions treated
+    conditions = []
+    conditions_section = re.search(r'<h3[^>]*>Conditions Treated</h3>\s*<ul[^>]*>(.*?)</ul>', content, re.DOTALL | re.IGNORECASE)
+    if conditions_section:
+        items = re.findall(r'<li>([^<]+)</li>', conditions_section.group(1))
+        conditions = [c.strip() for c in items]
+    data['conditions'] = conditions if conditions else ['Knee Osteoarthritis', 'Back Pain', 'Shoulder Injuries', 'Hip Pain']
+
+    # Extract price range if not from JSON-LD
+    if 'price_range' not in data:
+        price_match = re.search(r'Price [Rr]ange[^$]*\$([0-9,]+)\s*[-–]\s*\$([0-9,]+)', content)
+        if price_match:
+            data['price_range'] = f"{price_match.group(1)} - {price_match.group(2)}"
+
+    # Extract phone if not from JSON-LD
+    if 'phone' not in data:
+        phone_match = re.search(r'(?:Phone|telephone)[^(]*(\([0-9]{3}\)\s*[0-9]{3}[-.]?[0-9]{4}|\+?[0-9]{1,3}[-.\s]?[0-9]{3}[-.\s]?[0-9]{3}[-.\s]?[0-9]{4})', content, re.IGNORECASE)
+        if phone_match:
+            data['phone'] = phone_match.group(1)
+
+    # Extract address if not from JSON-LD
+    if 'street' not in data:
+        addr_match = re.search(r'<p[^>]*class="[^"]*text-slate-900[^"]*"[^>]*>([^<]+(?:St|Ave|Blvd|Dr|Rd|Way|Lane|Ct|Suite|#)[^<]*)</p>', content)
+        if addr_match:
+            data['street'] = addr_match.group(1).strip()
+
+    # Get slug from filename
+    data['slug'] = filepath.stem
+
+    # Extract other clinics in city
+    other_clinics = []
+    other_section = re.search(r'Other Clinics in.*?<div class="grid[^>]*>(.*?)</div>\s*</div>\s*</div>', content, re.DOTALL | re.IGNORECASE)
+    if other_section:
+        clinic_links = re.findall(r'<a href="([^"]+)"[^>]*>.*?<h3[^>]*>([^<]+)</h3>.*?<p[^>]*>([^<]+)</p>.*?<p[^>]*text-blue[^>]*>([^<]+)</p>', other_section.group(1), re.DOTALL)
+        for link, name, specialty, price in clinic_links:
+            other_clinics.append({
+                'href': link,
+                'name': name.strip(),
+                'specialty': specialty.strip(),
+                'price': price.strip()
+            })
+    data['other_clinics'] = other_clinics
+
+    return data
+
+def get_state_features(state_slug):
+    """Get Why Choose features for a state"""
+    features = {
+        'california': [
+            ('Leading Medical Innovation', 'California is home to world-renowned research institutions and pioneering stem cell clinics'),
+            ('Highly Experienced Physicians', 'Access to board-certified specialists with extensive regenerative medicine training'),
+            ('Advanced Treatment Options', 'Latest stem cell protocols and cutting-edge regenerative technologies'),
+            ('Comprehensive Care', 'Full-service clinics offering personalized treatment plans and follow-up care'),
+        ],
+        'texas': [
+            ('Competitive Pricing', 'Texas offers stem cell treatments at prices 15-25% below coastal states'),
+            ('Top Medical Centers', 'Houston and Dallas are home to world-class orthopedic facilities'),
+            ('No State Income Tax', 'Patients save on overall costs with Texas tax advantages'),
+            ('Growing Expertise', 'Rapidly expanding network of regenerative medicine specialists'),
+        ],
+        'florida': [
+            ('Medical Tourism Hub', 'Florida attracts patients nationwide with its concentration of regenerative clinics'),
+            ('Experienced Specialists', 'Many physicians with decades of stem cell therapy experience'),
+            ('Year-Round Accessibility', 'Convenient location with major airports and pleasant recovery weather'),
+            ('Competitive Pricing', 'Multiple clinics competing keeps prices reasonable'),
+        ],
+        'arizona': [
+            ('Lower Cost of Living', 'Arizona clinics often offer more competitive pricing than coastal states'),
+            ('Renowned Institutions', 'Home to Mayo Clinic Arizona and other prestigious medical centers'),
+            ('Recovery-Friendly Climate', 'Dry, warm weather ideal for post-treatment recovery'),
+            ('Growing Medical Hub', 'Phoenix and Scottsdale attract top regenerative medicine talent'),
+        ],
+        'new-york': [
+            ('World-Class Specialists', 'NYC is home to Hospital for Special Surgery and leading orthopedic experts'),
+            ('Cutting-Edge Research', 'Access to the latest clinical trials and innovative treatments'),
+            ('Comprehensive Care Teams', 'Multi-disciplinary approach to regenerative medicine'),
+            ('Convenient Access', 'Major international hub with extensive transportation options'),
+        ],
+        'colorado': [
+            ('Sports Medicine Excellence', 'Home to Steadman Clinic and top sports orthopedics specialists'),
+            ('Active Lifestyle Focus', 'Clinics specialized in treating athletic injuries and active patients'),
+            ('Altitude Training Benefits', 'Some research suggests altitude may enhance recovery'),
+            ('Growing Regenerative Hub', 'Denver is becoming a center for regenerative medicine'),
+        ],
+    }
+
+    # Default features for states not specifically defined
+    default_features = [
+        ('Qualified Specialists', 'Board-certified physicians with regenerative medicine expertise'),
+        ('Modern Facilities', 'State-of-the-art clinics with advanced treatment technologies'),
+        ('Personalized Care', 'Customized treatment plans tailored to your specific condition'),
+        ('Competitive Pricing', 'Transparent pricing and multiple financing options available'),
+    ]
+
+    return features.get(state_slug, default_features)
+
+def generate_clinic_page(data, state_slug, city_slug, filepath):
+    """Generate new clinic page HTML using Mexico template format"""
+
+    state_name = slug_to_display(state_slug)
+    city_name = data.get('city_name', slug_to_display(city_slug))
+    clinic_name = data.get('name', 'Stem Cell Clinic')
+    clinic_slug = data.get('slug', filepath.stem)
+    specialty = data.get('specialty', 'Regenerative Medicine')
+    phone = data.get('phone', '')
+    street = data.get('street', city_name)
+    price_range = data.get('price_range', '4,000 - 10,000')
+    about = data.get('about', f'{clinic_name} offers stem cell therapy and regenerative medicine treatments in {city_name}, {state_name}.')
+    treatments = data.get('treatments', [])
+    conditions = data.get('conditions', [])
+    other_clinics = data.get('other_clinics', [])
+
+    # Format price range with $ signs if not already present
+    if '$' not in price_range:
+        price_parts = price_range.replace(',', '').split('-')
+        if len(price_parts) == 2:
+            try:
+                low = int(price_parts[0].strip())
+                high = int(price_parts[1].strip())
+                price_range = f"${low:,} - ${high:,}"
+            except:
+                price_range = f"${price_range}"
+
+    # Generate treatments HTML (colored tags)
+    treatments_html = ''
+    all_items = treatments + conditions
+    for item in all_items[:8]:  # Limit to 8 items
+        treatments_html += f'<div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">{item}</div>'
+
+    # Generate features HTML
+    features_html = ''
+    feature_items = [
+        'Board-certified physicians',
+        'Modern treatment facilities',
+        'Personalized care plans',
+        'Follow-up support'
+    ]
+    for feature in feature_items:
+        features_html += f'''<div class="flex items-center gap-2"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-700">{feature}</span></div>'''
+
+    # Generate Why Choose section
+    state_features = get_state_features(state_slug)
+    why_choose_html = ''
+    for title, desc in state_features:
+        why_choose_html += f'''<li class="flex items-start gap-2">
+                            <span class="text-blue-500 mt-1">&#10003;</span>
+                            <span><strong>{title}</strong> - {desc}</span>
+                        </li>'''
+
+    # Generate other clinics HTML
+    other_clinics_html = f'''<a href="/locations/{state_slug}/{city_slug}/" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                    <div class="text-blue-600 font-semibold">&larr; View All {city_name} Clinics</div>
+                    <p class="text-gray-500 text-sm mt-1">Compare verified clinics</p>
+                </a>
+                <a href="/conditions/" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                    <div class="text-blue-600 font-semibold">Treatment Guides</div>
+                    <p class="text-gray-500 text-sm mt-1">Knee, hip, shoulder, spine</p>
+                </a>
+                <a href="/locations/{state_slug}/" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
+                    <div class="text-blue-600 font-semibold">All {state_name} Locations</div>
+                    <p class="text-gray-500 text-sm mt-1">Browse clinics statewide</p>
+                </a>'''
+
+    # Try to use city-specific background image, fallback to state or generic
+    city_bg = f'/assets/images/cities/{city_slug}.jpg'
+
+    html = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacramento Stem Cell Treatment - Stem Cell Clinic in Sacramento, California | StemCellPrices.com</title>
-    <meta name="description" content="Sacramento Stem Cell Treatment offers stem cell therapy in Sacramento, California. Regenerative Orthopedics. Prices from $4,000 - $9,000. Get a free consultation today.">
-    <meta name="keywords" content="Sacramento Stem Cell Treatment, stem cell therapy Sacramento, stem cell clinic California, regenerative medicine, regenerative orthopedics Sacramento">
-    <link rel="canonical" href="https://stemcellprices.com/locations/california/sacramento/sacramento-stem-cell-treatment.html">
+    <title>{clinic_name} - Stem Cell Clinic in {city_name}, {state_name} | StemCellPrices.com</title>
+    <meta name="description" content="{clinic_name} offers stem cell therapy in {city_name}, {state_name}. {specialty}. Prices from {price_range}. Get a free consultation today.">
+    <meta name="keywords" content="{clinic_name}, stem cell therapy {city_name}, stem cell clinic {state_name}, regenerative medicine, {specialty.lower()} {city_name}">
+    <link rel="canonical" href="https://stemcellprices.com/locations/{state_slug}/{city_slug}/{clinic_slug}.html">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Sacramento Stem Cell Treatment - Stem Cell Clinic in Sacramento, California">
-    <meta property="og:description" content="Regenerative Orthopedics. Prices from $4,000 - $9,000. Get a free quote.">
-    <meta property="og:url" content="https://stemcellprices.com/locations/california/sacramento/sacramento-stem-cell-treatment.html">
+    <meta property="og:title" content="{clinic_name} - Stem Cell Clinic in {city_name}, {state_name}">
+    <meta property="og:description" content="{specialty}. Prices from {price_range}. Get a free quote.">
+    <meta property="og:url" content="https://stemcellprices.com/locations/{state_slug}/{city_slug}/{clinic_slug}.html">
     <meta property="og:type" content="business.business">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
+        tailwind.config = {{
+            theme: {{
+                extend: {{
+                    colors: {{
+                        brand: {{
                             50: '#f0f7ff',
                             100: '#e0effe',
                             600: '#2563eb',
                             700: '#1d4ed8',
-                        }
-                    }
-                }
-            }
-        }
+                        }}
+                    }}
+                }}
+            }}
+        }}
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="/assets/js/tracking.js"></script>
 
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
-    {
+    {{
         "@context": "https://schema.org",
         "@graph": [
-            {
+            {{
                 "@type": "MedicalBusiness",
-                "name": "Sacramento Stem Cell Treatment",
-                "description": "Sacramento Stem Cell Treatment is a regenerative orthopedics provider located in Sacramento, California. 
-                        They offer stem cell therapy and regenerative medicine treatments for various orthopedic conditions 
-                        including knee osteoarthritis, spine and disc issues, shoulder injuries, and hip problems.",
-                "address": {
+                "name": "{clinic_name}",
+                "description": "{about}",
+                "address": {{
                     "@type": "PostalAddress",
-                    "streetAddress": "1515 Response Rd #100",
-                    "addressLocality": "Sacramento",
-                    "addressRegion": "California",
+                    "streetAddress": "{street}",
+                    "addressLocality": "{city_name}",
+                    "addressRegion": "{state_name}",
                     "addressCountry": "US"
-                },
-                "telephone": "(916) 921-7900",
-                "priceRange": "$4,000 - $9,000",
-                "medicalSpecialty": "Regenerative Orthopedics",
-                "url": "https://stemcellprices.com/locations/california/sacramento/sacramento-stem-cell-treatment.html"
-            },
-            {
+                }},
+                "telephone": "{phone}",
+                "priceRange": "{price_range}",
+                "medicalSpecialty": "{specialty}",
+                "url": "https://stemcellprices.com/locations/{state_slug}/{city_slug}/{clinic_slug}.html"
+            }},
+            {{
                 "@type": "BreadcrumbList",
                 "itemListElement": [
-                    {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://stemcellprices.com/"},
-                    {"@type": "ListItem", "position": 2, "name": "Locations", "item": "https://stemcellprices.com/locations/"},
-                    {"@type": "ListItem", "position": 3, "name": "California", "item": "https://stemcellprices.com/locations/california/"},
-                    {"@type": "ListItem", "position": 4, "name": "Sacramento", "item": "https://stemcellprices.com/locations/california/sacramento/"},
-                    {"@type": "ListItem", "position": 5, "name": "Sacramento Stem Cell Treatment"}
+                    {{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://stemcellprices.com/"}},
+                    {{"@type": "ListItem", "position": 2, "name": "Locations", "item": "https://stemcellprices.com/locations/"}},
+                    {{"@type": "ListItem", "position": 3, "name": "{state_name}", "item": "https://stemcellprices.com/locations/{state_slug}/"}},
+                    {{"@type": "ListItem", "position": 4, "name": "{city_name}", "item": "https://stemcellprices.com/locations/{state_slug}/{city_slug}/"}},
+                    {{"@type": "ListItem", "position": 5, "name": "{clinic_name}"}}
                 ]
-            }
+            }}
         ]
-    }
+    }}
     </script>
     <script src="/assets/js/clinic-gallery.js"></script>
-    <style>[x-cloak] { display: none !important; }</style>
+    <style>[x-cloak] {{ display: none !important; }}</style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200" x-data="{ mobileMenu: false, locationsOpen: false }">
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200" x-data="{{ mobileMenu: false, locationsOpen: false }}">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <a href="/" class="flex items-center gap-2">
@@ -126,7 +395,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative bg-cover bg-center text-white py-16" style="background-image: url('/assets/images/cities/sacramento.jpg');">
+    <section class="relative bg-cover bg-center text-white py-16" style="background-image: url('{city_bg}');">
         <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-blue-900/80"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Breadcrumb -->
@@ -136,11 +405,11 @@
                     <li>/</li>
                     <li><a href="/locations/" class="hover:text-white">Locations</a></li>
                     <li>/</li>
-                    <li><a href="/locations/california/" class="hover:text-white">California</a></li>
+                    <li><a href="/locations/{state_slug}/" class="hover:text-white">{state_name}</a></li>
                     <li>/</li>
-                    <li><a href="/locations/california/sacramento/" class="hover:text-white">Sacramento</a></li>
+                    <li><a href="/locations/{state_slug}/{city_slug}/" class="hover:text-white">{city_name}</a></li>
                     <li>/</li>
-                    <li class="text-white font-medium">Sacramento Stem Cell Treatment</li>
+                    <li class="text-white font-medium">{clinic_name}</li>
                 </ol>
             </nav>
 
@@ -148,21 +417,21 @@
                 <div>
                     <div class="flex items-center gap-3 mb-4">
                         <span class='bg-green-400 text-green-900 px-3 py-1 rounded-full text-sm font-semibold'>&#10003; Verified</span>
-                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">California</span>
+                        <span class="bg-white/20 px-3 py-1 rounded-full text-sm">{state_name}</span>
                     </div>
-                    <h1 class="text-4xl font-bold mb-2">Sacramento Stem Cell Treatment</h1>
-                    <p class="text-xl text-blue-100 mb-4">Regenerative Orthopedics</p>
+                    <h1 class="text-4xl font-bold mb-2">{clinic_name}</h1>
+                    <p class="text-xl text-blue-100 mb-4">{specialty}</p>
                     <p class="text-blue-200">
                         <svg class="w-5 h-5 inline mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
-                        1515 Response Rd #100, Sacramento
+                        {street}, {city_name}
                     </p>
                 </div>
                 <div class="mt-6 md:mt-0 text-right">
                     <div class="text-blue-200 text-sm mb-1">Price Range</div>
-                    <div class="text-3xl font-bold">$4,000 - $9,000</div>
+                    <div class="text-3xl font-bold">{price_range}</div>
                 </div>
             </div>
         </div>
@@ -176,7 +445,7 @@
                 <!-- About -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <!-- Clinic Image Gallery -->
-                    <div x-data="clinicGallery('sacramento-stem-cell-treatment')" x-init="init()" @keydown.window="handleKeydown($event)" class="mb-6">
+                    <div x-data="clinicGallery('{clinic_slug}')" x-init="init()" @keydown.window="handleKeydown($event)" class="mb-6">
                         <!-- Loading state -->
                         <template x-if="loading">
                             <div class="w-full h-64 bg-slate-100 rounded-xl animate-pulse flex items-center justify-center">
@@ -267,17 +536,15 @@
                             </div>
                         </template>
                     </div>
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">About Sacramento Stem Cell Treatment</h2>
-                    <p class="text-gray-600 leading-relaxed">Sacramento Stem Cell Treatment is a regenerative orthopedics provider located in Sacramento, California. 
-                        They offer stem cell therapy and regenerative medicine treatments for various orthopedic conditions 
-                        including knee osteoarthritis, spine and disc issues, shoulder injuries, and hip problems.</p>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">About {clinic_name}</h2>
+                    <p class="text-gray-600 leading-relaxed">{about}</p>
                 </div>
 
                 <!-- Treatments -->
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Treatments Offered</h2>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">PRP (Platelet-Rich Plasma) Therapy</div><div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">Bone Marrow Aspirate Concentrate (BMAC)</div><div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">Adipose-Derived Stem Cell Therapy</div><div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">Regenerative Joint Injections</div><div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">Knee Osteoarthritis</div><div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">Spine & Disc Degeneration</div><div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">Shoulder Injuries (Rotator Cuff)</div><div class="bg-blue-50 text-blue-700 px-4 py-2 rounded-lg text-sm font-medium">Hip Osteoarthritis</div>
+                        {treatments_html}
                     </div>
                 </div>
 
@@ -285,27 +552,15 @@
                 <div class="bg-white rounded-xl shadow-sm p-6">
                     <h2 class="text-2xl font-bold text-gray-900 mb-4">Clinic Features</h2>
                     <div class="grid grid-cols-2 gap-4">
-                        <div class="flex items-center gap-2"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-700">Board-certified physicians</span></div><div class="flex items-center gap-2"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-700">Modern treatment facilities</span></div><div class="flex items-center gap-2"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-700">Personalized care plans</span></div><div class="flex items-center gap-2"><svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span class="text-gray-700">Follow-up support</span></div>
+                        {features_html}
                     </div>
                 </div>
 
                 <!-- Why Choose This City -->
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
-                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Why Choose Sacramento for Stem Cell Therapy?</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-4">Why Choose {city_name} for Stem Cell Therapy?</h2>
                     <ul class="space-y-3 text-gray-700">
-                        <li class="flex items-start gap-2">
-                            <span class="text-blue-500 mt-1">&#10003;</span>
-                            <span><strong>Leading Medical Innovation</strong> - California is home to world-renowned research institutions and pioneering stem cell clinics</span>
-                        </li><li class="flex items-start gap-2">
-                            <span class="text-blue-500 mt-1">&#10003;</span>
-                            <span><strong>Highly Experienced Physicians</strong> - Access to board-certified specialists with extensive regenerative medicine training</span>
-                        </li><li class="flex items-start gap-2">
-                            <span class="text-blue-500 mt-1">&#10003;</span>
-                            <span><strong>Advanced Treatment Options</strong> - Latest stem cell protocols and cutting-edge regenerative technologies</span>
-                        </li><li class="flex items-start gap-2">
-                            <span class="text-blue-500 mt-1">&#10003;</span>
-                            <span><strong>Comprehensive Care</strong> - Full-service clinics offering personalized treatment plans and follow-up care</span>
-                        </li>
+                        {why_choose_html}
                     </ul>
                 </div>
             </div>
@@ -315,9 +570,9 @@
                 <div class="bg-white rounded-xl shadow-sm p-6 sticky top-24">
                     <h3 class="text-xl font-bold text-gray-900 mb-4">Get a Free Quote</h3>
                     <form id="leadForm" class="space-y-4">
-                        <input type="hidden" id="clinicName" value="Sacramento Stem Cell Treatment">
-                        <input type="hidden" id="clinicCity" value="Sacramento">
-                        <input type="hidden" id="clinicState" value="California">
+                        <input type="hidden" id="clinicName" value="{clinic_name}">
+                        <input type="hidden" id="clinicCity" value="{city_name}">
+                        <input type="hidden" id="clinicState" value="{state_name}">
 
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">Full Name *</label>
@@ -359,11 +614,11 @@
 
                     <div class="mt-6 pt-6 border-t border-gray-200">
                         <p class="text-sm text-gray-500 mb-3">Or contact directly:</p>
-                        <a href="tel:(916) 921-7900" class="flex items-center justify-center gap-2 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 transition">
+                        <a href="tel:{phone}" class="flex items-center justify-center gap-2 bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 transition">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                             </svg>
-                            (916) 921-7900
+                            {phone if phone else 'Call Clinic'}
                         </a>
                     </div>
 
@@ -376,20 +631,9 @@
 
         <!-- Other Clinics in City -->
         <div class="mt-12">
-            <h2 class="text-2xl font-bold text-gray-900 mb-6">Other Clinics in Sacramento</h2>
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Other Clinics in {city_name}</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <a href="/locations/california/sacramento/" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                    <div class="text-blue-600 font-semibold">&larr; View All Sacramento Clinics</div>
-                    <p class="text-gray-500 text-sm mt-1">Compare verified clinics</p>
-                </a>
-                <a href="/conditions/" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                    <div class="text-blue-600 font-semibold">Treatment Guides</div>
-                    <p class="text-gray-500 text-sm mt-1">Knee, hip, shoulder, spine</p>
-                </a>
-                <a href="/locations/california/" class="bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition">
-                    <div class="text-blue-600 font-semibold">All California Locations</div>
-                    <p class="text-gray-500 text-sm mt-1">Browse clinics statewide</p>
-                </a>
+                {other_clinics_html}
             </div>
         </div>
     </main>
@@ -441,10 +685,10 @@
 
     <script>
         // Lead form submission
-        document.getElementById('leadForm').addEventListener('submit', function(e) {
+        document.getElementById('leadForm').addEventListener('submit', function(e) {{
             e.preventDefault();
 
-            const lead = {
+            const lead = {{
                 clinic: document.getElementById('clinicName').value,
                 city: document.getElementById('clinicCity').value,
                 state: document.getElementById('clinicState').value,
@@ -455,7 +699,7 @@
                 message: document.getElementById('message').value,
                 timestamp: new Date().toISOString(),
                 source: window.location.href
-            };
+            }};
 
             // Store lead
             const leads = JSON.parse(localStorage.getItem('stemcell_leads') || '[]');
@@ -463,17 +707,83 @@
             localStorage.setItem('stemcell_leads', JSON.stringify(leads));
 
             // Track conversion
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'generate_lead', {
+            if (typeof gtag !== 'undefined') {{
+                gtag('event', 'generate_lead', {{
                     'event_category': 'Lead',
                     'event_label': lead.clinic,
                     'value': 1
-                });
-            }
+                }});
+            }}
 
             alert('Thank you! Your request has been submitted. The clinic will contact you within 24-48 hours.');
             this.reset();
-        });
+        }});
     </script>
 </body>
-</html>
+</html>'''
+
+    return html
+
+def main():
+    root = Path('.')
+    updated = 0
+    skipped = 0
+    errors = []
+
+    # Find all USA clinic HTML files (exclude Mexico and index files)
+    for state_dir in (root / 'locations').iterdir():
+        if not state_dir.is_dir():
+            continue
+
+        state_slug = state_dir.name
+
+        # Skip Mexico (already has the template)
+        if state_slug == 'mexico':
+            print(f"Skipping: {state_slug} (Mexico already has template)")
+            continue
+
+        # Skip index.html files
+        if state_slug == 'index.html':
+            continue
+
+        # Process each city in the state
+        for city_dir in state_dir.iterdir():
+            if not city_dir.is_dir():
+                continue
+
+            city_slug = city_dir.name
+
+            # Process each clinic file in the city
+            for clinic_file in city_dir.glob('*.html'):
+                # Skip index files
+                if clinic_file.name == 'index.html':
+                    continue
+
+                try:
+                    # Extract data from existing file
+                    data = extract_clinic_data(clinic_file)
+
+                    # Generate new HTML
+                    new_html = generate_clinic_page(data, state_slug, city_slug, clinic_file)
+
+                    # Write updated file
+                    with open(clinic_file, 'w', encoding='utf-8') as f:
+                        f.write(new_html)
+
+                    print(f"Updated: {clinic_file}")
+                    updated += 1
+
+                except Exception as e:
+                    errors.append((clinic_file, str(e)))
+                    print(f"Error: {clinic_file} - {e}")
+
+    print(f"\n{'='*50}")
+    print(f"Summary: Updated {updated}, Skipped {skipped}, Errors {len(errors)}")
+
+    if errors:
+        print("\nErrors:")
+        for filepath, error in errors[:10]:
+            print(f"  {filepath}: {error}")
+
+if __name__ == '__main__':
+    main()
