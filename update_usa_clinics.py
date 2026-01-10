@@ -340,7 +340,10 @@ def generate_clinic_page(data, state_slug, city_slug, filepath):
     }}
     </script>
     <script src="/assets/js/clinic-gallery.js"></script>
-    <style>[x-cloak] {{ display: none !important; }}</style>
+    <style>
+        [x-cloak] {{ display: none !important; }}
+        .hero-gradient {{ background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 58, 138, 0.5) 100%); }}
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
@@ -396,7 +399,7 @@ def generate_clinic_page(data, state_slug, city_slug, filepath):
 
     <!-- Hero Section -->
     <section class="relative bg-cover bg-center text-white py-16" style="background-image: url('{city_bg}');">
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 to-blue-900/80"></div>
+        <div class="absolute inset-0 hero-gradient"></div>
         <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <!-- Breadcrumb -->
             <nav class="mb-6">
