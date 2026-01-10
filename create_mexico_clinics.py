@@ -312,6 +312,18 @@ def create_clinic_detail_page(city_slug, city_data, clinic):
         ]
     }}
     </script>
+    <style>
+        [x-cloak] {{ display: none !important; }}
+        .price-panel {{
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 16px 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }}
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
@@ -366,9 +378,9 @@ def create_clinic_detail_page(city_slug, city_data, clinic):
                         {clinic["address"]}
                     </p>
                 </div>
-                <div class="mt-6 md:mt-0 text-right">
-                    <div class="text-teal-200 text-sm mb-1">Price Range</div>
-                    <div class="text-3xl font-bold">{clinic["price_range"]}</div>
+                <div class="mt-6 md:mt-0 text-right price-panel">
+                    <div class="text-emerald-400 text-sm font-semibold mb-1">Price Range</div>
+                    <div class="text-3xl font-bold text-white">{clinic["price_range"]}</div>
                 </div>
             </div>
         </div>

@@ -343,6 +343,15 @@ def generate_clinic_page(data, state_slug, city_slug, filepath):
     <style>
         [x-cloak] {{ display: none !important; }}
         .hero-gradient {{ background: linear-gradient(135deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 58, 138, 0.5) 100%); }}
+        .price-panel {{
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 16px 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }}
     </style>
 </head>
 <body class="bg-gray-50">
@@ -432,9 +441,9 @@ def generate_clinic_page(data, state_slug, city_slug, filepath):
                         {street}, {city_name}
                     </p>
                 </div>
-                <div class="mt-6 md:mt-0 text-right">
-                    <div class="text-blue-200 text-sm mb-1">Price Range</div>
-                    <div class="text-3xl font-bold">{price_range}</div>
+                <div class="mt-6 md:mt-0 text-right price-panel">
+                    <div class="text-emerald-400 text-sm font-semibold mb-1">Price Range</div>
+                    <div class="text-3xl font-bold text-white">{price_range}</div>
                 </div>
             </div>
         </div>
