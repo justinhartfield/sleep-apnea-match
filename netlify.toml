@@ -1,0 +1,16 @@
+# Netlify Configuration
+
+[build]
+  publish = "."
+
+# Form notification settings
+[[plugins]]
+  package = "@netlify/plugin-emails"
+
+# Email notification for consultation form submissions
+[[notifications]]
+  type = "email"
+  event = "submission_created"
+  address = "hartjr@gmail.com"
+  format = "long"
+  title = "New Consultation Request - StemCellPrices.com"

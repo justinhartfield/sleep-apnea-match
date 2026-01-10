@@ -317,16 +317,14 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2 cursor-pointer" @click="navigate('home')">
-                    <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path></svg>
-                    </div>
+                    <img src="/assets/images/logo-icon.png" alt="StemCellPrices.com" class="w-8 h-8 rounded-lg">
                     <span class="text-xl font-bold tracking-tight text-slate-900">StemCellPrices.com<span class="text-brand-600">.</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
                     <a href="#" @click.prevent="navigate('cost-index')" :class="currentPage === 'cost-index' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Cost Guide</a>
                     <a href="#" @click.prevent="navigate('knee-cost-guide')" :class="currentPage === 'knee-cost-guide' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Conditions</a>
                     <div class="relative" x-data="{ locationsOpen: false }" @mouseenter="locationsOpen = true" @mouseleave="locationsOpen = false">
-                        <a href="/locations/" :class="currentPage.includes('directory') || currentPage === 'all-states' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition inline-flex items-center gap-1 py-4">Locations <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+                        <a href="/locations/" :class="currentPage.includes('directory') || currentPage === 'all-states' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition inline-flex items-center gap-1">Locations <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
                         <div x-show="locationsOpen" x-cloak class="absolute top-full left-0 pt-0 w-64 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 max-h-96 overflow-y-auto">
                             <a href="/locations/" class="block px-4 py-2 text-sm font-bold text-brand-600 hover:bg-brand-50">View All 30 States →</a>
                             <div class="border-t border-slate-100 my-2"></div>
@@ -350,7 +348,7 @@
                     <a href="#" @click.prevent="navigate('home')" :class="currentPage === 'home' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Find Clinics</a>
                 </div>
                 <div class="flex items-center gap-4">
-                    <button class="text-sm font-bold text-brand-700 bg-brand-50 px-4 py-2 rounded-full hover:bg-brand-100 transition">Clinic Login</button>
+                    <button onclick="openClinicModal()" class="text-sm font-bold text-brand-700 bg-brand-50 px-4 py-2 rounded-full hover:bg-brand-100 transition">Clinic Login</button>
                     <!-- Mobile menu button -->
                     <button class="md:hidden p-2" @click="mobileMenu = !mobileMenu">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -376,7 +374,7 @@
             <template x-if="currentPage === 'home'">
                 <div x-data="homePage()">
                     <!-- Hero Section -->
-                    <section class="relative pt-12 pb-20 overflow-hidden">
+                    <section class="relative pt-12 pb-20 z-20">
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
                             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-700 text-xs font-bold uppercase tracking-wider mb-6">
                                 <span class="relative flex h-2 w-2">
@@ -394,7 +392,7 @@
                             </p>
 
                             <!-- 3-Step Selector Box -->
-                            <div class="max-w-4xl mx-auto">
+                            <div class="max-w-4xl mx-auto relative z-40">
                                 <div class="bg-white rounded-3xl shadow-2xl shadow-brand-100 border border-slate-100 p-2 md:p-3">
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
                                         <!-- Step 1: Condition -->
@@ -465,14 +463,14 @@
                             </div>
                         </div>
                         <!-- Background Decoration -->
-                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden">
+                        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden -z-10">
                             <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-brand-100 rounded-full blur-[120px] opacity-50"></div>
                             <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-sky-100 rounded-full blur-[120px] opacity-50"></div>
                         </div>
                     </section>
 
                     <!-- Stats Grid -->
-                    <section class="py-16 bg-slate-900 text-white relative">
+                    <section class="py-16 bg-slate-900 text-white relative z-10">
                         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div class="flex flex-col md:flex-row items-end justify-between mb-12 gap-6">
                                 <div>
@@ -492,21 +490,169 @@
                             </div>
 
                             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                                <!-- Map Placeholder -->
-                                <div class="bg-slate-800/50 rounded-3xl p-8 border border-slate-700/50 aspect-video flex flex-col items-center justify-center relative overflow-hidden group">
-                                    <svg class="w-full h-full text-slate-700 opacity-60 transition-transform group-hover:scale-105 duration-700" viewBox="0 0 800 500" fill="currentColor">
-                                        <path d="M120 150 L150 140 L200 160 L250 150 L300 170 L350 160 L400 180 L450 170 L500 190 L550 180 L600 200 L650 190 L700 210 L700 350 L650 370 L600 360 L550 380 L500 370 L450 390 L400 380 L350 400 L300 390 L250 410 L200 400 L150 420 L120 410 Z" />
-                                        <circle cx="180" cy="220" r="40" fill="#2563eb" opacity="0.4" />
-                                        <circle cx="600" cy="250" r="60" fill="#0ea5e9" opacity="0.3" />
-                                        <circle cx="450" cy="320" r="30" fill="#1d4ed8" opacity="0.5" />
+                                <!-- US + Mexico Price Heatmap -->
+                                <div class="bg-slate-800/50 rounded-3xl p-6 border border-slate-700/50 relative overflow-hidden group" x-data="{
+                                    tooltip: { show: false, city: '', price: '', x: 0, y: 0, color: '' },
+                                    showTooltip(e, city, price, color) {
+                                        const rect = e.target.closest('svg').getBoundingClientRect();
+                                        const circleRect = e.target.getBoundingClientRect();
+                                        this.tooltip = {
+                                            show: true,
+                                            city: city,
+                                            price: price,
+                                            x: circleRect.left - rect.left + circleRect.width/2,
+                                            y: circleRect.top - rect.top - 10,
+                                            color: color
+                                        };
+                                    },
+                                    hideTooltip() {
+                                        this.tooltip.show = false;
+                                    }
+                                }">
+                                    <!-- Tooltip Popup -->
+                                    <div x-show="tooltip.show"
+                                         x-transition:enter="transition ease-out duration-150"
+                                         x-transition:enter-start="opacity-0 transform -translate-y-2"
+                                         x-transition:enter-end="opacity-100 transform translate-y-0"
+                                         x-transition:leave="transition ease-in duration-100"
+                                         x-transition:leave-start="opacity-100"
+                                         x-transition:leave-end="opacity-0"
+                                         class="absolute z-50 pointer-events-none"
+                                         :style="'left: ' + tooltip.x + 'px; top: ' + tooltip.y + 'px; transform: translate(-50%, -100%);'">
+                                        <div class="bg-white rounded-xl shadow-2xl px-4 py-3 text-center min-w-[140px] border border-slate-200">
+                                            <div class="text-xs font-bold uppercase tracking-wide text-slate-500 mb-1" x-text="tooltip.city"></div>
+                                            <div class="text-2xl font-extrabold" :class="tooltip.color" x-text="tooltip.price"></div>
+                                            <div class="text-[10px] text-slate-400 mt-1">Average Price</div>
+                                        </div>
+                                        <div class="w-3 h-3 bg-white border-b border-r border-slate-200 rotate-45 mx-auto -mt-1.5"></div>
+                                    </div>
+                                    <svg class="w-full h-auto" viewBox="0 0 960 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <!-- US States Outline (simplified) -->
+                                        <g fill="#334155" stroke="#475569" stroke-width="0.5">
+                                            <!-- West Coast -->
+                                            <path d="M78 45 L95 42 L115 85 L125 130 L120 180 L100 220 L85 190 L75 140 L70 90 Z" /> <!-- WA -->
+                                            <path d="M85 190 L100 220 L115 280 L100 330 L80 300 L75 250 L80 220 Z" /> <!-- OR -->
+                                            <path d="M80 300 L100 330 L130 420 L145 480 L120 500 L90 470 L75 400 L70 340 Z" /> <!-- CA -->
+                                            <!-- Mountain -->
+                                            <path d="M125 130 L180 125 L195 180 L175 230 L130 220 L120 180 Z" /> <!-- ID -->
+                                            <path d="M130 220 L175 230 L200 300 L180 340 L140 330 L115 280 Z" /> <!-- NV -->
+                                            <path d="M180 125 L250 115 L260 180 L245 230 L195 220 L195 180 Z" /> <!-- MT -->
+                                            <path d="M195 220 L245 230 L255 290 L235 330 L200 320 L200 300 Z" /> <!-- WY -->
+                                            <path d="M200 320 L235 330 L250 400 L220 420 L190 400 L180 340 Z" /> <!-- CO -->
+                                            <path d="M140 330 L180 340 L190 400 L170 450 L130 440 L130 420 Z" /> <!-- UT -->
+                                            <path d="M130 440 L170 450 L180 500 L145 520 L120 500 L130 450 Z" /> <!-- AZ -->
+                                            <path d="M180 500 L220 510 L240 540 L200 560 L170 540 L180 510 Z" /> <!-- NM -->
+                                            <!-- Central -->
+                                            <path d="M260 180 L330 170 L340 230 L320 280 L255 290 L260 230 Z" /> <!-- ND/SD -->
+                                            <path d="M255 290 L320 280 L335 350 L310 390 L250 400 L250 340 Z" /> <!-- NE/KS -->
+                                            <path d="M250 400 L310 390 L330 450 L300 480 L240 480 L240 440 Z" /> <!-- OK -->
+                                            <path d="M240 480 L300 480 L340 560 L280 590 L220 560 L220 520 Z" /> <!-- TX -->
+                                            <!-- Midwest -->
+                                            <path d="M340 230 L400 220 L420 270 L400 310 L355 310 L340 280 Z" /> <!-- MN/IA -->
+                                            <path d="M355 310 L400 310 L420 360 L390 400 L350 390 L335 350 Z" /> <!-- MO -->
+                                            <path d="M350 390 L390 400 L410 450 L380 480 L340 470 L330 430 Z" /> <!-- AR -->
+                                            <path d="M340 470 L380 480 L400 530 L360 560 L330 540 L330 500 Z" /> <!-- LA -->
+                                            <!-- Great Lakes -->
+                                            <path d="M420 180 L480 170 L500 210 L490 250 L450 260 L420 230 Z" /> <!-- WI/MI-UP -->
+                                            <path d="M500 210 L560 200 L575 250 L555 290 L510 280 L490 250 Z" /> <!-- MI -->
+                                            <path d="M420 270 L450 260 L490 280 L480 320 L440 330 L420 310 Z" /> <!-- IL -->
+                                            <path d="M480 320 L510 310 L530 350 L510 380 L470 370 L460 340 Z" /> <!-- IN/OH -->
+                                            <!-- South -->
+                                            <path d="M410 450 L470 440 L500 490 L460 520 L420 510 L400 480 Z" /> <!-- MS/AL -->
+                                            <path d="M460 520 L500 510 L540 550 L500 580 L460 560 L450 540 Z" /> <!-- FL-pan -->
+                                            <path d="M540 550 L580 540 L620 600 L570 610 L530 580 Z" /> <!-- FL -->
+                                            <!-- East -->
+                                            <path d="M530 350 L580 340 L600 380 L575 410 L540 400 L520 370 Z" /> <!-- KY/TN -->
+                                            <path d="M540 400 L575 410 L600 450 L565 480 L530 460 L520 430 Z" /> <!-- NC -->
+                                            <path d="M530 460 L565 480 L580 520 L545 540 L510 520 L500 490 Z" /> <!-- SC/GA -->
+                                            <path d="M575 250 L630 240 L650 280 L630 320 L590 310 L575 280 Z" /> <!-- PA -->
+                                            <path d="M590 310 L630 320 L650 360 L620 390 L585 370 L580 340 Z" /> <!-- WV/VA -->
+                                            <path d="M620 390 L650 380 L670 420 L640 450 L610 430 L600 410 Z" /> <!-- MD/DE -->
+                                            <!-- Northeast -->
+                                            <path d="M650 200 L700 190 L720 230 L700 270 L660 260 L650 230 Z" /> <!-- NY -->
+                                            <path d="M660 260 L700 270 L720 300 L690 330 L655 310 L650 280 Z" /> <!-- NJ/CT -->
+                                            <path d="M700 190 L750 175 L770 210 L750 250 L720 240 L710 210 Z" /> <!-- New England -->
+                                        </g>
+                                        <!-- Mexico (simplified) -->
+                                        <g fill="#1e3a5f" stroke="#475569" stroke-width="0.5">
+                                            <path d="M120 520 L200 560 L280 590 L340 580 L320 620 L260 640 L180 630 L120 600 L100 560 Z" />
+                                            <path d="M180 630 L260 640 L300 680 L240 700 L180 680 L160 650 Z" />
+                                        </g>
+
+                                        <!-- Heat spots - based on real city prices -->
+                                        <!-- Lower cost (green/teal) to Higher cost (orange/red) -->
+
+                                        <!-- Mexico - Lowest costs ($3,500-4,500) - Bright Green -->
+                                        <circle cx="200" cy="600" r="28" fill="url(#heatGreen)" opacity="0.8" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Tijuana', '$3,500', 'text-emerald-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="260" cy="650" r="22" fill="url(#heatGreen)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Cancun', '$4,000', 'text-emerald-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="220" cy="680" r="20" fill="url(#heatGreen)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Puerto Vallarta', '$4,200', 'text-emerald-500')" @mouseleave="hideTooltip()"></circle>
+
+                                        <!-- Low cost cities ($4,500-5,500) - Teal/Cyan -->
+                                        <circle cx="185" cy="510" r="20" fill="url(#heatTeal)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Phoenix', '$4,950', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="195" cy="480" r="16" fill="url(#heatTeal)" opacity="0.65" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Scottsdale', '$5,225', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="290" cy="530" r="18" fill="url(#heatTeal)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Houston', '$4,950', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="260" cy="490" r="16" fill="url(#heatTeal)" opacity="0.65" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Dallas', '$4,950', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="250" cy="520" r="14" fill="url(#heatTeal)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Austin', '$5,225', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="235" cy="550" r="14" fill="url(#heatTeal)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'San Antonio', '$4,950', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="385" cy="400" r="15" fill="url(#heatTeal)" opacity="0.65" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Kansas City', '$5,225', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="430" cy="440" r="14" fill="url(#heatTeal)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Nashville', '$5,225', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="540" cy="480" r="16" fill="url(#heatTeal)" opacity="0.65" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Atlanta', '$4,950', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="390" cy="350" r="14" fill="url(#heatTeal)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Minneapolis', '$5,500', 'text-cyan-500')" @mouseleave="hideTooltip()"></circle>
+
+                                        <!-- Medium cost cities ($5,500-6,500) - Blue -->
+                                        <circle cx="110" cy="380" r="22" fill="url(#heatBlue)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Los Angeles', '$5,500', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="95" cy="320" r="16" fill="url(#heatBlue)" opacity="0.65" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'San Francisco', '$6,050', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="100" cy="280" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Sacramento', '$5,500', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="130" cy="450" r="18" fill="url(#heatBlue)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'San Diego', '$5,775', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="115" cy="340" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'San Jose', '$5,775', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="165" cy="395" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Las Vegas', '$5,775', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="210" cy="380" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Denver', '$5,500', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="85" cy="200" r="16" fill="url(#heatBlue)" opacity="0.65" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Seattle', '$5,775', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="95" cy="260" r="12" fill="url(#heatBlue)" opacity="0.55" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Portland', '$5,500', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="440" cy="310" r="18" fill="url(#heatBlue)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Chicago', '$5,775', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="490" cy="310" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Detroit', '$5,500', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="600" cy="320" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Philadelphia', '$6,050', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="520" cy="430" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Charlotte', '$5,500', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="510" cy="400" r="12" fill="url(#heatBlue)" opacity="0.55" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Raleigh', '$5,775', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="360" cy="540" r="14" fill="url(#heatBlue)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'New Orleans', '$5,500', 'text-blue-500')" @mouseleave="hideTooltip()"></circle>
+
+                                        <!-- Higher cost cities ($6,500+) - Purple/Pink -->
+                                        <circle cx="570" cy="580" r="24" fill="url(#heatPurple)" opacity="0.75" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Miami', '$6,325', 'text-purple-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="540" cy="540" r="16" fill="url(#heatPurple)" opacity="0.65" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Tampa', '$5,775', 'text-purple-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="520" cy="520" r="14" fill="url(#heatPurple)" opacity="0.6" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Orlando', '$5,500', 'text-purple-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="505" cy="550" r="12" fill="url(#heatPurple)" opacity="0.55" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Jacksonville', '$5,500', 'text-purple-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="680" cy="260" r="26" fill="url(#heatPurple)" opacity="0.8" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'New York', '$6,600', 'text-purple-500')" @mouseleave="hideTooltip()"></circle>
+                                        <circle cx="710" cy="220" r="18" fill="url(#heatPurple)" opacity="0.7" class="cursor-pointer hover:opacity-100 transition-opacity" @mouseenter="showTooltip($event, 'Boston', '$6,600', 'text-purple-500')" @mouseleave="hideTooltip()"></circle>
+
+                                        <!-- Gradient definitions -->
+                                        <defs>
+                                            <radialGradient id="heatGreen">
+                                                <stop offset="0%" stop-color="#10b981" stop-opacity="1"/>
+                                                <stop offset="100%" stop-color="#10b981" stop-opacity="0"/>
+                                            </radialGradient>
+                                            <radialGradient id="heatTeal">
+                                                <stop offset="0%" stop-color="#06b6d4" stop-opacity="1"/>
+                                                <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+                                            </radialGradient>
+                                            <radialGradient id="heatBlue">
+                                                <stop offset="0%" stop-color="#3b82f6" stop-opacity="1"/>
+                                                <stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/>
+                                            </radialGradient>
+                                            <radialGradient id="heatPurple">
+                                                <stop offset="0%" stop-color="#8b5cf6" stop-opacity="1"/>
+                                                <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/>
+                                            </radialGradient>
+                                        </defs>
+
+                                        <!-- Labels for Mexico -->
+                                        <text x="200" y="620" fill="#10b981" font-size="10" font-weight="bold" text-anchor="middle">MEXICO</text>
                                     </svg>
-                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
-                                    <div class="absolute bottom-6 left-6 right-6 flex justify-between items-center">
+                                    <div class="absolute bottom-4 left-4 right-4 flex justify-between items-center">
                                         <span class="text-xs font-bold text-slate-400 tracking-widest uppercase">Live Price Heatmap</span>
                                         <div class="flex items-center gap-2">
-                                            <span class="text-[10px] text-slate-500">Lower Cost</span>
-                                            <div class="w-24 h-2 bg-gradient-to-r from-sky-400 to-brand-700 rounded-full"></div>
-                                            <span class="text-[10px] text-slate-500">Higher Cost</span>
+                                            <span class="text-[10px] text-slate-500">$3.5K</span>
+                                            <div class="w-32 h-2 bg-gradient-to-r from-emerald-400 via-cyan-400 via-blue-500 to-purple-500 rounded-full"></div>
+                                            <span class="text-[10px] text-slate-500">$6.5K+</span>
                                         </div>
                                     </div>
                                 </div>
@@ -603,6 +749,42 @@
                                     <h4 class="text-lg font-bold mb-3">Direct-to-Expert</h4>
                                     <p class="text-slate-600 text-sm leading-relaxed">Click-to-call technology. Skip the middleman and speak directly to a physician's clinical coordinator.</p>
                                 </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SEO Content Section -->
+                    <section class="py-16 bg-white border-t border-slate-100">
+                        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <h2 class="text-2xl font-bold text-slate-900 mb-6">Understanding Stem Cell Therapy Costs in the United States</h2>
+
+                            <div class="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
+                                <p>
+                                    Stem cell therapy has emerged as a promising regenerative medicine treatment for patients suffering from chronic joint pain, osteoarthritis, and degenerative conditions. As this innovative approach gains popularity across the United States, understanding the true cost of <a href="/knee-cost-guide/" class="text-brand-600 hover:text-brand-700 underline">stem cell injections</a> becomes essential for patients exploring their treatment options. At StemCellPrices.com, we provide transparent, verified pricing data from <a href="/locations/" class="text-brand-600 hover:text-brand-700 underline">over 500 clinics nationwide</a>, helping you make informed decisions about your healthcare.
+                                </p>
+
+                                <p>
+                                    The cost of stem cell therapy varies significantly based on several factors, including geographic location, the type of stem cells used, and the complexity of your condition. Platelet-rich plasma (PRP) injections typically range from $500 to $2,500 per treatment, while bone marrow aspirate concentrate (BMAC) procedures cost between $3,000 and $8,000. More advanced treatments using adipose-derived stem cells or umbilical cord tissue can range from $5,000 to $25,000 depending on the protocol and clinic.
+                                </p>
+
+                                <p>
+                                    Major metropolitan areas like <a href="/locations/new-york/new-york-city/" class="text-brand-600 hover:text-brand-700 underline">New York</a>, <a href="/locations/massachusetts/boston/" class="text-brand-600 hover:text-brand-700 underline">Boston</a>, and <a href="/locations/florida/miami/" class="text-brand-600 hover:text-brand-700 underline">Miami</a> tend to have higher stem cell treatment costs, with averages exceeding $6,500 per procedure. In contrast, cities in <a href="/locations/texas/" class="text-brand-600 hover:text-brand-700 underline">Texas</a>, <a href="/locations/arizona/" class="text-brand-600 hover:text-brand-700 underline">Arizona</a>, and the Southeast offer more competitive pricing, often 15-25% below the national median. For patients seeking significant savings, medical tourism destinations in <a href="/locations/mexico/" class="text-brand-600 hover:text-brand-700 underline">Mexico</a>—including <a href="/locations/mexico/tijuana/" class="text-brand-600 hover:text-brand-700 underline">Tijuana</a>, <a href="/locations/mexico/cancun/" class="text-brand-600 hover:text-brand-700 underline">Cancun</a>, and <a href="/locations/mexico/puerto-vallarta/" class="text-brand-600 hover:text-brand-700 underline">Puerto Vallarta</a>—provide accredited stem cell treatments at 40-60% lower costs than comparable U.S. clinics.
+                                </p>
+
+                                <p>
+                                    When comparing stem cell clinics, it's important to look beyond price alone. Consider the physician's credentials, the source and processing of stem cells, facility accreditation, and published patient outcomes. Board-certified orthopedic surgeons and sports medicine specialists with fellowship training in regenerative medicine typically deliver the most consistent results. Our platform verifies clinic credentials, aggregates patient reviews, and provides side-by-side cost comparisons so you can find the right balance of quality and affordability for your stem cell therapy journey.
+                                </p>
+                            </div>
+
+                            <div class="mt-8 pt-6 border-t border-slate-100 flex flex-wrap gap-2">
+                                <span class="text-xs text-slate-400 uppercase font-bold tracking-wide mr-2">Related:</span>
+                                <a href="/knee-cost-guide/" class="text-xs text-brand-600 hover:text-brand-700 font-medium">Knee Stem Cell Cost Guide</a>
+                                <span class="text-slate-300">|</span>
+                                <a href="/locations/california/los-angeles/" class="text-xs text-brand-600 hover:text-brand-700 font-medium">Los Angeles Clinics</a>
+                                <span class="text-slate-300">|</span>
+                                <a href="/locations/texas/houston/" class="text-xs text-brand-600 hover:text-brand-700 font-medium">Houston Clinics</a>
+                                <span class="text-slate-300">|</span>
+                                <a href="/locations/mexico/" class="text-xs text-brand-600 hover:text-brand-700 font-medium">Mexico Medical Tourism</a>
                             </div>
                         </div>
                     </section>
@@ -723,6 +905,333 @@
         </div>
     </div>
 </footer>
+
+<!-- Consultation Request Modal -->
+<div id="consultationModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" onclick="if(event.target === this) closeConsultationModal()">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div id="formSuccess" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Request Submitted!</h3>
+            <p class="text-slate-600">A specialist will contact you within 24 hours.</p>
+        </div>
+        <div id="formContainer">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Request Information</h3>
+            <p class="text-slate-600 text-sm mb-6">Fill out the form below and a specialist will contact you.</p>
+            <div id="formError" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm"></div>
+            <form id="consultationForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
+                    <input type="text" name="name" placeholder="John Smith" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
+                    <input type="email" name="email" placeholder="john@example.com" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
+                    <input type="tel" name="phone" placeholder="(555) 123-4567" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Condition / Area of Pain *</label>
+                    <select name="condition" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select your condition</option>
+                        <option value="Knee">Knee Pain / Osteoarthritis</option>
+                        <option value="Spine">Lower Back / Disc Pain</option>
+                        <option value="Shoulder">Shoulder / Rotator Cuff</option>
+                        <option value="Hip">Hip Pain / Osteoarthritis</option>
+                        <option value="Neck">Neck / Cervical Spine</option>
+                        <option value="SI Joint">SI Joint / Sacroiliac</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Additional Information</label>
+                    <textarea name="message" rows="3" placeholder="Tell us more about your condition..." class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition">Submit Request</button>
+                <button type="button" onclick="closeConsultationModal()" class="w-full py-2 text-slate-500 hover:text-slate-700 font-medium transition text-sm">Cancel</button>
+                <p class="text-[11px] text-slate-400 text-center">By submitting, you consent to be contacted about stem cell treatment options.</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function openConsultationModal() {
+    document.getElementById('consultationModal').classList.remove('hidden');
+    document.getElementById('consultationModal').classList.add('flex');
+    document.getElementById('formSuccess').classList.add('hidden');
+    document.getElementById('formContainer').classList.remove('hidden');
+    document.getElementById('formError').classList.add('hidden');
+}
+
+function closeConsultationModal() {
+    document.getElementById('consultationModal').classList.add('hidden');
+    document.getElementById('consultationModal').classList.remove('flex');
+}
+
+document.getElementById('consultationForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const errorDiv = document.getElementById('formError');
+
+    if (!formData.get('name') || !formData.get('email') || !formData.get('phone') || !formData.get('condition')) {
+        errorDiv.textContent = 'Please fill in all required fields.';
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.get('email'))) {
+        errorDiv.textContent = 'Please enter a valid email address.';
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        const urlParams = new URLSearchParams();
+        urlParams.append('form-name', 'consultation');
+        urlParams.append('name', formData.get('name'));
+        urlParams.append('email', formData.get('email'));
+        urlParams.append('phone', formData.get('phone'));
+        urlParams.append('condition', formData.get('condition'));
+        urlParams.append('message', formData.get('message') || '');
+        urlParams.append('page_url', window.location.href);
+        urlParams.append('location', 'Homepage');
+
+        const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: urlParams.toString()
+        });
+
+        if (!response.ok) throw new Error('Form submission failed');
+
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'consultation_request', { 'condition': formData.get('condition'), 'page': window.location.pathname });
+        }
+
+        document.getElementById('formContainer').classList.add('hidden');
+        document.getElementById('formSuccess').classList.remove('hidden');
+        setTimeout(function() { closeConsultationModal(); form.reset(); }, 3000);
+    } catch (error) {
+        errorDiv.textContent = 'Something went wrong. Please try again.';
+        errorDiv.classList.remove('hidden');
+    }
+});
+</script>
+
+<!-- Hidden Netlify Form for detection -->
+<form name="consultation" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <input type="tel" name="phone">
+    <input type="text" name="condition">
+    <textarea name="message"></textarea>
+    <input type="text" name="page_url">
+    <input type="text" name="location">
+</form>
+
+<!-- Clinic/Patient Lead Capture Modal -->
+<div id="clinicModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" onclick="if(event.target === this) closeClinicModal()">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+        <div id="clinicFormSuccess" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Thank You!</h3>
+            <p class="text-slate-600">We'll be in touch within 24 hours.</p>
+        </div>
+        <div id="clinicFormContainer">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-brand-100 rounded-xl flex items-center justify-center">
+                    <svg class="w-5 h-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">Join Our Network</h3>
+                    <p class="text-slate-500 text-sm">For clinics and patients</p>
+                </div>
+            </div>
+
+            <div id="clinicFormError" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm"></div>
+
+            <form id="clinicLeadForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">I am a... *</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="flex items-center gap-2 p-3 border border-slate-200 rounded-xl cursor-pointer hover:border-brand-300 transition has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+                            <input type="radio" name="lead_type" value="clinic" required class="text-brand-600 focus:ring-brand-500">
+                            <span class="text-sm font-medium text-slate-700">Clinic Owner</span>
+                        </label>
+                        <label class="flex items-center gap-2 p-3 border border-slate-200 rounded-xl cursor-pointer hover:border-brand-300 transition has-[:checked]:border-brand-500 has-[:checked]:bg-brand-50">
+                            <input type="radio" name="lead_type" value="patient" required class="text-brand-600 focus:ring-brand-500">
+                            <span class="text-sm font-medium text-slate-700">Patient</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
+                    <input type="text" name="name" placeholder="Your full name" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
+                    <input type="email" name="email" placeholder="you@example.com" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
+                    <input type="tel" name="phone" placeholder="(555) 123-4567" required class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                </div>
+
+                <div id="clinicFields" class="hidden space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Clinic/Practice Name</label>
+                        <input type="text" name="clinic_name" placeholder="Your clinic name" class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">City & State</label>
+                        <input type="text" name="clinic_location" placeholder="Los Angeles, CA" class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Website (optional)</label>
+                        <input type="url" name="website" placeholder="https://yourclinic.com" class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                    </div>
+                </div>
+
+                <div id="patientFields" class="hidden space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">What condition are you seeking treatment for?</label>
+                        <select name="patient_condition" class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                            <option value="">Select your condition</option>
+                            <option value="Knee">Knee Pain / Osteoarthritis</option>
+                            <option value="Spine">Lower Back / Disc Pain</option>
+                            <option value="Shoulder">Shoulder / Rotator Cuff</option>
+                            <option value="Hip">Hip Pain / Osteoarthritis</option>
+                            <option value="Neck">Neck / Cervical Spine</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-2">Your Location</label>
+                        <input type="text" name="patient_location" placeholder="City, State" class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">How can we help? (optional)</label>
+                    <textarea name="message" rows="3" placeholder="Tell us more..." class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-brand-500 resize-none"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3 bg-brand-600 text-white rounded-xl font-semibold hover:bg-brand-700 transition">Submit</button>
+                <button type="button" onclick="closeClinicModal()" class="w-full py-2 text-slate-500 hover:text-slate-700 font-medium transition text-sm">Cancel</button>
+                <p class="text-[11px] text-slate-400 text-center">By submitting, you agree to be contacted about our services.</p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function openClinicModal() {
+    document.getElementById('clinicModal').classList.remove('hidden');
+    document.getElementById('clinicModal').classList.add('flex');
+    document.getElementById('clinicFormSuccess').classList.add('hidden');
+    document.getElementById('clinicFormContainer').classList.remove('hidden');
+    document.getElementById('clinicFormError').classList.add('hidden');
+    document.getElementById('clinicFields').classList.add('hidden');
+    document.getElementById('patientFields').classList.add('hidden');
+}
+
+function closeClinicModal() {
+    document.getElementById('clinicModal').classList.add('hidden');
+    document.getElementById('clinicModal').classList.remove('flex');
+}
+
+// Toggle fields based on lead type selection
+document.querySelectorAll('input[name="lead_type"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+        if (this.value === 'clinic') {
+            document.getElementById('clinicFields').classList.remove('hidden');
+            document.getElementById('patientFields').classList.add('hidden');
+        } else {
+            document.getElementById('clinicFields').classList.add('hidden');
+            document.getElementById('patientFields').classList.remove('hidden');
+        }
+    });
+});
+
+document.getElementById('clinicLeadForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+    const errorDiv = document.getElementById('clinicFormError');
+
+    if (!formData.get('lead_type') || !formData.get('name') || !formData.get('email') || !formData.get('phone')) {
+        errorDiv.textContent = 'Please fill in all required fields.';
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.get('email'))) {
+        errorDiv.textContent = 'Please enter a valid email address.';
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        const urlParams = new URLSearchParams();
+        urlParams.append('form-name', 'clinic-lead');
+        urlParams.append('lead_type', formData.get('lead_type'));
+        urlParams.append('name', formData.get('name'));
+        urlParams.append('email', formData.get('email'));
+        urlParams.append('phone', formData.get('phone'));
+        urlParams.append('clinic_name', formData.get('clinic_name') || '');
+        urlParams.append('clinic_location', formData.get('clinic_location') || '');
+        urlParams.append('website', formData.get('website') || '');
+        urlParams.append('patient_condition', formData.get('patient_condition') || '');
+        urlParams.append('patient_location', formData.get('patient_location') || '');
+        urlParams.append('message', formData.get('message') || '');
+
+        const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: urlParams.toString()
+        });
+
+        if (!response.ok) throw new Error('Form submission failed');
+
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'lead_capture', { 'lead_type': formData.get('lead_type') });
+        }
+
+        document.getElementById('clinicFormContainer').classList.add('hidden');
+        document.getElementById('clinicFormSuccess').classList.remove('hidden');
+        setTimeout(function() { closeClinicModal(); form.reset(); }, 3000);
+    } catch (error) {
+        errorDiv.textContent = 'Something went wrong. Please try again.';
+        errorDiv.classList.remove('hidden');
+    }
+});
+</script>
+
+<!-- Hidden Netlify Form for clinic lead detection -->
+<form name="clinic-lead" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="lead_type">
+    <input type="text" name="name">
+    <input type="email" name="email">
+    <input type="tel" name="phone">
+    <input type="text" name="clinic_name">
+    <input type="text" name="clinic_location">
+    <input type="url" name="website">
+    <input type="text" name="patient_condition">
+    <input type="text" name="patient_location">
+    <textarea name="message"></textarea>
+</form>
 
     <!-- Main App Script -->
     <script src="app.js"></script>

@@ -1035,27 +1035,35 @@ function homePage() {
 
         performSearch() {
             if (this.condition && this.state && this.city) {
-                const cityKey = this.city.toLowerCase().replace(/ /g, '_').replace(/\./g, '');
+                // Navigate to actual static location pages
+                const stateSlug = this.state.toLowerCase().replace(/\s+/g, '-').replace(/[()]/g, '');
+                const citySlug = this.city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '');
+
                 if (this.state === 'Mexico (Tourism)') {
-                    this.$dispatch('navigate', 'mexico-comparison');
-                } else if (CLINIC_DATABASE.cities[cityKey]) {
-                    window.selectedCity = cityKey;
-                    this.$dispatch('navigate', 'city-directory');
+                    // Mexico cities
+                    window.location.href = `/locations/mexico/${citySlug}/`;
                 } else {
-                    this.$dispatch('navigate', 'california-directory');
+                    // US cities - redirect to static location page
+                    window.location.href = `/locations/${stateSlug}/${citySlug}/`;
                 }
             }
         },
 
         navigateToCity(cityName) {
-            const cityKey = cityName.toLowerCase().replace(/ /g, '_').replace(/\./g, '');
-            if (cityName === 'Tijuana' || cityName === 'Cancun' || cityName === 'Mexico City') {
-                this.$dispatch('navigate', 'mexico-comparison');
-            } else if (CLINIC_DATABASE.cities[cityKey]) {
-                window.selectedCity = cityKey;
-                this.$dispatch('navigate', 'city-directory');
+            const citySlug = cityName.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '');
+            if (cityName === 'Tijuana' || cityName === 'Cancun' || cityName === 'Puerto Vallarta' || cityName === 'Mexico City') {
+                window.location.href = `/locations/mexico/${citySlug}/`;
             } else {
-                this.$dispatch('navigate', 'california-directory');
+                // For other cities, determine state from database
+                const cityKey = cityName.toLowerCase().replace(/ /g, '_').replace(/\./g, '');
+                if (CLINIC_DATABASE.cities[cityKey]) {
+                    const cityData = CLINIC_DATABASE.cities[cityKey];
+                    const stateSlug = cityData.state.toLowerCase().replace(/\s+/g, '-');
+                    window.location.href = `/locations/${stateSlug}/${citySlug}/`;
+                } else {
+                    // Fallback to California
+                    window.location.href = `/locations/california/${citySlug}/`;
+                }
             }
         }
     };
@@ -1405,6 +1413,19 @@ function laKneeResultsPage() {
             }
         ],
 
+        getClinicSlug(name) {
+            return name.toLowerCase()
+                .replace(/[.,()]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+        },
+
+        viewClinic(clinic) {
+            const clinicSlug = this.getClinicSlug(clinic.name);
+            window.location.href = `/locations/california/los-angeles/${clinicSlug}`;
+        },
+
         init() {
             this.$nextTick(() => this.renderContent());
         },
@@ -1435,7 +1456,7 @@ function laKneeResultsPage() {
 
                         <div class="space-y-4">
                             <template x-for="clinic in clinics" :key="clinic.name">
-                                <div :class="clinic.featured ? 'featured-card' : 'border border-slate-200'" class="bg-white rounded-3xl p-6 hover:shadow-lg transition-all cursor-pointer" @click="$dispatch('navigate', 'clinic-profile')">
+                                <div :class="clinic.featured ? 'featured-card' : 'border border-slate-200'" class="bg-white rounded-3xl p-6 hover:shadow-lg transition-all cursor-pointer" @click="viewClinic(clinic)">
                                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                         <div class="flex-1">
                                             <div class="flex items-center gap-2 mb-2">
@@ -1464,21 +1485,11 @@ function laKneeResultsPage() {
     };
 }
 
-// Clinic Profile Page - REAL DATA
+// Clinic Profile Page - DYNAMIC DATA
 function clinicProfilePage() {
     return {
         activeTab: 'conditions',
-        // Real clinic data - Pacific Coast example replaced with real clinic
-        clinic: {
-            name: 'Advanced Stem Cell Institute',
-            address: 'Beverly Hills & Los Angeles, CA',
-            phone: '(213) 460-5099',
-            website: 'advancedstemcellinstitute.com',
-            specialty: ['Orthopedic', 'Aesthetic', 'Anti-Aging'],
-            rating: 4.7,
-            reviewCount: 89
-        },
-        // Real pricing based on research
+        clinic: null,
         procedures: [
             { name: 'PRP Injection (Single Joint)', price: '$750 - $1,500', details: 'Platelet Rich Plasma, same-day procedure' },
             { name: 'BMAC Knee Treatment', price: '$5,000 - $8,000', details: 'Bone Marrow Aspirate Concentrate with image guidance' },
@@ -1487,33 +1498,64 @@ function clinicProfilePage() {
         ],
 
         init() {
+            // Get clinic from window or use default
+            this.clinic = window.selectedClinic || {
+                name: 'Advanced Stem Cell Institute',
+                address: 'Beverly Hills & Los Angeles, CA',
+                phone: '(213) 460-5099',
+                specialty: 'Orthopedic, Aesthetic, Anti-Aging',
+                priceRange: 'Contact for pricing',
+                featured: true,
+                verified: true
+            };
             this.$nextTick(() => this.renderContent());
         },
 
+        getClinicInitials(name) {
+            return name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+        },
+
+        getClinicColor(name) {
+            const colors = ['from-blue-500 to-cyan-400', 'from-emerald-500 to-teal-400', 'from-purple-500 to-pink-400', 'from-orange-500 to-amber-400', 'from-rose-500 to-red-400', 'from-indigo-500 to-blue-400'];
+            const index = name.length % colors.length;
+            return colors[index];
+        },
+
+        formatPhone(phone) {
+            if (!phone) return null;
+            return phone.replace(/[^\d]/g, '');
+        },
+
         renderContent() {
+            const clinic = this.clinic;
+            const phoneDigits = this.formatPhone(clinic.phone);
+
             this.$el.innerHTML = `
                 <section class="bg-white border-b border-slate-200 py-8 lg:py-12">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <nav class="flex text-xs font-bold text-slate-400 uppercase tracking-widest mb-6 gap-2 items-center">
-                            <a href="#" @click.prevent="$dispatch('navigate', 'california-directory')" class="hover:text-brand-600">California</a>
+                            <a href="#" @click.prevent="$dispatch('navigate', 'home')" class="hover:text-brand-600">Home</a>
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"></path></svg>
-                            <a href="#" @click.prevent="$dispatch('navigate', 'la-directory')" class="hover:text-brand-600">Los Angeles</a>
+                            <span class="text-slate-600">Clinic Profile</span>
                         </nav>
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="px-2.5 py-1 bg-brand-600 text-white text-[10px] font-black uppercase rounded">Featured</span>
-                            <span class="text-emerald-600 bg-emerald-50 px-2 py-1 rounded text-xs font-bold border border-emerald-100">Verified Clinic</span>
-                        </div>
-                        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-2">
-                            Advanced Stem Cell Institute
-                        </h1>
-                        <p class="flex items-center gap-1.5 font-medium text-slate-500 mb-2">
-                            <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            Beverly Hills & Los Angeles, CA
-                        </p>
-                        <div class="flex items-center gap-2">
-                            <span class="text-amber-500">★★★★★</span>
-                            <span class="font-bold text-slate-700">4.7</span>
-                            <span class="text-slate-400">(89 reviews)</span>
+                        <div class="flex flex-col md:flex-row gap-6 items-start">
+                            <div class="w-24 h-24 rounded-2xl bg-gradient-to-br ${this.getClinicColor(clinic.name)} flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">
+                                ${this.getClinicInitials(clinic.name)}
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex items-center gap-3 mb-3">
+                                    ${clinic.featured ? '<span class="px-2.5 py-1 bg-brand-600 text-white text-[10px] font-black uppercase rounded">Featured</span>' : ''}
+                                    ${clinic.verified ? '<span class="text-emerald-600 bg-emerald-50 px-2 py-1 rounded text-xs font-bold border border-emerald-100">Verified Clinic</span>' : ''}
+                                </div>
+                                <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight mb-2">
+                                    ${clinic.name}
+                                </h1>
+                                <p class="flex items-center gap-1.5 font-medium text-slate-500 mb-2">
+                                    <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                    ${clinic.address || 'Contact for address'}
+                                </p>
+                                <p class="text-sm text-slate-600">${clinic.specialty}</p>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -1534,6 +1576,15 @@ function clinicProfilePage() {
                                             <p class="text-sm text-slate-500">Prices based on publicly available information. Contact clinic for current rates.</p>
                                         </div>
                                         <div class="divide-y divide-slate-100">
+                                            <div class="p-6">
+                                                <div class="flex items-center justify-between">
+                                                    <div>
+                                                        <h4 class="font-bold text-slate-900">Stem Cell Treatment</h4>
+                                                        <p class="text-xs text-slate-500">${clinic.specialty}</p>
+                                                    </div>
+                                                    <span class="text-xl font-extrabold text-brand-700">${clinic.priceRange}</span>
+                                                </div>
+                                            </div>
                                             <template x-for="item in procedures" :key="item.name">
                                                 <div class="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-slate-50 transition">
                                                     <div>
@@ -1553,8 +1604,8 @@ function clinicProfilePage() {
                                 <div x-show="activeTab === 'credentials'">
                                     <div class="bg-white rounded-3xl border border-slate-200 p-6">
                                         <h3 class="font-extrabold text-lg mb-4">About This Clinic</h3>
-                                        <p class="text-slate-600 mb-4">Advanced Stem Cell Institute offers comprehensive regenerative medicine services including orthopedic stem cell therapy, aesthetic treatments, and anti-aging protocols. The clinic serves patients in Beverly Hills and the greater Los Angeles area.</p>
-                                        <p class="text-slate-600">Treatments include PRP, BMAC (bone marrow aspirate concentrate), adipose-derived stem cells, and IV stem cell infusions.</p>
+                                        <p class="text-slate-600 mb-4">${clinic.name} specializes in ${clinic.specialty}. Contact the clinic directly for more information about their services and treatment protocols.</p>
+                                        <p class="text-slate-600">Treatments may include PRP, BMAC (bone marrow aspirate concentrate), adipose-derived stem cells, and other regenerative therapies.</p>
                                     </div>
                                 </div>
                             </div>
@@ -1562,13 +1613,17 @@ function clinicProfilePage() {
                             <div class="lg:col-span-4">
                                 <div class="sticky sticky-sidebar bg-white rounded-3xl p-6 border border-slate-200 shadow-xl">
                                     <h3 class="font-extrabold text-xl mb-6">Contact Clinic</h3>
-                                    <a href="tel:2134605099" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold hover:bg-black transition-all mb-3 flex items-center justify-center gap-2">
+                                    ${clinic.phone ? `
+                                    <a href="tel:${phoneDigits}" class="w-full bg-slate-900 text-white py-4 rounded-2xl font-bold hover:bg-black transition-all mb-3 flex items-center justify-center gap-2">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                                        (213) 460-5099
+                                        ${clinic.phone}
                                     </a>
-                                    <a href="https://advancedstemcellinstitute.com" target="_blank" class="w-full bg-brand-600 text-white py-4 rounded-2xl font-bold hover:bg-brand-700 transition-all flex items-center justify-center gap-2">
-                                        Visit Website
-                                    </a>
+                                    ` : `
+                                    <p class="text-slate-500 text-sm mb-3">Contact clinic directly for phone number</p>
+                                    `}
+                                    <button onclick="openConsultationModal()" class="w-full bg-brand-600 text-white py-4 rounded-2xl font-bold hover:bg-brand-700 transition-all flex items-center justify-center gap-2">
+                                        Request Information
+                                    </button>
                                     <p class="text-center text-[11px] text-slate-400 mt-4">Prices may vary. Contact for current rates.</p>
                                 </div>
                             </div>
@@ -1735,6 +1790,19 @@ function laDirectoryPage() {
             }
         ],
 
+        getClinicSlug(name) {
+            return name.toLowerCase()
+                .replace(/[.,()]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+        },
+
+        viewClinic(clinic) {
+            const clinicSlug = this.getClinicSlug(clinic.name);
+            window.location.href = `/locations/california/los-angeles/${clinicSlug}`;
+        },
+
         init() {
             this.$nextTick(() => this.renderContent());
         },
@@ -1765,7 +1833,7 @@ function laDirectoryPage() {
 
                         <div class="space-y-4">
                             <template x-for="clinic in clinics" :key="clinic.name">
-                                <div :class="clinic.featured ? 'featured-card' : 'border border-slate-200'" class="bg-white rounded-3xl p-6 hover:shadow-lg transition-all cursor-pointer" @click="$dispatch('navigate', 'clinic-profile')">
+                                <div :class="clinic.featured ? 'featured-card' : 'border border-slate-200'" class="bg-white rounded-3xl p-6 hover:shadow-lg transition-all cursor-pointer" @click="viewClinic(clinic)">
                                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
                                         <div>
                                             <div class="flex items-center gap-2 mb-2">
@@ -2036,27 +2104,72 @@ function cityDirectoryPage() {
             this.$nextTick(() => this.renderContent());
         },
 
+        getClinicInitials(name) {
+            return name.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+        },
+
+        getClinicColor(name) {
+            const colors = ['from-blue-500 to-cyan-400', 'from-emerald-500 to-teal-400', 'from-purple-500 to-pink-400', 'from-orange-500 to-amber-400', 'from-rose-500 to-red-400', 'from-indigo-500 to-blue-400'];
+            const index = name.length % colors.length;
+            return colors[index];
+        },
+
+        getClinicSlug(name) {
+            return name.toLowerCase()
+                .replace(/[.,()]/g, '')
+                .replace(/\s+/g, '-')
+                .replace(/-+/g, '-')
+                .replace(/^-|-$/g, '');
+        },
+
+        getStateSlug(state) {
+            return state.toLowerCase().replace(/\s+/g, '-');
+        },
+
+        getCitySlug(city) {
+            return city.toLowerCase().replace(/\s+/g, '-').replace(/\./g, '');
+        },
+
+        viewClinic(clinic) {
+            const stateSlug = this.getStateSlug(this.cityData.state);
+            const citySlug = this.getCitySlug(this.cityData.cityName);
+            const clinicSlug = this.getClinicSlug(clinic.name);
+            window.location.href = `/locations/${stateSlug}/${citySlug}/${clinicSlug}`;
+        },
+
         renderContent() {
             if (!this.cityData) return;
-            
-            const clinicsHtml = this.cityData.clinics.map(clinic => `
-                <div class="bg-white rounded-3xl p-6 border ${clinic.featured ? 'border-brand-200 featured-card' : 'border-slate-200'} hover:shadow-xl transition-all">
-                    <div class="flex items-start justify-between mb-4">
-                        <div class="flex items-center gap-2">
-                            ${clinic.featured ? '<span class="text-[10px] font-bold bg-brand-600 text-white px-2 py-0.5 rounded-full uppercase">Featured</span>' : ''}
-                            ${clinic.verified ? '<span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full uppercase">Verified</span>' : ''}
+
+            const stateSlug = this.getStateSlug(this.cityData.state);
+            const citySlug = this.getCitySlug(this.cityData.cityName);
+
+            const clinicsHtml = this.cityData.clinics.map((clinic, index) => {
+                const clinicSlug = this.getClinicSlug(clinic.name);
+                const clinicUrl = `/locations/${stateSlug}/${citySlug}/${clinicSlug}`;
+                return `
+                <div class="bg-white rounded-3xl p-6 border ${clinic.featured ? 'border-brand-200 featured-card' : 'border-slate-200'} hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer group" onclick="window.location.href='${clinicUrl}'">
+                    <div class="flex gap-4 mb-4">
+                        <div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${this.getClinicColor(clinic.name)} flex items-center justify-center text-white font-bold text-lg flex-shrink-0">
+                            ${this.getClinicInitials(clinic.name)}
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center gap-2 mb-2">
+                                ${clinic.featured ? '<span class="text-[10px] font-bold bg-brand-600 text-white px-2 py-0.5 rounded-full uppercase">Featured</span>' : ''}
+                                ${clinic.verified ? '<span class="text-[10px] font-bold bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full uppercase">Verified</span>' : ''}
+                            </div>
+                            <h3 class="text-lg font-extrabold text-slate-900 group-hover:text-brand-600 transition-colors truncate">${clinic.name}</h3>
                         </div>
                     </div>
-                    <h3 class="text-lg font-extrabold text-slate-900 mb-2">${clinic.name}</h3>
-                    <p class="text-sm text-slate-500 mb-1">${clinic.address}</p>
+                    <p class="text-sm text-slate-500 mb-1">${clinic.address || this.cityData.cityName + ', ' + this.cityData.state}</p>
                     <p class="text-sm text-slate-500 mb-3">${clinic.specialty}</p>
                     ${clinic.phone ? `<p class="text-sm text-slate-600 mb-3"><strong>Phone:</strong> ${clinic.phone}</p>` : ''}
                     <div class="flex items-center justify-between">
                         <span class="text-lg font-extrabold text-brand-600">${clinic.priceRange}</span>
-                        <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-5 h-5 text-slate-400 group-hover:text-brand-600 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
 
             this.$el.innerHTML = `
                 <section class="py-8 md:py-12">

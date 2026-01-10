@@ -1,0 +1,20 @@
+# Netlify Redirects for StemCellPrices.com
+# Cost Guide SPA fallbacks - serve index.html for client-side routing
+
+# Cost guide default pages (for dynamic location handling)
+/knee-cost-guide/*       /knee-cost-guide/index.html       200
+/spine-cost-guide/*      /spine-cost-guide/index.html      200
+/shoulder-cost-guide/*   /shoulder-cost-guide/index.html   200
+/hip-cost-guide/*        /hip-cost-guide/index.html        200
+/neck-cost-guide/*       /neck-cost-guide/index.html       200
+/si-joint-cost-guide/*   /si-joint-cost-guide/index.html   200
+
+# Old LP redirects to new cost guides (301 permanent)
+/lp/knee-osteoarthritis/*       /knee-cost-guide/           301
+/lp/spine-disc/*                /spine-cost-guide/          301
+/lp/shoulder/*                  /shoulder-cost-guide/       301
+/lp/hip-osteoarthritis/*        /hip-cost-guide/            301
+/lp/sports-injury/*             /knee-cost-guide/           301
+
+# Legacy knee guide redirect
+/knee_stem_cell_cost_guide.html /knee-cost-guide/           301

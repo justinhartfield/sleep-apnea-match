@@ -23,6 +23,17 @@
     </script>
 </head>
 <body class="bg-gray-50">
+    <!-- Hidden Netlify Form for detection -->
+    <form name="consultation" data-netlify="true" netlify-honeypot="bot-field" hidden>
+        <input type="text" name="name">
+        <input type="email" name="email">
+        <input type="tel" name="phone">
+        <input type="text" name="condition">
+        <textarea name="message"></textarea>
+        <input type="text" name="page_url">
+        <input type="text" name="location">
+    </form>
+
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -239,5 +250,168 @@
             </div>
         </div>
     </footer>
+
+<!-- Consultation Request Modal -->
+<div id="consultationModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 p-4" onclick="if(event.target === this) closeConsultationModal()">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl max-h-[90vh] overflow-y-auto">
+        <!-- Success State -->
+        <div id="formSuccess" class="hidden text-center py-8">
+            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            </div>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Request Submitted!</h3>
+            <p class="text-slate-600">A specialist will contact you within 24 hours.</p>
+        </div>
+
+        <!-- Form State -->
+        <div id="formContainer">
+            <h3 class="text-xl font-bold text-slate-900 mb-2">Request Information</h3>
+            <p class="text-slate-600 text-sm mb-6">Fill out the form below and a specialist will contact you.</p>
+
+            <!-- Error Message -->
+            <div id="formError" class="hidden mb-4 p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm"></div>
+
+            <form id="consultationForm" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
+                    <input type="text" name="name" placeholder="John Smith" required
+                           class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
+                    <input type="email" name="email" placeholder="john@example.com" required
+                           class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
+                    <input type="tel" name="phone" placeholder="(555) 123-4567" required
+                           class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Condition / Area of Pain *</label>
+                    <select name="condition" required
+                            class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="">Select your condition</option>
+                        <option value="Knee">Knee Pain / Osteoarthritis</option>
+                        <option value="Spine">Lower Back / Disc Pain</option>
+                        <option value="Shoulder">Shoulder / Rotator Cuff</option>
+                        <option value="Hip">Hip Pain / Osteoarthritis</option>
+                        <option value="Neck">Neck / Cervical Spine</option>
+                        <option value="SI Joint">SI Joint / Sacroiliac</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">Additional Information</label>
+                    <textarea name="message" rows="3" placeholder="Tell us more about your condition..."
+                              class="w-full p-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"></textarea>
+                </div>
+
+                <button type="submit"
+                        class="w-full py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition">
+                    Submit Request
+                </button>
+
+                <button type="button" onclick="closeConsultationModal()"
+                        class="w-full py-2 text-slate-500 hover:text-slate-700 font-medium transition text-sm">
+                    Cancel
+                </button>
+
+                <p class="text-[11px] text-slate-400 text-center">
+                    By submitting, you consent to be contacted about stem cell treatment options.
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+function openConsultationModal() {
+    document.getElementById('consultationModal').classList.remove('hidden');
+    document.getElementById('consultationModal').classList.add('flex');
+    document.getElementById('formSuccess').classList.add('hidden');
+    document.getElementById('formContainer').classList.remove('hidden');
+    document.getElementById('formError').classList.add('hidden');
+}
+
+function closeConsultationModal() {
+    document.getElementById('consultationModal').classList.add('hidden');
+    document.getElementById('consultationModal').classList.remove('flex');
+}
+
+document.getElementById('consultationForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+    const errorDiv = document.getElementById('formError');
+
+    // Basic validation
+    if (!formData.get('name') || !formData.get('email') || !formData.get('phone') || !formData.get('condition')) {
+        errorDiv.textContent = 'Please fill in all required fields.';
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.get('email'))) {
+        errorDiv.textContent = 'Please enter a valid email address.';
+        errorDiv.classList.remove('hidden');
+        return;
+    }
+
+    try {
+        // Submit to Netlify Forms
+        const urlParams = new URLSearchParams();
+        urlParams.append('form-name', 'consultation');
+        urlParams.append('name', formData.get('name'));
+        urlParams.append('email', formData.get('email'));
+        urlParams.append('phone', formData.get('phone'));
+        urlParams.append('condition', formData.get('condition'));
+        urlParams.append('message', formData.get('message') || '');
+        urlParams.append('page_url', window.location.href);
+        urlParams.append('location', document.title.match(/in ([^|]+)/)?.[1] || 'Not specified');
+
+        const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: urlParams.toString()
+        });
+
+        if (!response.ok) {
+            throw new Error('Form submission failed');
+        }
+
+        // Track form submission
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'consultation_request', {
+                'condition': formData.get('condition'),
+                'page': window.location.pathname
+            });
+        }
+
+        // Show success
+        document.getElementById('formContainer').classList.add('hidden');
+        document.getElementById('formSuccess').classList.remove('hidden');
+
+        // Close after delay
+        setTimeout(function() {
+            closeConsultationModal();
+            form.reset();
+        }, 3000);
+
+    } catch (error) {
+        errorDiv.textContent = 'Something went wrong. Please try again.';
+        errorDiv.classList.remove('hidden');
+        console.error('Form error:', error);
+    }
+});
+</script>
+
 </body>
 </html>
