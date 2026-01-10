@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | StemCellPrices.com</title>
+    <meta name="description" content="Terms of Service for StemCellPrices.com. Read our terms and conditions for using our stem cell therapy directory and comparison platform.">
+    <link rel="canonical" href="https://stemcellprices.com/terms-of-service.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f7ff',
+                            100: '#e0effe',
+                            200: '#bae0fd',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <style>[x-cloak] { display: none !important; }</style>
+</head>
+<body class="bg-slate-50 font-sans">
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200" x-data="{ mobileMenu: false, locationsOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <a href="/" class="flex items-center gap-2">
+                    <img src="/assets/images/logo-icon.png" alt="StemCellPrices.com" class="w-8 h-8 rounded-lg">
+                    <span class="text-xl font-bold tracking-tight text-slate-900">StemCellPrices.com<span class="text-brand-600">.</span></span>
+                </a>
+                <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="/" class="hover:text-brand-600 transition">Find Clinics</a>
+                    <a href="/#cost-guide" class="hover:text-brand-600 transition">Cost Guide</a>
+                    <a href="/conditions/" class="hover:text-brand-600 transition">Conditions</a>
+                    <div class="relative" @mouseenter="locationsOpen = true" @mouseleave="locationsOpen = false">
+                        <a href="/locations/" class="hover:text-brand-600 transition inline-flex items-center gap-1">Locations <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
+                        <div x-show="locationsOpen" x-cloak class="absolute top-full left-0 pt-0 w-64 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 max-h-96 overflow-y-auto">
+                            <a href="/locations/" class="block px-4 py-2 text-sm font-bold text-brand-600 hover:bg-brand-50">View All 30 States &rarr;</a>
+                            <div class="border-t border-slate-100 my-2"></div>
+                            <a href="/locations/california/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">California</a>
+                            <a href="/locations/texas/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Texas</a>
+                            <a href="/locations/florida/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Florida</a>
+                            <a href="/locations/new-york/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">New York</a>
+                            <a href="/locations/arizona/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Arizona</a>
+                            <a href="/locations/colorado/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Colorado</a>
+                            <a href="/locations/illinois/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Illinois</a>
+                            <a href="/locations/georgia/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Georgia</a>
+                            <a href="/locations/washington/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Washington</a>
+                            <a href="/locations/massachusetts/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Massachusetts</a>
+                            <div class="border-t border-slate-100 my-2"></div>
+                            <p class="px-4 py-1 text-xs text-slate-400 uppercase tracking-wider">International</p>
+                            <a href="/locations/mexico/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Mexico</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="/#clinic-login" class="hidden sm:block text-sm font-bold text-brand-700 bg-brand-50 px-4 py-2 rounded-full hover:bg-brand-100 transition">Clinic Login</a>
+                    <button class="md:hidden p-2" @click="mobileMenu = !mobileMenu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                    </button>
+                </div>
+            </div>
+            <div x-show="mobileMenu" x-cloak class="md:hidden py-4 border-t border-slate-100">
+                <div class="flex flex-col space-y-3">
+                    <a href="/" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Find Clinics</a>
+                    <a href="/#cost-guide" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Cost Guide</a>
+                    <a href="/conditions/" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Conditions</a>
+                    <a href="/locations/" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Locations</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-4xl font-bold text-slate-900 mb-8">Terms of Service</h1>
+        <p class="text-slate-500 mb-8">Last updated: January 2025</p>
+
+        <div class="prose prose-slate max-w-none">
+            <div class="bg-white rounded-xl shadow-sm p-8 space-y-8">
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Agreement to Terms</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        By accessing or using StemCellPrices.com (the "Site"), you agree to be bound by these Terms of Service ("Terms"). If you disagree with any part of these terms, you may not access the Site. These Terms apply to all visitors, users, and others who access or use the Site.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Description of Service</h2>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        StemCellPrices.com is an informational directory and comparison platform that:
+                    </p>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li>Provides information about stem cell therapy clinics and their services</li>
+                        <li>Displays pricing information collected from various sources</li>
+                        <li>Facilitates connections between users and healthcare providers</li>
+                        <li>Offers educational content about stem cell treatments</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Medical Disclaimer</h2>
+                    <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-4">
+                        <p class="text-amber-800 font-semibold">Important Medical Notice</p>
+                    </div>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        <strong>StemCellPrices.com does not provide medical advice.</strong> The information on this Site is for general informational purposes only and should not be considered medical advice, diagnosis, or treatment recommendations.
+                    </p>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2 mb-4">
+                        <li>We are not a healthcare provider and do not practice medicine</li>
+                        <li>All medical decisions should be made in consultation with qualified healthcare professionals</li>
+                        <li>Stem cell therapy outcomes vary and are not guaranteed</li>
+                        <li>Some stem cell treatments may not be FDA-approved in the United States</li>
+                        <li>We do not endorse or recommend any specific clinic or treatment</li>
+                    </ul>
+                    <p class="text-slate-600 leading-relaxed">
+                        Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition. Never disregard professional medical advice or delay in seeking it because of something you have read on this Site.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Pricing Information</h2>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        The pricing information displayed on our Site:
+                    </p>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li>Is collected from publicly available sources and clinic submissions</li>
+                        <li>May not reflect current prices at any given clinic</li>
+                        <li>Should be verified directly with the clinic before making decisions</li>
+                        <li>May vary based on individual circumstances, treatment protocols, and other factors</li>
+                        <li>Does not constitute a price quote or guarantee</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">User Responsibilities</h2>
+                    <p class="text-slate-600 leading-relaxed mb-4">By using our Site, you agree to:</p>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li>Provide accurate and truthful information when submitting forms</li>
+                        <li>Use the Site only for lawful purposes</li>
+                        <li>Not attempt to gain unauthorized access to our systems</li>
+                        <li>Not use automated systems to scrape or collect data from the Site</li>
+                        <li>Not submit false reviews or misleading information</li>
+                        <li>Conduct your own due diligence before choosing any healthcare provider</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Clinic Listings</h2>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        Clinics listed on our Site:
+                    </p>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li>Are independent businesses not owned or operated by StemCellPrices.com</li>
+                        <li>Are solely responsible for their services, treatments, and outcomes</li>
+                        <li>May have paid for enhanced listings or featured placement</li>
+                        <li>Have not been evaluated, certified, or endorsed by us unless explicitly stated</li>
+                    </ul>
+                    <p class="text-slate-600 leading-relaxed mt-4">
+                        We do not guarantee the accuracy of information provided by clinics, and we encourage users to verify credentials, licensing, and reviews independently.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Intellectual Property</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        The Site and its original content, features, and functionality are owned by StemCellPrices.com and are protected by international copyright, trademark, and other intellectual property laws. You may not reproduce, distribute, modify, or create derivative works without our prior written consent.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Limitation of Liability</h2>
+                    <p class="text-slate-600 leading-relaxed mb-4">
+                        To the fullest extent permitted by law, StemCellPrices.com shall not be liable for:
+                    </p>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li>Any indirect, incidental, special, consequential, or punitive damages</li>
+                        <li>Any loss or damage arising from your use of the Site</li>
+                        <li>Any medical outcomes resulting from treatments at listed clinics</li>
+                        <li>Any errors or omissions in the content on the Site</li>
+                        <li>Any unauthorized access to or use of our servers or personal information</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Disclaimer of Warranties</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        The Site is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, either express or implied. We do not warrant that the Site will be uninterrupted, secure, or error-free, or that any defects will be corrected.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Indemnification</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        You agree to indemnify and hold harmless StemCellPrices.com, its affiliates, and their respective officers, directors, employees, and agents from any claims, damages, losses, or expenses arising from your use of the Site or violation of these Terms.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Third-Party Links</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Our Site may contain links to third-party websites. We are not responsible for the content, privacy policies, or practices of any third-party sites. You acknowledge and agree that we are not liable for any damage or loss caused by your use of any third-party website.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">International Users</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        Our Site includes information about clinics in multiple countries, including Mexico. Users are responsible for understanding and complying with local laws and regulations regarding medical treatment in any jurisdiction. Medical regulations, standards, and patient protections may differ significantly between countries.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Changes to Terms</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        We reserve the right to modify these Terms at any time. We will notify users of significant changes by posting the new Terms on this page and updating the "Last updated" date. Your continued use of the Site after changes constitutes acceptance of the modified Terms.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Governing Law</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        These Terms shall be governed by and construed in accordance with the laws of the United States, without regard to its conflict of law provisions.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4">Contact Us</h2>
+                    <p class="text-slate-600 leading-relaxed">
+                        If you have questions about these Terms, please contact us at:
+                    </p>
+                    <p class="text-slate-600 mt-2">
+                        <strong>Email:</strong> legal@stemcellprices.com
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 py-12">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Conditions</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/knee-cost-guide/" class="text-gray-400 hover:text-blue-400 text-sm">Knee</a></li>
+                        <li><a href="/hip-cost-guide/" class="text-gray-400 hover:text-blue-400 text-sm">Hip</a></li>
+                        <li><a href="/shoulder-cost-guide/" class="text-gray-400 hover:text-blue-400 text-sm">Shoulder</a></li>
+                        <li><a href="/spine-cost-guide/" class="text-gray-400 hover:text-blue-400 text-sm">Spine</a></li>
+                        <li><a href="/neck-cost-guide/" class="text-gray-400 hover:text-blue-400 text-sm">Neck</a></li>
+                        <li><a href="/si-joint-cost-guide/" class="text-gray-400 hover:text-blue-400 text-sm">SI Joint</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Top Locations</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/locations/california/los-angeles/" class="text-gray-400 hover:text-blue-400 text-sm">Los Angeles</a></li>
+                        <li><a href="/locations/new-york/new-york-city/" class="text-gray-400 hover:text-blue-400 text-sm">New York</a></li>
+                        <li><a href="/locations/florida/miami/" class="text-gray-400 hover:text-blue-400 text-sm">Miami</a></li>
+                        <li><a href="/locations/texas/houston/" class="text-gray-400 hover:text-blue-400 text-sm">Houston</a></li>
+                        <li><a href="/locations/arizona/scottsdale/" class="text-gray-400 hover:text-blue-400 text-sm">Scottsdale</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Mexico</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/locations/mexico/" class="text-gray-400 hover:text-blue-400 text-sm">All Mexico Clinics</a></li>
+                        <li><a href="/locations/mexico/tijuana/" class="text-gray-400 hover:text-blue-400 text-sm">Tijuana</a></li>
+                        <li><a href="/locations/mexico/cancun/" class="text-gray-400 hover:text-blue-400 text-sm">Cancun</a></li>
+                        <li><a href="/locations/mexico/puerto-vallarta/" class="text-gray-400 hover:text-blue-400 text-sm">Puerto Vallarta</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-white font-semibold mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/#cost-guide" class="text-gray-400 hover:text-blue-400 text-sm">Cost Guide</a></li>
+                        <li><a href="/locations/" class="text-gray-400 hover:text-blue-400 text-sm">All Locations</a></li>
+                        <li><a href="/privacy-policy.html" class="text-gray-400 hover:text-blue-400 text-sm">Privacy Policy</a></li>
+                        <li><a href="/terms-of-service.html" class="text-gray-400 hover:text-blue-400 text-sm">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-gray-400 text-sm">&copy; 2025 StemCellPrices.com. All rights reserved.</p>
+                    <p class="text-gray-500 text-xs">The information on this website is for educational purposes only and should not be considered medical advice.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
