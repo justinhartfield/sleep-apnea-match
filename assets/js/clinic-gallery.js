@@ -12,61 +12,59 @@ function clinicGallery(clinicSlug, maxImages = 6) {
         loading: true,
         baseUrl: 'https://cfls.b-cdn.net/stem-cell-clinics',
 
-        async init() {
-            await this.loadImages();
+        init() {
+            // Try loading images in parallel
+            this.tryLoadImages();
+        },
+
+        async tryLoadImages() {
+            const formats = ['jpg', 'webp', 'png'];
+            const loadedImages = [];
+
+            // Try primary image
+            for (const fmt of formats) {
+                const url = `${this.baseUrl}/${this.clinicSlug}/primary.${fmt}`;
+                const exists = await this.checkImage(url);
+                if (exists) {
+                    loadedImages.push({ url, alt: 'Clinic primary image' });
+                    break; // Found primary, stop checking formats
+                }
+            }
+
+            // Try numbered images 2-6
+            for (let i = 2; i <= maxImages; i++) {
+                let found = false;
+                for (const fmt of formats) {
+                    const url = `${this.baseUrl}/${this.clinicSlug}/${i}.${fmt}`;
+                    const exists = await this.checkImage(url);
+                    if (exists) {
+                        loadedImages.push({ url, alt: `Clinic image ${i}` });
+                        found = true;
+                        break; // Found this number, stop checking formats
+                    }
+                }
+                if (!found) break; // Stop if we hit a missing number
+            }
+
+            this.images = loadedImages;
             this.loading = false;
         },
 
-        async loadImages() {
-            // Try to load primary image (check .jpg, .webp, and .png)
-            const formats = ['jpg', 'webp', 'png'];
-            let primaryUrl = null;
-
-            for (const fmt of formats) {
-                const url = `${this.baseUrl}/${this.clinicSlug}/primary.${fmt}`;
-                if (await this.imageExists(url)) {
-                    primaryUrl = url;
-                    break;
-                }
-            }
-
-            if (primaryUrl) {
-                this.images.push({
-                    url: primaryUrl,
-                    alt: 'Clinic primary image'
-                });
-            }
-
-            // Try to load additional numbered images (2.jpg/webp/png, 3.jpg/webp/png, etc.)
-            for (let i = 2; i <= maxImages; i++) {
-                let url = null;
-
-                for (const fmt of formats) {
-                    const testUrl = `${this.baseUrl}/${this.clinicSlug}/${i}.${fmt}`;
-                    if (await this.imageExists(testUrl)) {
-                        url = testUrl;
-                        break;
-                    }
-                }
-
-                if (url) {
-                    this.images.push({
-                        url: url,
-                        alt: `Clinic image ${i}`
-                    });
-                } else {
-                    // Stop checking if we hit a missing image
-                    break;
-                }
-            }
-        },
-
-        imageExists(url) {
+        checkImage(url) {
             return new Promise((resolve) => {
                 const img = new Image();
-                img.onload = () => resolve(true);
-                img.onerror = () => resolve(false);
+                let resolved = false;
+                img.onload = () => {
+                    if (!resolved) { resolved = true; resolve(true); }
+                };
+                img.onerror = () => {
+                    if (!resolved) { resolved = true; resolve(false); }
+                };
                 img.src = url;
+                // Timeout fallback
+                setTimeout(() => {
+                    if (!resolved) { resolved = true; resolve(false); }
+                }, 3000);
             });
         },
 
