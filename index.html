@@ -321,8 +321,9 @@
                     <span class="text-xl font-bold tracking-tight text-slate-900">StemCellPrices.com<span class="text-brand-600">.</span></span>
                 </div>
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#" @click.prevent="navigate('home')" :class="currentPage === 'home' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Find Clinics</a>
                     <a href="#" @click.prevent="navigate('cost-index')" :class="currentPage === 'cost-index' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Cost Guide</a>
-                    <a href="#" @click.prevent="navigate('knee-cost-guide')" :class="currentPage === 'knee-cost-guide' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Conditions</a>
+                    <a href="/conditions/" class="hover:text-brand-600 transition">Conditions</a>
                     <div class="relative" x-data="{ locationsOpen: false }" @mouseenter="locationsOpen = true" @mouseleave="locationsOpen = false">
                         <a href="/locations/" :class="currentPage.includes('directory') || currentPage === 'all-states' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition inline-flex items-center gap-1">Locations <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></a>
                         <div x-show="locationsOpen" x-cloak class="absolute top-full left-0 pt-0 w-64 bg-white rounded-xl shadow-xl border border-slate-200 py-2 z-50 max-h-96 overflow-y-auto">
@@ -345,7 +346,6 @@
                             <a href="/compare-costs/" class="block px-4 py-2 text-sm text-slate-600 hover:bg-brand-50 hover:text-brand-600">Compare Travel Costs</a>
                         </div>
                     </div>
-                    <a href="#" @click.prevent="navigate('home')" :class="currentPage === 'home' ? 'text-brand-600 border-b-2 border-brand-600' : 'hover:text-brand-600'" class="transition">Find Clinics</a>
                 </div>
                 <div class="flex items-center gap-4">
                     <button onclick="openClinicModal()" class="text-sm font-bold text-brand-700 bg-brand-50 px-4 py-2 rounded-full hover:bg-brand-100 transition">Clinic Login</button>
@@ -358,10 +358,10 @@
             <!-- Mobile menu -->
             <div x-show="mobileMenu" x-cloak class="md:hidden py-4 border-t border-slate-100">
                 <div class="flex flex-col space-y-3">
-                    <a href="#" @click.prevent="navigate('cost-index'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Cost Guide</a>
-                    <a href="#" @click.prevent="navigate('knee-cost-guide'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Conditions</a>
-                    <a href="/locations/" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Locations (30 States)</a>
                     <a href="#" @click.prevent="navigate('home'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Find Clinics</a>
+                    <a href="#" @click.prevent="navigate('cost-index'); mobileMenu=false" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Cost Guide</a>
+                    <a href="/conditions/" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Conditions</a>
+                    <a href="/locations/" class="px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-brand-50 rounded-lg">Locations (30 States)</a>
                 </div>
             </div>
         </div>
