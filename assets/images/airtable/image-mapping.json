@@ -1,0 +1,322 @@
+[
+  {
+    "name": "Obstructive Sleep Apnea Diagram",
+    "category": "Anatomy",
+    "description": "Cross-section showing obstructed vs non-obstructed airway",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/obstructive-sleep-apnea-diagram.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/lbHdUDhMvgoxXhke.jpg"
+  },
+  {
+    "name": "CPAP Patient Sleeping",
+    "category": "Device",
+    "description": "Patient sleeping with CPAP machine",
+    "related_procedure": "CPAP Therapy",
+    "local_path": "assets/images/airtable/cpap-patient-sleeping.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/GkKvTeeRsbMZTHYh.jpg"
+  },
+  {
+    "name": "Oral Appliance Device",
+    "category": "Device",
+    "description": "Silent Nite oral appliance for sleep apnea",
+    "related_procedure": "Oral Appliance Therapy",
+    "local_path": "assets/images/airtable/oral-appliance-device.png",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/LEXgwnnLPwfwqFpJ.png"
+  },
+  {
+    "name": "Jaw Surgery Sleep Apnea Case",
+    "category": "Before/After",
+    "description": "Jaw surgery case for sleep apnea - before and after profile",
+    "related_procedure": "MMA Surgery",
+    "local_path": "assets/images/airtable/jaw-surgery-sleep-apnea-case.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/nSRBoenWeQAKOjZP.jpg"
+  },
+  {
+    "name": "UPPP Surgery Diagram - Cleveland Clinic",
+    "category": "Procedure Diagram",
+    "description": "Before and after diagram of UPPP (Uvulopalatopharyngoplasty) surgery showing soft palate, uvula, and tonsils",
+    "related_procedure": "UPPP",
+    "local_path": "assets/images/airtable/uppp-surgery-diagram---cleveland-clinic.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/fpjUcvWNKmgVypCZ.jpg"
+  },
+  {
+    "name": "Sleep Apnea Surgery Before After",
+    "category": "Before/After",
+    "description": "Before and after case for sleep apnea surgery",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/sleep-apnea-surgery-before-after.png",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/EaTgDoDeNWFlDsle.png"
+  },
+  {
+    "name": "Mayo Clinic Store Sleep Apnea",
+    "category": "Facility",
+    "description": "Mayo Clinic Store sleep apnea products",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/mayo-clinic-store-sleep-apnea.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/YjVZcYSltrPvmHjk.jpg"
+  },
+  {
+    "name": "Stanford Sleep Sciences Center",
+    "category": "Facility",
+    "description": "Stanford Center for Sleep Sciences and Medicine",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/stanford-sleep-sciences-center.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/DGLjprrNYApNUjXD.jpg"
+  },
+  {
+    "name": "Genioglossus Advancement Diagram 2",
+    "category": "Procedure Diagram",
+    "description": "Detailed illustration of genioglossus advancement surgery",
+    "related_procedure": "Genioglossus Advancement",
+    "local_path": "assets/images/airtable/genioglossus-advancement-diagram-2.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/lZbWTPZecmzjVcVH.jpg"
+  },
+  {
+    "name": "Oral Appliance Diagram",
+    "category": "Device",
+    "description": "Diagram showing how oral appliance works to open airway",
+    "related_procedure": "Oral Appliance Therapy",
+    "local_path": "assets/images/airtable/oral-appliance-diagram.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/jgdLGTdWTCLHuRDE.jpg"
+  },
+  {
+    "name": "Inspire Sleep Apnea Implant Diagram",
+    "category": "Device",
+    "description": "Anatomical diagram showing Inspire implant placement with pressure sensor, stimulation electrode, and stimulator",
+    "related_procedure": "Inspire Implant",
+    "local_path": "assets/images/airtable/inspire-sleep-apnea-implant-diagram.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/UgzZQShyuCvXvQmu.jpg"
+  },
+  {
+    "name": "Turbinate Reduction Surgery",
+    "category": "Procedure Diagram",
+    "description": "Illustration of turbinate reduction surgery procedure",
+    "related_procedure": "Turbinate Reduction",
+    "local_path": "assets/images/airtable/turbinate-reduction-surgery.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/CMzbyrvFhnwlXewl.jpg"
+  },
+  {
+    "name": "Stanford Sleep Medicine Center",
+    "category": "Facility",
+    "description": "Stanford Sleep Medicine Center building exterior",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/stanford-sleep-medicine-center.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/xINfevzIEcFPZbqY.jpg"
+  },
+  {
+    "name": "MMA Surgery Side Profile",
+    "category": "Procedure Diagram",
+    "description": "Side profile diagram showing jaw advancement in MMA surgery",
+    "related_procedure": "MMA Surgery",
+    "local_path": "assets/images/airtable/mma-surgery-side-profile.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/nsbzktpYaPmbIGwO.jpg"
+  },
+  {
+    "name": "Sleep Apnea Airway Comparison",
+    "category": "Anatomy",
+    "description": "Normal vs sleep apnea airway comparison showing obstruction",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/sleep-apnea-airway-comparison.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/BmiLkFOBDySGBryJ.jpg"
+  },
+  {
+    "name": "CPAP Machine Diagram",
+    "category": "Device",
+    "description": "Labeled diagram of CPAP machine components including mask, airflow, and machine",
+    "related_procedure": "CPAP Therapy",
+    "local_path": "assets/images/airtable/cpap-machine-diagram.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/TrNUfbVojjzHosdj.jpg"
+  },
+  {
+    "name": "Septoplasty Nasal Surgery Diagram",
+    "category": "Procedure Diagram",
+    "description": "Diagram showing septoplasty procedure for deviated septum correction",
+    "related_procedure": "Septoplasty",
+    "local_path": "assets/images/airtable/septoplasty-nasal-surgery-diagram.webp",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/IqvbAsLAiWMVxeSw.webp"
+  },
+  {
+    "name": "Tongue Radiofrequency Procedure",
+    "category": "Procedure Diagram",
+    "description": "Diagram of tongue base radiofrequency reduction procedure",
+    "related_procedure": "Tongue Base Reduction",
+    "local_path": "assets/images/airtable/tongue-radiofrequency-procedure.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/XmcugzdXgERMOhqK.jpg"
+  },
+  {
+    "name": "UPPP Surgery Illustration - Sleep Foundation",
+    "category": "Procedure Diagram",
+    "description": "Detailed illustration of UPPP surgery showing before and after views of soft palate trimming",
+    "related_procedure": "UPPP",
+    "local_path": "assets/images/airtable/uppp-surgery-illustration---sleep-foundation.png",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/PRHrpyfGdSzsKoUI.png"
+  },
+  {
+    "name": "UPPP Before After Comparison",
+    "category": "Procedure Diagram",
+    "description": "Side-by-side comparison of airway before and after UPPP surgery",
+    "related_procedure": "UPPP",
+    "local_path": "assets/images/airtable/uppp-before-after-comparison.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/rGGpbLjkDkEctEPf.jpg"
+  },
+  {
+    "name": "Stanford Medical Center Building",
+    "category": "Facility",
+    "description": "Stanford Medical Center main building",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/stanford-medical-center-building.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/oMdppKJIQGIqKTsR.jpg"
+  },
+  {
+    "name": "Patient Journey Sleep Apnea",
+    "category": "Before/After",
+    "description": "Patient journey with obstructive sleep apnea showing facial changes",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/patient-journey-sleep-apnea.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/cKJoCXFddBYWsLCz.jpg"
+  },
+  {
+    "name": "MMA Surgery 3D Model",
+    "category": "Procedure Diagram",
+    "description": "3D model showing maxillomandibular advancement surgery progression",
+    "related_procedure": "MMA Surgery",
+    "local_path": "assets/images/airtable/mma-surgery-3d-model.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/FGmvcJndPWmMiQyQ.jpg"
+  },
+  {
+    "name": "Pediatric Tonsillectomy Illustration",
+    "category": "Procedure Diagram",
+    "description": "Illustration of pediatric tonsillectomy procedure",
+    "related_procedure": "Tonsillectomy/Adenoidectomy",
+    "local_path": "assets/images/airtable/pediatric-tonsillectomy-illustration.png",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/qBUVsuyUUcGQrilP.png"
+  },
+  {
+    "name": "Sleep Study Patient",
+    "category": "Procedure Diagram",
+    "description": "Patient undergoing in-lab polysomnography sleep study",
+    "related_procedure": "Sleep Study",
+    "local_path": "assets/images/airtable/sleep-study-patient.webp",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/TQdYxNRkTZiHQJya.webp"
+  },
+  {
+    "name": "MMA Before After Patient",
+    "category": "Before/After",
+    "description": "Patient before and after MMA surgery showing facial profile changes",
+    "related_procedure": "MMA Surgery",
+    "local_path": "assets/images/airtable/mma-before-after-patient.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/WwzfZgrnMvINRZQY.jpg"
+  },
+  {
+    "name": "Turbinate Surgery Illustration",
+    "category": "Procedure Diagram",
+    "description": "Detailed illustration of turbinate surgery showing nasal anatomy",
+    "related_procedure": "Turbinate Reduction",
+    "local_path": "assets/images/airtable/turbinate-surgery-illustration.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/uEIfpOuhZliteoMY.jpg"
+  },
+  {
+    "name": "Sleep Study Setup Diagram",
+    "category": "Procedure Diagram",
+    "description": "Illustration showing polysomnography sleep study equipment setup",
+    "related_procedure": "Sleep Study",
+    "local_path": "assets/images/airtable/sleep-study-setup-diagram.png",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/WuGRpitkCmwiaRyA.png"
+  },
+  {
+    "name": "CPAP Machine Photo",
+    "category": "Device",
+    "description": "Photo of CPAP machine in use by patient",
+    "related_procedure": "CPAP Therapy",
+    "local_path": "assets/images/airtable/cpap-machine-photo.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/ZQawOcOtFAuhYkSq.jpg"
+  },
+  {
+    "name": "Tongue Surgery Stanford",
+    "category": "Procedure Diagram",
+    "description": "Tongue surgery illustration from Stanford Medicine",
+    "related_procedure": "Tongue Base Reduction",
+    "local_path": "assets/images/airtable/tongue-surgery-stanford.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/DJtePHAMqNxyRGGO.jpg"
+  },
+  {
+    "name": "Mayo Clinic Sleep Center Florida",
+    "category": "Facility",
+    "description": "Mayo Clinic Sleep Center in Florida",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/mayo-clinic-sleep-center-florida.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/APiEphmuuafJfbWZ.jpg"
+  },
+  {
+    "name": "Tonsillectomy Adenoidectomy Diagram",
+    "category": "Procedure Diagram",
+    "description": "Diagram showing tonsillectomy and adenoidectomy procedure",
+    "related_procedure": "Tonsillectomy/Adenoidectomy",
+    "local_path": "assets/images/airtable/tonsillectomy-adenoidectomy-diagram.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/ObdnmRUsHQPYZHKL.jpg"
+  },
+  {
+    "name": "Pediatric Tonsil Surgery Care",
+    "category": "Procedure Diagram",
+    "description": "Caring for child after tonsil and adenoid surgery",
+    "related_procedure": "Tonsillectomy/Adenoidectomy",
+    "local_path": "assets/images/airtable/pediatric-tonsil-surgery-care.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/ARsVlUuusgHCQDNJ.jpg"
+  },
+  {
+    "name": "Base of Tongue Reduction",
+    "category": "Procedure Diagram",
+    "description": "Before and after illustration of tongue base reduction",
+    "related_procedure": "Tongue Base Reduction",
+    "local_path": "assets/images/airtable/base-of-tongue-reduction.png",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/FCnMaVzQnAJXvwGr.png"
+  },
+  {
+    "name": "Mayo Clinic Center for Sleep Medicine",
+    "category": "Facility",
+    "description": "Mayo Clinic Center for Sleep Medicine interior",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/mayo-clinic-center-for-sleep-medicine.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/JllTWNXhNJiyEDAC.jpg"
+  },
+  {
+    "name": "Cleveland Clinic Sleep Center Building",
+    "category": "Facility",
+    "description": "Cleveland Clinic Sleep Disorders Center exterior",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/cleveland-clinic-sleep-center-building.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/skwLovLetdolOMRY.jpg"
+  },
+  {
+    "name": "Home Sleep Test Device",
+    "category": "Device",
+    "description": "Patient using home sleep test device",
+    "related_procedure": "Home Sleep Study",
+    "local_path": "assets/images/airtable/home-sleep-test-device.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/fdzwwdlEiInCIUIw.jpg"
+  },
+  {
+    "name": "Cleveland Clinic Sleep Disorders Center",
+    "category": "Facility",
+    "description": "Cleveland Clinic Indian River Hospital Sleep Disorders Center",
+    "related_procedure": "General",
+    "local_path": "assets/images/airtable/cleveland-clinic-sleep-disorders-center.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/CuhFunfwDfaJCEDl.jpg"
+  },
+  {
+    "name": "Genioglossus Advancement Diagram 1",
+    "category": "Procedure Diagram",
+    "description": "Diagram showing genioglossus advancement procedure",
+    "related_procedure": "Genioglossus Advancement",
+    "local_path": "assets/images/airtable/genioglossus-advancement-diagram-1.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/lefOMQhlPCDKYyBv.jpg"
+  },
+  {
+    "name": "Upper Airway Stimulation Therapy",
+    "category": "Device",
+    "description": "Illustration of upper airway stimulation therapy for sleep apnea",
+    "related_procedure": "Inspire Implant",
+    "local_path": "assets/images/airtable/upper-airway-stimulation-therapy.jpg",
+    "original_source": "https://files.manuscdn.com/user_upload_by_module/session_file/110791709/YgQDwnaYbxRFdJHM.jpg"
+  }
+]
