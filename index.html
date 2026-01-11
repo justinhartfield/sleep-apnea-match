@@ -269,15 +269,15 @@
 </head>
 <body class="font-sans antialiased text-slate-900 gradient-bg min-h-screen" x-data="sleepApneaApp()">
 
-    <!-- Hidden Netlify Form -->
-    <form name="consultation" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <!-- Hidden Netlify Form for detection -->
+    <form name="consultation" netlify netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="consultation">
         <input type="text" name="name">
         <input type="email" name="email">
         <input type="tel" name="phone">
         <input type="text" name="procedure">
         <textarea name="message"></textarea>
         <input type="text" name="page_url">
-        <input type="text" name="location">
     </form>
 
     <!-- Navigation -->
