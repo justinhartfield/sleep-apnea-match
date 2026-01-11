@@ -124,11 +124,56 @@
                     <p class="text-slate-600 text-sm">Aetna, Ambetter, Blue Cross Blue Shield of NC, Cigna, Duke Employee Plans, Experience Health, Humana, Medicare, NC Medicaid, TRICARE, United Healthcare</p>
                 </div>
 
-                <!-- CTA -->
-                <div class="bg-brand-600 rounded-xl p-6 text-center">
-                    <h3 class="text-lg font-bold text-white mb-2">Ready to Get Started?</h3>
-                    <p class="text-blue-100 text-sm mb-4">Contact this provider directly or request a consultation through our matching service.</p>
-                    <a href="/#get-matched" class="inline-block bg-white text-brand-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition">Get Matched Free</a>
+                <!-- Lead Form -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4">Get a Free Consultation</h3>
+                    <form action="/thank-you/" method="POST" name="consultation" data-netlify="true" class="space-y-4">
+                        <input type="hidden" name="form-name" value="consultation">
+                        <input type="hidden" name="clinic_name" value="Duke Sleep Disorders Center">
+                        <input type="hidden" name="clinic_city" value="Durham">
+                        <input type="hidden" name="clinic_state" value="North Carolina">
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Full Name *</label>
+                            <input type="text" name="name" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Email *</label>
+                            <input type="email" name="email" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Phone *</label>
+                            <input type="tel" name="phone" required class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Procedure of Interest</label>
+                            <select name="procedure" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+                                <option value="">Select procedure...</option>
+                                <option value="inspire">Inspire Therapy</option>
+                                <option value="uppp">UPPP Surgery</option>
+                                <option value="mma">MMA Surgery</option>
+                                <option value="septoplasty">Septoplasty</option>
+                                <option value="turbinate">Turbinate Reduction</option>
+                                <option value="other">Other / Not Sure</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1">Message</label>
+                            <textarea name="message" rows="3" class="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-transparent" placeholder="Tell us about your situation..."></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-brand-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-brand-700 transition">
+                            Request Free Consultation
+                        </button>
+                    </form>
+
+                    <p class="mt-4 text-xs text-slate-400 text-center">
+                        By submitting, you agree to our privacy policy.
+                    </p>
                 </div>
             </div>
         </div>
