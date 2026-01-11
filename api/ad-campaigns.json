@@ -7,16 +7,16 @@
   },
   "campaign_templates": {
     "city_condition": {
-      "name_template": "Stem Cell {{condition}} - {{city}}, {{state_abbr}}",
+      "name_template": "sleep apnea {{condition}} - {{city}}, {{state_abbr}}",
       "headline_templates": [
         "{{condition}} Treatment in {{city}}",
-        "Stem Cell Therapy {{city}} | ${{price_low}}+",
+        "sleep apnea surgery {{city}} | ${{price_low}}+",
         "{{city}} {{condition}} Specialists",
         "Compare {{condition}} Costs in {{city}}"
       ],
       "description_templates": [
-        "Find verified stem cell clinics in {{city}} for {{condition}}. Average cost ${{avg_price}}. Compare prices from {{clinic_count}} providers.",
-        "{{condition}} stem cell therapy in {{city}}, {{state_abbr}}. Prices from ${{price_low}}-${{price_high}}. Get free consultation today.",
+        "Find verified sleep surgery clinics in {{city}} for {{condition}}. Average cost ${{avg_price}}. Compare prices from {{clinic_count}} providers.",
+        "{{condition}} sleep apnea surgery in {{city}}, {{state_abbr}}. Prices from ${{price_low}}-${{price_high}}. Get free consultation today.",
         "Looking for {{condition}} treatment in {{city}}? Compare {{clinic_count}} verified clinics. Transparent pricing, no hidden fees."
       ],
       "landing_url_template": "/locations/{{state_slug}}/{{city_slug}}/?utm_source={{source}}&utm_medium=cpc&utm_campaign={{campaign_id}}"
@@ -24,48 +24,48 @@
     "clinic_specific": {
       "name_template": "{{clinic_name}} - {{city}}",
       "headline_templates": [
-        "{{clinic_name}} | Stem Cell Therapy",
+        "{{clinic_name}} | sleep apnea surgery",
         "{{specialty}} in {{city}}",
         "{{clinic_name}} - From ${{price_low}}"
       ],
       "description_templates": [
         "{{clinic_name}} offers {{specialty}} in {{city}}. Prices ${{price_low}}-${{price_high}}. Verified provider. Book consultation.",
-        "Visit {{clinic_name}} for stem cell therapy in {{city}}, {{state_abbr}}. {{specialty}}. Call {{phone}} today."
+        "Visit {{clinic_name}} for sleep apnea surgery in {{city}}, {{state_abbr}}. {{specialty}}. Call {{phone}} today."
       ],
       "landing_url_template": "{{clinic_url}}?utm_source={{source}}&utm_medium=cpc&utm_campaign={{campaign_id}}"
     },
     "state_awareness": {
-      "name_template": "Stem Cell Clinics - {{state}}",
+      "name_template": "sleep surgery clinics - {{state}}",
       "headline_templates": [
-        "Stem Cell Therapy in {{state}}",
-        "{{state}} Stem Cell Clinics | Compare Prices",
-        "Find {{state}} Regenerative Medicine"
+        "sleep apnea surgery in {{state}}",
+        "{{state}} sleep surgery clinics | Compare Prices",
+        "Find {{state}} sleep surgery"
       ],
       "description_templates": [
-        "Compare {{clinic_count}} stem cell clinics across {{city_count}} cities in {{state}}. Average cost ${{avg_price}}. Verified providers.",
-        "{{state}} stem cell therapy directory. {{clinic_count}} clinics, {{city_count}} cities. Transparent pricing from ${{price_low}}."
+        "Compare {{clinic_count}} sleep surgery clinics across {{city_count}} cities in {{state}}. Average cost ${{avg_price}}. Verified providers.",
+        "{{state}} sleep apnea surgery directory. {{clinic_count}} clinics, {{city_count}} cities. Transparent pricing from ${{price_low}}."
       ],
       "landing_url_template": "/locations/{{state_slug}}/?utm_source={{source}}&utm_medium=cpc&utm_campaign={{campaign_id}}"
     }
   },
   "keyword_templates": {
     "condition_city": [
-      "stem cell {{condition}} {{city}}",
-      "{{condition}} stem cell therapy {{city}}",
+      "sleep apnea {{condition}} {{city}}",
+      "{{condition}} sleep apnea surgery {{city}}",
       "{{condition}} treatment {{city}} cost",
       "best {{condition}} clinic {{city}}",
-      "{{condition}} regenerative medicine {{city}}"
+      "{{condition}} sleep surgery {{city}}"
     ],
     "general_city": [
-      "stem cell therapy {{city}}",
-      "stem cell clinic {{city}}",
-      "regenerative medicine {{city}}",
-      "stem cell injection {{city}}",
-      "stem cell treatment cost {{city}}"
+      "sleep apnea surgery {{city}}",
+      "sleep surgery clinic {{city}}",
+      "sleep surgery {{city}}",
+      "sleep apnea injection {{city}}",
+      "sleep apnea treatment cost {{city}}"
     ],
     "condition_state": [
-      "stem cell {{condition}} {{state}}",
-      "{{condition}} stem cell {{state_abbr}}",
+      "sleep apnea {{condition}} {{state}}",
+      "{{condition}} sleep apnea {{state_abbr}}",
       "best {{condition}} clinic {{state}}"
     ]
   },
@@ -88,7 +88,7 @@
     "general_regenerative": {
       "conditions": ["all"],
       "age_range": "40-70",
-      "interests": ["regenerative medicine", "alternative medicine", "stem cell therapy", "anti-aging"]
+      "interests": ["sleep surgery", "alternative medicine", "sleep apnea surgery", "anti-aging"]
     }
   },
   "budget_recommendations": {

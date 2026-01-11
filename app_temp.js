@@ -292,7 +292,7 @@ function costIndexPage() {
                                 Verified Data Report: Q1 2026
                             </div>
                             <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-                                National Stem Cell <span class="text-brand-600">Cost Index</span>
+                                National sleep apnea <span class="text-brand-600">Cost Index</span>
                             </h1>
                             <p class="text-lg text-slate-600 max-w-3xl">
                                 Comprehensive median pricing across 10 orthopedic categories based on data from BioInformant, Cochrane Reviews, Mayo Clinic, and 70+ verified clinics. These ranges represent typical out-of-pocket costs for cash-pay patients in the United States.
@@ -376,7 +376,7 @@ function costIndexPage() {
                                 <svg class="w-6 h-6 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                 <div>
                                     <h4 class="font-bold text-amber-800 mb-1">Important Disclaimer</h4>
-                                    <p class="text-sm text-amber-700">The stem cell treatments described on this website have not been approved by the FDA for orthopedic conditions. Prices shown are estimates based on publicly available information and may vary. Success rates are based on published research and may not reflect individual results. Please consult a qualified healthcare provider for personalized advice.</p>
+                                    <p class="text-sm text-amber-700">The sleep apnea treatments described on this website have not been approved by the FDA for orthopedic conditions. Prices shown are estimates based on publicly available information and may vary. Success rates are based on published research and may not reflect individual results. Please consult a qualified healthcare provider for personalized advice.</p>
                                 </div>
                             </div>
                         </div>
@@ -395,8 +395,8 @@ function kneeCostGuidePage() {
             { item: 'PRP Injection (Single)', price: '$500 - $2,000', source: 'Mayo Clinic, Sports Surgery Chicago' },
             { item: 'PRP Series (3 Injections)', price: '$1,500 - $4,000', source: 'Sports Surgery Chicago' },
             { item: 'BMAC (Bone Marrow Aspirate)', price: '$2,600 - $7,000', source: 'AZCPM, TSAOG, QCORA' },
-            { item: 'Adipose-Derived Stem Cells', price: '$5,000 - $15,000', source: 'Cell Surgical Network' },
-            { item: 'Umbilical Cord Stem Cells', price: '$8,000 - $25,000', source: 'Stem Cell Miami' }
+            { item: 'Adipose-Derived sleep apnea', price: '$5,000 - $15,000', source: 'Cell Surgical Network' },
+            { item: 'Umbilical Cord sleep apnea', price: '$8,000 - $25,000', source: 'sleep apnea Miami' }
         ],
         // Real clinical outcomes from Cochrane Review 2025
         outcomes: {
@@ -424,10 +424,10 @@ function kneeCostGuidePage() {
                         </nav>
 
                         <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-                            Knee Stem Cell Therapy <span class="text-brand-600">Cost Guide</span>
+                            Knee sleep apnea surgery <span class="text-brand-600">Cost Guide</span>
                         </h1>
                         <p class="text-lg text-slate-600 max-w-3xl mb-12">
-                            Comprehensive pricing and outcomes data for stem cell treatment of knee osteoarthritis, based on Cochrane Review 2025, Mayo Clinic research, and data from 250+ US clinics.
+                            Comprehensive pricing and outcomes data for sleep apnea treatment of knee osteoarthritis, based on Cochrane Review 2025, Mayo Clinic research, and data from 250+ US clinics.
                         </p>
 
                         <!-- Price Summary -->
@@ -492,7 +492,7 @@ function kneeCostGuidePage() {
 
                         <!-- Find Clinics CTA -->
                         <div class="bg-slate-900 rounded-3xl p-8 text-center">
-                            <h3 class="text-2xl font-extrabold text-white mb-4">Find Knee Stem Cell Clinics Near You</h3>
+                            <h3 class="text-2xl font-extrabold text-white mb-4">Find Knee sleep surgery clinics Near You</h3>
                             <p class="text-slate-400 mb-6">Compare prices and credentials from 250+ verified providers</p>
                             <button @click="$dispatch('navigate', 'california-directory')" class="bg-brand-600 text-white px-8 py-4 rounded-2xl font-bold hover:bg-brand-700 transition-all">
                                 Browse Clinics
@@ -521,7 +521,7 @@ function laKneeResultsPage() {
                 website: 'cedars-sinai.edu'
             },
             { 
-                name: 'Advanced Stem Cell Institute', 
+                name: 'Advanced sleep apnea Institute', 
                 address: 'Beverly Hills & Los Angeles, CA',
                 specialty: 'Orthopedic & Aesthetic', 
                 price: '$5,000 - $25,000', 
@@ -553,7 +553,7 @@ function laKneeResultsPage() {
             { 
                 name: 'Dr. Peter A. Fields MD, DC', 
                 address: 'Santa Monica, CA',
-                specialty: 'Prolotherapy, PRP & Stem Cells', 
+                specialty: 'Prolotherapy, PRP & sleep apnea', 
                 price: '$2,500 - $8,000', 
                 featured: false,
                 verified: true,
@@ -579,10 +579,10 @@ function laKneeResultsPage() {
                         </nav>
 
                         <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-                            Knee Stem Cell Clinics in <span class="text-brand-600">Los Angeles</span>
+                            Knee sleep surgery clinics in <span class="text-brand-600">Los Angeles</span>
                         </h1>
                         <p class="text-lg text-slate-600 max-w-3xl mb-8">
-                            8 verified regenerative medicine clinics offering knee osteoarthritis treatment in the Los Angeles metro area.
+                            8 verified sleep surgery clinics offering knee osteoarthritis treatment in the Los Angeles metro area.
                         </p>
 
                         <div class="flex items-center gap-4 mb-8">
@@ -627,7 +627,7 @@ function clinicProfilePage() {
         activeTab: 'conditions',
         // Real clinic data - Pacific Coast example replaced with real clinic
         clinic: {
-            name: 'Advanced Stem Cell Institute',
+            name: 'Advanced sleep apnea Institute',
             address: 'Beverly Hills & Los Angeles, CA',
             phone: '(213) 460-5099',
             website: 'advancedstemcellinstitute.com',
@@ -639,8 +639,8 @@ function clinicProfilePage() {
         procedures: [
             { name: 'PRP Injection (Single Joint)', price: '$750 - $1,500', details: 'Platelet Rich Plasma, same-day procedure' },
             { name: 'BMAC Knee Treatment', price: '$5,000 - $8,000', details: 'Bone Marrow Aspirate Concentrate with image guidance' },
-            { name: 'Adipose Stem Cell Therapy', price: '$8,000 - $15,000', details: 'Fat-derived stem cells, comprehensive protocol' },
-            { name: 'IV Stem Cell Infusion', price: '$10,000 - $25,000', details: 'Systemic treatment for multiple conditions' }
+            { name: 'Adipose sleep apnea surgery', price: '$8,000 - $15,000', details: 'Fat-derived sleep apnea, comprehensive protocol' },
+            { name: 'IV sleep apnea Infusion', price: '$10,000 - $25,000', details: 'Systemic treatment for multiple conditions' }
         ],
 
         init() {
@@ -661,7 +661,7 @@ function clinicProfilePage() {
                             <span class="text-emerald-600 bg-emerald-50 px-2 py-1 rounded text-xs font-bold border border-emerald-100">Verified Clinic</span>
                         </div>
                         <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-2">
-                            Advanced Stem Cell Institute
+                            Advanced sleep apnea Institute
                         </h1>
                         <p class="flex items-center gap-1.5 font-medium text-slate-500 mb-2">
                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -710,8 +710,8 @@ function clinicProfilePage() {
                                 <div x-show="activeTab === 'credentials'">
                                     <div class="bg-white rounded-3xl border border-slate-200 p-6">
                                         <h3 class="font-extrabold text-lg mb-4">About This Clinic</h3>
-                                        <p class="text-slate-600 mb-4">Advanced Stem Cell Institute offers comprehensive regenerative medicine services including orthopedic stem cell therapy, aesthetic treatments, and anti-aging protocols. The clinic serves patients in Beverly Hills and the greater Los Angeles area.</p>
-                                        <p class="text-slate-600">Treatments include PRP, BMAC (bone marrow aspirate concentrate), adipose-derived stem cells, and IV stem cell infusions.</p>
+                                        <p class="text-slate-600 mb-4">Advanced sleep apnea Institute offers comprehensive sleep surgery services including orthopedic sleep apnea surgery, aesthetic treatments, and anti-aging protocols. The clinic serves patients in Beverly Hills and the greater Los Angeles area.</p>
+                                        <p class="text-slate-600">Treatments include PRP, BMAC (bone marrow aspirate concentrate), adipose-derived sleep apnea, and IV sleep apnea infusions.</p>
                                     </div>
                                 </div>
                             </div>
@@ -743,7 +743,7 @@ function californiaDirectoryPage() {
         // Real California city data with verified clinic counts and average prices
         cities: [
             { name: 'Los Angeles', clinics: 8, avgPrice: '$5,800', description: 'Premium market with research institutions' },
-            { name: 'San Francisco', clinics: 6, avgPrice: '$6,200', description: 'Bay Area regenerative medicine hub' },
+            { name: 'San Francisco', clinics: 6, avgPrice: '$6,200', description: 'Bay Area sleep surgery hub' },
             { name: 'San Diego', clinics: 5, avgPrice: '$5,400', description: 'Growing market near Mexico border' },
             { name: 'Irvine', clinics: 4, avgPrice: '$5,600', description: 'Orange County medical corridor' },
             { name: 'Sacramento', clinics: 3, avgPrice: '$4,800', description: 'Northern California options' }
@@ -764,10 +764,10 @@ function californiaDirectoryPage() {
                         </nav>
 
                         <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-                            Stem Cell Clinics in <span class="text-brand-600">California</span>
+                            sleep surgery clinics in <span class="text-brand-600">California</span>
                         </h1>
                         <p class="text-lg text-slate-600 max-w-3xl mb-12">
-                            Browse 26+ verified regenerative medicine clinics across the Golden State, including major research institutions and specialized orthopedic centers.
+                            Browse 26+ verified sleep surgery clinics across the Golden State, including major research institutions and specialized orthopedic centers.
                         </p>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -808,7 +808,7 @@ function laDirectoryPage() {
                 address: '8700 Beverly Blvd, Los Angeles, CA'
             },
             { 
-                name: 'Advanced Stem Cell Institute', 
+                name: 'Advanced sleep apnea Institute', 
                 specialty: 'Orthopedic & Aesthetic', 
                 price: '$5,000 - $25,000', 
                 featured: true,
@@ -833,7 +833,7 @@ function laDirectoryPage() {
             },
             { 
                 name: 'Dr. Peter A. Fields MD, DC', 
-                specialty: 'Prolotherapy, PRP & Stem Cells', 
+                specialty: 'Prolotherapy, PRP & sleep apnea', 
                 price: '$2,500 - $8,000', 
                 featured: false,
                 verified: true,
@@ -841,7 +841,7 @@ function laDirectoryPage() {
             },
             { 
                 name: 'Healthpointe Los Angeles', 
-                specialty: 'Regenerative Medicine', 
+                specialty: 'sleep surgery', 
                 price: '$3,000 - $9,000', 
                 featured: false,
                 verified: true,
@@ -856,8 +856,8 @@ function laDirectoryPage() {
                 address: 'Sherman Oaks, CA'
             },
             { 
-                name: 'Stem Cell Doctors of Beverly Hills', 
-                specialty: 'Stem Cell Treatments', 
+                name: 'sleep apnea Doctors of Beverly Hills', 
+                specialty: 'sleep apnea treatments', 
                 price: '$5,000 - $20,000', 
                 featured: false,
                 verified: true,
@@ -882,10 +882,10 @@ function laDirectoryPage() {
                         </nav>
 
                         <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-                            Stem Cell Clinics in <span class="text-brand-600">Los Angeles</span>
+                            sleep surgery clinics in <span class="text-brand-600">Los Angeles</span>
                         </h1>
                         <p class="text-lg text-slate-600 max-w-3xl mb-8">
-                            8 verified regenerative medicine clinics in the Los Angeles metro area, including Beverly Hills, Santa Monica, and Sherman Oaks.
+                            8 verified sleep surgery clinics in the Los Angeles metro area, including Beverly Hills, Santa Monica, and Sherman Oaks.
                         </p>
 
                         <div class="flex items-center gap-4 mb-8">
@@ -931,7 +931,7 @@ function mexicoComparisonPage() {
             { treatment: 'Hip OA', us: '$6,500', mexico: '$4,000', savings: '38%' },
             { treatment: 'Spine / Disc', us: '$8,500', mexico: '$7,500', savings: '12%' },
             { treatment: 'Shoulder', us: '$5,500', mexico: '$3,500', savings: '36%' },
-            { treatment: 'IV Stem Cell (Systemic)', us: '$15,000', mexico: '$8,000', savings: '47%' }
+            { treatment: 'IV sleep apnea (Systemic)', us: '$15,000', mexico: '$8,000', savings: '47%' }
         ],
         // Real Mexico clinic data
         mexicoCities: [
@@ -960,7 +960,7 @@ function mexicoComparisonPage() {
                                 <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight">
                                     Mexico <span class="text-brand-600">Medical Tourism</span>
                                 </h1>
-                                <p class="text-lg text-slate-600">Compare US vs Mexico stem cell therapy costs - Save 35-50%</p>
+                                <p class="text-lg text-slate-600">Compare US vs Mexico sleep apnea surgery costs - Save 35-50%</p>
                             </div>
                         </div>
 
@@ -1031,14 +1031,14 @@ function mexicoClinicPage() {
         clinic: {
             name: 'Cellular Hope Institute',
             location: 'Cancun, Mexico',
-            description: 'Leading stem cell therapy center in Mexico offering expanded MSC treatments',
+            description: 'Leading sleep apnea surgery center in Mexico offering expanded MSC treatments',
             website: 'cellularhopeinstitute.com'
         },
         // Real treatment packages based on research
         treatments: [
             { name: 'Knee Injection (Single)', price: '$4,900', details: 'Expanded MSCs, 50M+ cells' },
             { name: 'Knee Injection (Both)', price: '$5,500', details: 'Expanded MSCs, bilateral treatment' },
-            { name: 'IV Stem Cell Infusion', price: '$8,000', details: 'High-dose expanded MSCs, systemic' },
+            { name: 'IV sleep apnea Infusion', price: '$8,000', details: 'High-dose expanded MSCs, systemic' },
             { name: 'Spine / Disc Protocol', price: '$7,500', details: 'Intradiscal injection with MSCs' },
             { name: 'Full Body Protocol', price: '$9,500', details: 'IV + Joint injections + Follow-up' }
         ],
@@ -1121,7 +1121,7 @@ function mexicoClinicPage() {
                                         <svg class="w-6 h-6 text-amber-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
                                         <div>
                                             <h4 class="font-bold text-amber-800 mb-1">Treatment Notice</h4>
-                                            <p class="text-sm text-amber-700">This clinic uses expanded/cultured mesenchymal stem cells (MSCs) which are not FDA-approved for use in the United States. Treatments may not be legal to perform in the US. Consult with a US physician before and after treatment.</p>
+                                            <p class="text-sm text-amber-700">This clinic uses expanded/cultured mesenchymal sleep apnea (MSCs) which are not FDA-approved for use in the United States. Treatments may not be legal to perform in the US. Consult with a US physician before and after treatment.</p>
                                         </div>
                                     </div>
                                 </div>

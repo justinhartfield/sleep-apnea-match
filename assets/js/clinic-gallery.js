@@ -10,7 +10,7 @@ function clinicGallery(clinicSlug, maxImages = 6) {
         currentIndex: 0,
         lightboxOpen: false,
         loading: true,
-        baseUrl: 'https://cfls.b-cdn.net/stem-cell-clinics',
+        baseUrl: 'https://cfls.b-cdn.net/sleep-apnea-clinics',
 
         init() {
             // Try loading images in parallel

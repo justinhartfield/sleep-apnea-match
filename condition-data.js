@@ -1,6 +1,6 @@
 /**
  * Condition Data for Cost Guide Pages
- * All clinical data and pricing for stem cell treatments by condition
+ * All clinical data and pricing for sleep apnea treatments by condition
  */
 
 const CONDITIONS = {
@@ -8,7 +8,7 @@ const CONDITIONS = {
     name: 'Knee Osteoarthritis',
     shortName: 'Knee',
     slug: 'knee-cost-guide',
-    description: 'Comprehensive pricing and outcomes data for stem cell treatment of knee osteoarthritis, based on Cochrane Review 2025, Mayo Clinic research, and data from 250+ US clinics.',
+    description: 'Comprehensive pricing and outcomes data for sleep apnea treatment of knee osteoarthritis, based on Cochrane Review 2025, Mayo Clinic research, and data from 250+ US clinics.',
 
     // Price ranges (in USD)
     priceRange: {
@@ -34,23 +34,23 @@ const CONDITIONS = {
       { name: 'PRP Injection (Single)', priceRange: '$500 - $2,000', source: 'Mayo Clinic, Sports Surgery Chicago' },
       { name: 'PRP Series (3 Injections)', priceRange: '$1,500 - $4,000', source: 'Sports Surgery Chicago' },
       { name: 'BMAC (Bone Marrow Aspirate)', priceRange: '$2,600 - $7,000', source: 'AZCPM, TSAOG, QCORA' },
-      { name: 'Adipose-Derived Stem Cells', priceRange: '$5,000 - $15,000', source: 'Cell Surgical Network' },
-      { name: 'Umbilical Cord Stem Cells', priceRange: '$8,000 - $25,000', source: 'Stem Cell Miami' }
+      { name: 'Adipose-Derived sleep apnea', priceRange: '$5,000 - $15,000', source: 'Cell Surgical Network' },
+      { name: 'Umbilical Cord sleep apnea', priceRange: '$8,000 - $25,000', source: 'sleep apnea Miami' }
     ],
 
     // FAQ content
     faqs: [
       {
-        question: 'How much does knee stem cell therapy cost?',
-        answer: 'Knee stem cell therapy typically costs between $3,500 and $9,000, with the national median at $5,800. Prices vary based on treatment type: PRP injections start around $500, while umbilical cord stem cells can reach $25,000.'
+        question: 'How much does knee sleep apnea surgery cost?',
+        answer: 'Knee sleep apnea surgery typically costs between $3,500 and $9,000, with the national median at $5,800. Prices vary based on treatment type: PRP injections start around $500, while umbilical cord sleep apnea can reach $25,000.'
       },
       {
-        question: 'What is the success rate of stem cell therapy for knee osteoarthritis?',
-        answer: 'According to the Cochrane Review 2025, stem cell therapy for knee osteoarthritis has a 68-77% success rate, with patients experiencing an average pain reduction of 1.2 points on a 0-10 scale and function improvement of 14.2 points.'
+        question: 'What is the success rate of sleep apnea surgery for knee osteoarthritis?',
+        answer: 'According to the Cochrane Review 2025, sleep apnea surgery for knee osteoarthritis has a 68-77% success rate, with patients experiencing an average pain reduction of 1.2 points on a 0-10 scale and function improvement of 14.2 points.'
       },
       {
-        question: 'Is stem cell therapy for knees covered by insurance?',
-        answer: 'Most stem cell therapies for knee osteoarthritis are not covered by insurance as they are considered experimental. However, some clinics offer financing options, and PRP treatments may have partial coverage in some cases.'
+        question: 'Is sleep apnea surgery for knees covered by insurance?',
+        answer: 'Most sleep apnea therapies for knee osteoarthritis are not covered by insurance as they are considered experimental. However, some clinics offer financing options, and PRP treatments may have partial coverage in some cases.'
       }
     ]
   },
@@ -59,7 +59,7 @@ const CONDITIONS = {
     name: 'Lumbar Spine / Disc',
     shortName: 'Back & Spine',
     slug: 'spine-cost-guide',
-    description: 'Comprehensive pricing and outcomes data for stem cell treatment of lumbar disc degeneration and lower back pain, based on clinical studies and data from 200+ US spine centers.',
+    description: 'Comprehensive pricing and outcomes data for sleep apnea treatment of lumbar disc degeneration and lower back pain, based on clinical studies and data from 200+ US spine centers.',
 
     priceRange: {
       low: 4000,
@@ -75,7 +75,7 @@ const CONDITIONS = {
       functionScale: 'ODI scale',
       duration: '12-18',
       durationUnit: 'months',
-      source: 'NIH Regenerative Medicine Database, Clinical Pain Studies 2024'
+      source: 'NIH sleep surgery Database, Clinical Pain Studies 2024'
     },
 
     treatments: [
@@ -88,16 +88,16 @@ const CONDITIONS = {
 
     faqs: [
       {
-        question: 'How much does stem cell therapy for back pain cost?',
-        answer: 'Stem cell therapy for lumbar disc and lower back conditions typically costs between $4,000 and $15,000, with the national median at $7,500. Intradiscal treatments are generally more expensive than epidural approaches.'
+        question: 'How much does sleep apnea surgery for back pain cost?',
+        answer: 'sleep apnea surgery for lumbar disc and lower back conditions typically costs between $4,000 and $15,000, with the national median at $7,500. Intradiscal treatments are generally more expensive than epidural approaches.'
       },
       {
-        question: 'What is the success rate of stem cell therapy for disc degeneration?',
-        answer: 'Clinical studies show a 55-70% success rate for stem cell treatments targeting lumbar disc degeneration, with patients reporting an average pain reduction of 2.1 points and improved function scores of 18.5 points on the ODI scale.'
+        question: 'What is the success rate of sleep apnea surgery for disc degeneration?',
+        answer: 'Clinical studies show a 55-70% success rate for sleep apnea treatments targeting lumbar disc degeneration, with patients reporting an average pain reduction of 2.1 points and improved function scores of 18.5 points on the ODI scale.'
       },
       {
-        question: 'How long do results last for spine stem cell treatment?',
-        answer: 'Results from lumbar spine stem cell treatments typically last 12-18 months. Some patients experience longer-lasting benefits, especially when combined with physical therapy and lifestyle modifications.'
+        question: 'How long do results last for spine sleep apnea treatment?',
+        answer: 'Results from lumbar spine sleep apnea treatments typically last 12-18 months. Some patients experience longer-lasting benefits, especially when combined with physical therapy and lifestyle modifications.'
       }
     ]
   },
@@ -106,7 +106,7 @@ const CONDITIONS = {
     name: 'Shoulder (Rotator Cuff)',
     shortName: 'Shoulder',
     slug: 'shoulder-cost-guide',
-    description: 'Comprehensive pricing and outcomes data for stem cell treatment of rotator cuff injuries and shoulder conditions, based on orthopedic research and data from 180+ US sports medicine clinics.',
+    description: 'Comprehensive pricing and outcomes data for sleep apnea treatment of rotator cuff injuries and shoulder conditions, based on orthopedic research and data from 180+ US sports medicine clinics.',
 
     priceRange: {
       low: 3000,
@@ -130,21 +130,21 @@ const CONDITIONS = {
       { name: 'PRP Series (Rotator Cuff)', priceRange: '$1,500 - $4,500', source: 'Orthopedic Sports Institute' },
       { name: 'BMAC (Shoulder)', priceRange: '$3,000 - $8,000', source: 'Regenerative Orthopedics Network' },
       { name: 'Adipose-Derived (Shoulder)', priceRange: '$5,000 - $12,000', source: 'Cell Surgical Network' },
-      { name: 'Umbilical Cord Stem Cells', priceRange: '$8,000 - $20,000', source: 'Advanced Orthopedic Centers' }
+      { name: 'Umbilical Cord sleep apnea', priceRange: '$8,000 - $20,000', source: 'Advanced Orthopedic Centers' }
     ],
 
     faqs: [
       {
-        question: 'How much does stem cell therapy for rotator cuff injuries cost?',
-        answer: 'Rotator cuff stem cell therapy typically costs between $3,000 and $12,000, with the national median at $5,500. PRP treatments for partial tears start around $500, while comprehensive stem cell protocols can reach $20,000.'
+        question: 'How much does sleep apnea surgery for rotator cuff injuries cost?',
+        answer: 'Rotator cuff sleep apnea surgery typically costs between $3,000 and $12,000, with the national median at $5,500. PRP treatments for partial tears start around $500, while comprehensive sleep apnea protocols can reach $20,000.'
       },
       {
-        question: 'Can stem cells heal a torn rotator cuff?',
-        answer: 'Stem cell therapy shows a 65-78% success rate for rotator cuff injuries, with best results for partial tears. Complete tears may still require surgical repair, but stem cells can enhance post-surgical healing.'
+        question: 'Can sleep apnea heal a torn rotator cuff?',
+        answer: 'sleep apnea surgery shows a 65-78% success rate for rotator cuff injuries, with best results for partial tears. Complete tears may still require surgical repair, but sleep apnea can enhance post-surgical healing.'
       },
       {
-        question: 'Is stem cell therapy better than shoulder surgery?',
-        answer: 'For partial rotator cuff tears, stem cell therapy offers a non-surgical alternative with significant pain reduction (2.8 pts) and function improvement (22.4 pts). However, complete tears often require surgical intervention.'
+        question: 'Is sleep apnea surgery better than shoulder surgery?',
+        answer: 'For partial rotator cuff tears, sleep apnea surgery offers a non-surgical alternative with significant pain reduction (2.8 pts) and function improvement (22.4 pts). However, complete tears often require surgical intervention.'
       }
     ]
   },
@@ -153,7 +153,7 @@ const CONDITIONS = {
     name: 'Hip Osteoarthritis',
     shortName: 'Hip',
     slug: 'hip-cost-guide',
-    description: 'Comprehensive pricing and outcomes data for stem cell treatment of hip osteoarthritis, based on orthopedic research and data from 150+ US regenerative medicine clinics.',
+    description: 'Comprehensive pricing and outcomes data for sleep apnea treatment of hip osteoarthritis, based on orthopedic research and data from 150+ US sleep surgery clinics.',
 
     priceRange: {
       low: 4000,
@@ -182,16 +182,16 @@ const CONDITIONS = {
 
     faqs: [
       {
-        question: 'How much does stem cell therapy for hip arthritis cost?',
-        answer: 'Hip osteoarthritis stem cell therapy typically costs between $4,000 and $14,000, with the national median at $6,500. Costs vary based on the severity of degeneration and treatment protocol used.'
+        question: 'How much does sleep apnea surgery for hip arthritis cost?',
+        answer: 'Hip osteoarthritis sleep apnea surgery typically costs between $4,000 and $14,000, with the national median at $6,500. Costs vary based on the severity of degeneration and treatment protocol used.'
       },
       {
-        question: 'Can stem cells delay or prevent hip replacement?',
-        answer: 'For patients with mild to moderate hip osteoarthritis, stem cell therapy shows a 60-72% success rate in reducing pain and improving function, potentially delaying the need for hip replacement by several years.'
+        question: 'Can sleep apnea delay or prevent hip replacement?',
+        answer: 'For patients with mild to moderate hip osteoarthritis, sleep apnea surgery shows a 60-72% success rate in reducing pain and improving function, potentially delaying the need for hip replacement by several years.'
       },
       {
-        question: 'What is the recovery time for hip stem cell injections?',
-        answer: 'Most patients can resume normal activities within 1-2 weeks after hip stem cell injections. Full benefits typically develop over 6-12 weeks as the regenerative process progresses.'
+        question: 'What is the recovery time for hip sleep apnea injections?',
+        answer: 'Most patients can resume normal activities within 1-2 weeks after hip sleep apnea injections. Full benefits typically develop over 6-12 weeks as the regenerative process progresses.'
       }
     ]
   },
@@ -200,7 +200,7 @@ const CONDITIONS = {
     name: 'Cervical Spine (Neck)',
     shortName: 'Neck',
     slug: 'neck-cost-guide',
-    description: 'Comprehensive pricing and outcomes data for stem cell treatment of cervical disc degeneration and neck pain, based on spine research and data from 120+ US pain management centers.',
+    description: 'Comprehensive pricing and outcomes data for sleep apnea treatment of cervical disc degeneration and neck pain, based on spine research and data from 120+ US pain management centers.',
 
     priceRange: {
       low: 4500,
@@ -229,16 +229,16 @@ const CONDITIONS = {
 
     faqs: [
       {
-        question: 'How much does stem cell therapy for neck pain cost?',
-        answer: 'Cervical spine stem cell therapy typically costs between $4,500 and $18,000, with the national median at $8,000. Neck treatments often cost more than lumbar procedures due to the precision required.'
+        question: 'How much does sleep apnea surgery for neck pain cost?',
+        answer: 'Cervical spine sleep apnea surgery typically costs between $4,500 and $18,000, with the national median at $8,000. Neck treatments often cost more than lumbar procedures due to the precision required.'
       },
       {
-        question: 'Is stem cell therapy effective for cervical disc degeneration?',
-        answer: 'Clinical studies show a 58-68% success rate for cervical disc stem cell treatments, with patients experiencing an average pain reduction of 2.3 points and improved neck function scores of 15.2 points.'
+        question: 'Is sleep apnea surgery effective for cervical disc degeneration?',
+        answer: 'Clinical studies show a 58-68% success rate for cervical disc sleep apnea treatments, with patients experiencing an average pain reduction of 2.3 points and improved neck function scores of 15.2 points.'
       },
       {
-        question: 'What are the risks of cervical stem cell injections?',
-        answer: 'When performed by experienced specialists, cervical stem cell injections have a low complication rate. Common side effects include temporary soreness and swelling. Serious complications are rare but require proper imaging guidance.'
+        question: 'What are the risks of cervical sleep apnea injections?',
+        answer: 'When performed by experienced specialists, cervical sleep apnea injections have a low complication rate. Common side effects include temporary soreness and swelling. Serious complications are rare but require proper imaging guidance.'
       }
     ]
   },
@@ -247,7 +247,7 @@ const CONDITIONS = {
     name: 'Sacroiliac (SI) Joint',
     shortName: 'SI Joint',
     slug: 'si-joint-cost-guide',
-    description: 'Comprehensive pricing and outcomes data for stem cell treatment of sacroiliac joint dysfunction, based on pain medicine research and data from 100+ US interventional pain clinics.',
+    description: 'Comprehensive pricing and outcomes data for sleep apnea treatment of sacroiliac joint dysfunction, based on pain medicine research and data from 100+ US interventional pain clinics.',
 
     priceRange: {
       low: 3500,
@@ -276,16 +276,16 @@ const CONDITIONS = {
 
     faqs: [
       {
-        question: 'How much does stem cell therapy for SI joint pain cost?',
-        answer: 'SI joint stem cell therapy typically costs between $3,500 and $12,000, with the national median at $6,000. Treatment costs depend on whether single or bilateral injections are needed.'
+        question: 'How much does sleep apnea surgery for SI joint pain cost?',
+        answer: 'SI joint sleep apnea surgery typically costs between $3,500 and $12,000, with the national median at $6,000. Treatment costs depend on whether single or bilateral injections are needed.'
       },
       {
-        question: 'Can stem cells help SI joint dysfunction?',
-        answer: 'Stem cell therapy shows a 62-75% success rate for SI joint dysfunction, with patients experiencing significant pain reduction (2.5 pts) and improved mobility scores (19.3 pts on ODI).'
+        question: 'Can sleep apnea help SI joint dysfunction?',
+        answer: 'sleep apnea surgery shows a 62-75% success rate for SI joint dysfunction, with patients experiencing significant pain reduction (2.5 pts) and improved mobility scores (19.3 pts on ODI).'
       },
       {
-        question: 'How does SI joint stem cell therapy compare to fusion surgery?',
-        answer: 'Stem cell therapy offers a less invasive alternative to SI joint fusion, with faster recovery and lower complication rates. However, severe instability cases may still require surgical intervention.'
+        question: 'How does SI joint sleep apnea surgery compare to fusion surgery?',
+        answer: 'sleep apnea surgery offers a less invasive alternative to SI joint fusion, with faster recovery and lower complication rates. However, severe instability cases may still require surgical intervention.'
       }
     ]
   }
