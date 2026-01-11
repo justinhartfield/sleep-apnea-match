@@ -1,0 +1,679 @@
+{
+  "locations": {
+    "california": {
+      "name": "California",
+      "slug": "california",
+      "cities": {
+        "redwood-city": {
+          "name": "Redwood City",
+          "slug": "redwood-city",
+          "providers": [
+            {
+              "id": "center-001",
+              "name": "Stanford Sleep Surgery Center",
+              "slug": "stanford-sleep-surgery-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        },
+        "los-angeles": {
+          "name": "Los Angeles",
+          "slug": "los-angeles",
+          "providers": [
+            {
+              "id": "center-006",
+              "name": "UCLA Sleep Disorders Center",
+              "slug": "ucla-sleep-disorders-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            },
+            {
+              "id": "center-019",
+              "name": "Cedars-Sinai Sleep Center",
+              "slug": "cedars-sinai-sleep-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        },
+        "san-francisco": {
+          "name": "San Francisco",
+          "slug": "san-francisco",
+          "providers": [
+            {
+              "id": "center-011",
+              "name": "UCSF Sleep Surgery Center",
+              "slug": "ucsf-sleep-surgery-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "pennsylvania": {
+      "name": "Pennsylvania",
+      "slug": "pennsylvania",
+      "cities": {
+        "philadelphia": {
+          "name": "Philadelphia",
+          "slug": "philadelphia",
+          "providers": [
+            {
+              "id": "center-002",
+              "name": "The Penn Sleep Centers",
+              "slug": "the-penn-sleep-centers",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        },
+        "pittsburgh": {
+          "name": "Pittsburgh",
+          "slug": "pittsburgh",
+          "providers": [
+            {
+              "id": "center-020",
+              "name": "UPMC Sleep Medicine Center",
+              "slug": "upmc-sleep-medicine-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "ohio": {
+      "name": "Ohio",
+      "slug": "ohio",
+      "cities": {
+        "cleveland": {
+          "name": "Cleveland",
+          "slug": "cleveland",
+          "providers": [
+            {
+              "id": "center-003",
+              "name": "Cleveland Clinic Sleep Disorders Center",
+              "slug": "cleveland-clinic-sleep-disorders-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "minnesota": {
+      "name": "Minnesota",
+      "slug": "minnesota",
+      "cities": {
+        "rochester": {
+          "name": "Rochester",
+          "slug": "rochester",
+          "providers": [
+            {
+              "id": "center-004",
+              "name": "Mayo Clinic Sleep Surgery - Rochester, Minnesota",
+              "slug": "mayo-clinic-sleep-surgery---rochester-minnesota",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "new-york": {
+      "name": "New York",
+      "slug": "new-york",
+      "cities": {
+        "new-york": {
+          "name": "New York",
+          "slug": "new-york",
+          "providers": [
+            {
+              "id": "center-005",
+              "name": "Mount Sinai Sleep Surgery Program",
+              "slug": "mount-sinai-sleep-surgery-program",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            },
+            {
+              "id": "center-012",
+              "name": "NYU Langone Health - Division of General Otolaryngology & Sleep Surgery",
+              "slug": "nyu-langone-health---division-of-general-otolaryngology-&-sleep-surgery",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "massachusetts": {
+      "name": "Massachusetts",
+      "slug": "massachusetts",
+      "cities": {
+        "boston": {
+          "name": "Boston",
+          "slug": "boston",
+          "providers": [
+            {
+              "id": "center-007",
+              "name": "Massachusetts Eye and Ear",
+              "slug": "massachusetts-eye-and-ear",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "tennessee": {
+      "name": "Tennessee",
+      "slug": "tennessee",
+      "cities": {
+        "nashville": {
+          "name": "Nashville",
+          "slug": "nashville",
+          "providers": [
+            {
+              "id": "center-008",
+              "name": "Vanderbilt Sleep Surgery Program",
+              "slug": "vanderbilt-sleep-surgery-program",
+              "type": "academic_medical_center",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "maryland": {
+      "name": "Maryland",
+      "slug": "maryland",
+      "cities": {
+        "baltimore": {
+          "name": "Baltimore",
+          "slug": "baltimore",
+          "providers": [
+            {
+              "id": "center-009",
+              "name": "The Johns Hopkins Center for Snoring and Sleep Apnea Surgery",
+              "slug": "the-johns-hopkins-center-for-snoring-and-sleep-apnea-surgery",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "illinois": {
+      "name": "Illinois",
+      "slug": "illinois",
+      "cities": {
+        "chicago": {
+          "name": "Chicago",
+          "slug": "chicago",
+          "providers": [
+            {
+              "id": "center-010",
+              "name": "Northwestern Medicine Sleep Surgery Clinic",
+              "slug": "northwestern-medicine-sleep-surgery-clinic",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "north-carolina": {
+      "name": "North Carolina",
+      "slug": "north-carolina",
+      "cities": {
+        "durham": {
+          "name": "Durham",
+          "slug": "durham",
+          "providers": [
+            {
+              "id": "center-013",
+              "name": "Duke Sleep Disorders Center",
+              "slug": "duke-sleep-disorders-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "georgia": {
+      "name": "Georgia",
+      "slug": "georgia",
+      "cities": {
+        "atlanta": {
+          "name": "Atlanta",
+          "slug": "atlanta",
+          "providers": [
+            {
+              "id": "center-014",
+              "name": "Emory Sleep Center",
+              "slug": "emory-sleep-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "texas": {
+      "name": "Texas",
+      "slug": "texas",
+      "cities": {
+        "houston": {
+          "name": "Houston",
+          "slug": "houston",
+          "providers": [
+            {
+              "id": "center-015",
+              "name": "Houston Methodist Sleep Center at Texas Medical Center",
+              "slug": "houston-methodist-sleep-center-at-texas-medical-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        },
+        "dallas": {
+          "name": "Dallas",
+          "slug": "dallas",
+          "providers": [
+            {
+              "id": "center-016",
+              "name": "UT Southwestern Medical Center, Department of Otolaryngology-Head and Neck Surgery",
+              "slug": "ut-southwestern-medical-center-department-of-otolaryngology-head-and-neck-surgery",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "michigan": {
+      "name": "Michigan",
+      "slug": "michigan",
+      "cities": {
+        "ann-arbor": {
+          "name": "Ann Arbor",
+          "slug": "ann-arbor",
+          "providers": [
+            {
+              "id": "center-017",
+              "name": "University of Michigan Sleep Disorders Center",
+              "slug": "university-of-michigan-sleep-disorders-center",
+              "type": "academic_medical_center",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "washington": {
+      "name": "Washington",
+      "slug": "washington",
+      "cities": {
+        "seattle": {
+          "name": "Seattle",
+          "slug": "seattle",
+          "providers": [
+            {
+              "id": "center-018",
+              "name": "University of Washington Sleep Surgery",
+              "slug": "university-of-washington-sleep-surgery",
+              "type": "academic_medical_center",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "ny": {
+      "name": "NY",
+      "slug": "ny",
+      "cities": {
+        "new-york": {
+          "name": "New York",
+          "slug": "new-york",
+          "providers": [
+            {
+              "id": "clinic-001",
+              "name": "ENT & Allergy Associates - Madison Avenue",
+              "slug": "ent-&-allergy-associates---madison-avenue",
+              "type": "independent_practice",
+              "inspire_certified": true
+            },
+            {
+              "id": "clinic-012",
+              "name": "eos Sleep",
+              "slug": "eos-sleep",
+              "type": "independent_practice",
+              "inspire_certified": false
+            },
+            {
+              "id": "clinic-014",
+              "name": "Doctor Steven Y. Park, MD",
+              "slug": "doctor-steven-y-park-md",
+              "type": "independent_practice",
+              "inspire_certified": false
+            },
+            {
+              "id": "clinic-017",
+              "name": "Madison ENT & Facial Plastic Surgery",
+              "slug": "madison-ent-&-facial-plastic-surgery",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        },
+        "great-neck": {
+          "name": "Great Neck",
+          "slug": "great-neck",
+          "providers": [
+            {
+              "id": "clinic-022",
+              "name": "Great Neck Ear, Nose, & Throat",
+              "slug": "great-neck-ear-nose-&-throat",
+              "type": "independent_practice",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "il": {
+      "name": "IL",
+      "slug": "il",
+      "cities": {
+        "chicago": {
+          "name": "Chicago",
+          "slug": "chicago",
+          "providers": [
+            {
+              "id": "clinic-002",
+              "name": "Chicago ENT - Advanced Center for Specialty Care",
+              "slug": "chicago-ent---advanced-center-for-specialty-care",
+              "type": "independent_practice",
+              "inspire_certified": true
+            },
+            {
+              "id": "clinic-016",
+              "name": "Northwestern Medical Faculty Foundation",
+              "slug": "northwestern-medical-faculty-foundation",
+              "type": "independent_practice",
+              "inspire_certified": false
+            },
+            {
+              "id": "clinic-020",
+              "name": "Chicago Nasal & Sinus Center",
+              "slug": "chicago-nasal-&-sinus-center",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "ca": {
+      "name": "CA",
+      "slug": "ca",
+      "cities": {
+        "mountain-view": {
+          "name": "Mountain View",
+          "slug": "mountain-view",
+          "providers": [
+            {
+              "id": "clinic-003",
+              "name": "Sleep Apnea Surgery Center",
+              "slug": "sleep-apnea-surgery-center",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        },
+        "santa-monica": {
+          "name": "Santa Monica",
+          "slug": "santa-monica",
+          "providers": [
+            {
+              "id": "clinic-005",
+              "name": "Eric J. Kezirian, MD, MPH",
+              "slug": "eric-j-kezirian-md-mph",
+              "type": "independent_practice",
+              "inspire_certified": true
+            }
+          ]
+        },
+        "redwood-city": {
+          "name": "Redwood City",
+          "slug": "redwood-city",
+          "providers": [
+            {
+              "id": "clinic-007",
+              "name": "Stanford Health Care Sleep Surgery Program",
+              "slug": "stanford-health-care-sleep-surgery-program",
+              "type": "independent_practice",
+              "inspire_certified": true
+            }
+          ]
+        },
+        "los-angeles": {
+          "name": "Los Angeles",
+          "slug": "los-angeles",
+          "providers": [
+            {
+              "id": "clinic-009",
+              "name": "Osborne Head & Neck Institute",
+              "slug": "osborne-head-&-neck-institute",
+              "type": "independent_practice",
+              "inspire_certified": true
+            },
+            {
+              "id": "clinic-025",
+              "name": "Robert Kotler, MD, FACS (also known as Beverly Hills Sinus Institute)",
+              "slug": "robert-kotler-md-facs-(also-known-as-beverly-hills-sinus-institute)",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        },
+        "beverly-hills": {
+          "name": "Beverly Hills",
+          "slug": "beverly-hills",
+          "providers": [
+            {
+              "id": "clinic-013",
+              "name": "LA Sinus and Snoring",
+              "slug": "la-sinus-and-snoring",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "wi": {
+      "name": "WI",
+      "slug": "wi",
+      "cities": {
+        "milwaukee": {
+          "name": "Milwaukee",
+          "slug": "milwaukee",
+          "providers": [
+            {
+              "id": "clinic-004",
+              "name": "Froedtert & the Medical College of Wisconsin",
+              "slug": "froedtert-&-the-medical-college-of-wisconsin",
+              "type": "independent_practice",
+              "inspire_certified": true
+            },
+            {
+              "id": "clinic-011",
+              "name": "ADVENT",
+              "slug": "advent",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "n/a": {
+      "name": "N/A",
+      "slug": "n/a",
+      "cities": {
+        "singapore": {
+          "name": "Singapore",
+          "slug": "singapore",
+          "providers": [
+            {
+              "id": "clinic-006",
+              "name": "Asia Sleep Centre",
+              "slug": "asia-sleep-centre",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "az": {
+      "name": "AZ",
+      "slug": "az",
+      "cities": {
+        "phoenix": {
+          "name": "Phoenix",
+          "slug": "phoenix",
+          "providers": [
+            {
+              "id": "clinic-008",
+              "name": "Arizona Sinus Center, a division of Valley ENT",
+              "slug": "arizona-sinus-center-a-division-of-valley-ent",
+              "type": "independent_practice",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "pa": {
+      "name": "PA",
+      "slug": "pa",
+      "cities": {
+        "philadelphia": {
+          "name": "Philadelphia",
+          "slug": "philadelphia",
+          "providers": [
+            {
+              "id": "clinic-010",
+              "name": "Penn Sleep Surgery",
+              "slug": "penn-sleep-surgery",
+              "type": "independent_practice",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    },
+    "ky": {
+      "name": "KY",
+      "slug": "ky",
+      "cities": {
+        "lexington": {
+          "name": "Lexington",
+          "slug": "lexington",
+          "providers": [
+            {
+              "id": "clinic-015",
+              "name": "Wardrop Med Services",
+              "slug": "wardrop-med-services",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "ga": {
+      "name": "GA",
+      "slug": "ga",
+      "cities": {
+        "atlanta": {
+          "name": "Atlanta",
+          "slug": "atlanta",
+          "providers": [
+            {
+              "id": "clinic-018",
+              "name": "ENT of Georgia South",
+              "slug": "ent-of-georgia-south",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "tx": {
+      "name": "TX",
+      "slug": "tx",
+      "cities": {
+        "dallas": {
+          "name": "Dallas",
+          "slug": "dallas",
+          "providers": [
+            {
+              "id": "clinic-019",
+              "name": "The Snoring Center (Closed)",
+              "slug": "the-snoring-center-(closed)",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        },
+        "houston": {
+          "name": "Houston",
+          "slug": "houston",
+          "providers": [
+            {
+              "id": "clinic-021",
+              "name": "Houston Advanced Nose & Sinus",
+              "slug": "houston-advanced-nose-&-sinus",
+              "type": "independent_practice",
+              "inspire_certified": false
+            },
+            {
+              "id": "clinic-024",
+              "name": "Houston Methodist ENT Specialists",
+              "slug": "houston-methodist-ent-specialists",
+              "type": "independent_practice",
+              "inspire_certified": false
+            }
+          ]
+        }
+      }
+    },
+    "mi": {
+      "name": "MI",
+      "slug": "mi",
+      "cities": {
+        "detroit": {
+          "name": "Detroit",
+          "slug": "detroit",
+          "providers": [
+            {
+              "id": "clinic-023",
+              "name": "Henry Ford Medical Center",
+              "slug": "henry-ford-medical-center",
+              "type": "independent_practice",
+              "inspire_certified": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

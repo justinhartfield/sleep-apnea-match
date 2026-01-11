@@ -1,11 +1,11 @@
-# StemCellPrices.com Robots.txt
-# Stem Cell Therapy Cost Directory
+# SleepApneaMatch.com Robots.txt
+# Sleep Apnea Surgery Cost & Provider Directory
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://stemcellprices.com/sitemap.xml
+Sitemap: https://sleepapneamatch.com/sitemap.xml
 
 # Allow all major search engines
 User-agent: Googlebot
@@ -30,3 +30,4 @@ Crawl-delay: 10
 # Prevent crawling of utility files
 Disallow: /app.js
 Disallow: /*.json$
+Disallow: /*.py$

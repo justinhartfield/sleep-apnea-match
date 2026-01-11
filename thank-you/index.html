@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | SleepApneaMatch.com</title>
+    <meta name="robots" content="noindex">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-primary to-secondary min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl p-8 md:p-12 max-w-lg mx-auto text-center shadow-2xl">
+        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </div>
+
+        <h1 class="text-3xl font-bold text-slate-800 mb-4">Thank You!</h1>
+        <p class="text-lg text-slate-600 mb-6">
+            Your consultation request has been received. One of our sleep apnea specialists will contact you within 24-48 hours.
+        </p>
+
+        <div class="bg-slate-50 rounded-xl p-4 mb-6">
+            <p class="text-sm text-slate-500">
+                In the meantime, explore our resources to learn more about sleep apnea surgery options.
+            </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/" class="bg-primary text-white px-6 py-3 rounded-lg font-semibold hover:bg-secondary transition-colors">
+                Back to Home
+            </a>
+            <a href="/blog/" class="border border-primary text-primary px-6 py-3 rounded-lg font-semibold hover:bg-primary/10 transition-colors">
+                Read Our Blog
+            </a>
+        </div>
+    </div>
+</body>
+</html>
