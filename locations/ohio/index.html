@@ -26,21 +26,115 @@
     <style>
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+            /* Navigation Dropdown */
+        .nav-dropdown-container { position: relative; }
+        .nav-dropdown-container:hover .nav-dropdown-menu {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .nav-dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 220px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 8px 0;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+        }
+        .nav-dropdown-menu::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 0;
+            right: 0;
+            height: 10px;
+        }
+        .nav-dropdown-menu a {
+            display: block;
+            padding: 8px 16px;
+            color: #475569;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .nav-dropdown-menu a:hover {
+            background: #f1f5f9;
+        }
+        [x-cloak] { display: none !important; }
     </style>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 <body class="bg-slate-50">
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200" x-data="{ mobileMenu: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <a href="/" class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                    </div>
                     <span class="text-xl font-bold tracking-tight text-slate-900">SleepApneaMatch<span class="text-brand-600">.</span></span>
                 </a>
+
                 <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
-                    <a href="/" class="hover:text-brand-600 transition">Home</a>
-                    <a href="/locations/" class="hover:text-brand-600 transition">Locations</a>
+                    <a href="/" class="hover:text-brand-600 transition">Find Providers</a>
+                    <a href="/guides/" class="hover:text-brand-600 transition">Guides</a>
                     <a href="/blog/" class="hover:text-brand-600 transition">Blog</a>
+                    <a href="/patient-journey/" class="hover:text-brand-600 transition">Patient Journey</a>
+                    <div class="nav-dropdown-container">
+                        <a href="/locations/" class="hover:text-brand-600 transition inline-flex items-center gap-1">
+                            Locations
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="nav-dropdown-menu">
+                            <a href="/locations/" class="font-bold text-brand-600">View All Locations &rarr;</a>
+                            <div class="h-px bg-slate-100 my-2"></div>
+                            <a href="/locations/california/">California</a>
+                            <a href="/locations/new-york/">New York</a>
+                            <a href="/locations/texas/">Texas</a>
+                            <a href="/locations/pennsylvania/">Pennsylvania</a>
+                            <a href="/locations/illinois/">Illinois</a>
+                            <a href="/locations/massachusetts/">Massachusetts</a>
+                        </div>
+                    </div>
                     <a href="/faq/" class="hover:text-brand-600 transition">FAQ</a>
                 </div>
+
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="/#consultation" class="bg-brand-600 text-white px-4 py-2 rounded-lg font-semibold text-sm hover:bg-brand-700 transition">
+                        Get Matched
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Mobile menu -->
+            <div x-show="mobileMenu" x-cloak class="md:hidden py-4 border-t border-slate-200">
+                <a href="/" class="block py-2 text-slate-600 font-medium">Find Providers</a>
+                <a href="/guides/" class="block py-2 text-slate-600 font-medium">Guides</a>
+                <a href="/blog/" class="block py-2 text-slate-600 font-medium">Blog</a>
+                <a href="/patient-journey/" class="block py-2 text-slate-600 font-medium">Patient Journey</a>
+                <a href="/locations/" class="block py-2 text-slate-600 font-medium">Locations</a>
+                <a href="/faq/" class="block py-2 text-slate-600 font-medium">FAQ</a>
+                <a href="/#consultation" class="block mt-4 bg-brand-600 text-white text-center py-2 rounded-lg font-semibold">Get Matched</a>
             </div>
         </div>
     </nav>
@@ -75,9 +169,67 @@
         </div>
     </div>
 
-    <footer class="bg-slate-900 text-slate-400 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <p>&copy; 2026 SleepApneaMatch.com. All rights reserved.</p>
+        <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                            </svg>
+                        </div>
+                        <span class="text-xl font-bold text-white">SleepApneaMatch</span>
+                    </div>
+                    <p class="text-sm">
+                        Compare sleep apnea surgery costs and find verified providers. Medically reviewed by Dr. Igor I. Bussel, MD.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Procedures</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/uppp-cost-guide/" class="hover:text-white transition">UPPP</a></li>
+                        <li><a href="/inspire-cost-guide/" class="hover:text-white transition">Inspire Therapy</a></li>
+                        <li><a href="/mma-cost-guide/" class="hover:text-white transition">MMA Surgery</a></li>
+                        <li><a href="/septoplasty-cost-guide/" class="hover:text-white transition">Septoplasty</a></li>
+                        <li><a href="/turbinate-reduction-cost-guide/" class="hover:text-white transition">Turbinate Reduction</a></li>
+                        <li><a href="/tonsillectomy-cost-guide/" class="hover:text-white transition">Tonsillectomy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Top Locations</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/locations/california/" class="hover:text-white transition">California</a></li>
+                        <li><a href="/locations/new-york/" class="hover:text-white transition">New York</a></li>
+                        <li><a href="/locations/texas/" class="hover:text-white transition">Texas</a></li>
+                        <li><a href="/locations/pennsylvania/" class="hover:text-white transition">Pennsylvania</a></li>
+                        <li><a href="/locations/ohio/" class="hover:text-white transition">Ohio</a></li>
+                        <li><a href="/locations/" class="hover:text-white transition">All Locations &rarr;</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/guides/" class="hover:text-white transition">Guides</a></li>
+                        <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="/patient-journey/" class="hover:text-white transition">Patient Journey</a></li>
+                        <li><a href="/faq/" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm">
+                    &copy; 2026 SleepApneaMatch.com. All rights reserved.
+                </p>
+                <p class="text-xs text-slate-500">
+                    Medical information is reviewed by Dr. Igor I. Bussel, MD. This site does not provide medical advice.
+                </p>
+            </div>
         </div>
     </footer>
 </body>
